@@ -32,7 +32,7 @@ def turn(board)
   puts "Please enter 1-9:"
   position=gets
   if valid_move?(board, position)==true
-    move(board, position, token="X")
+    move(board, position, current_player(board))
   elsif valid_move?(board, position)==false
     turn(board)
   end
@@ -114,18 +114,18 @@ def play(board)
 
   until over?(board) 
     turn(board) 
+  end
 
-end
 
-    if winner(board)=="X"
-      puts "Congratulations X!"
-    elsif winner(board)=="O"
-      puts "Congratulations O!"
-    elsif draw?(board)==true 
+    if won?(board)
+    puts "Congratulations #{winner(board)}!"
+    
+    elsif draw?(board)
       puts  "Cats Game!"
   end
 
 end
+ 
  
 
  
