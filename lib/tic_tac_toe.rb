@@ -30,12 +30,12 @@ end
 
 def turn(board)
   puts "Please enter 1-9:"
-  input = gets.strip
-  if valid_move?(board, input)
+  position = gets.strip
+  if valid_move?(board, position)
     # Get the current player's token, X or O
     current_token = current_player(board)
     # pass the current player's token to the board
-    move(board, input, current_token)
+    move(board, position, current_token)
   else
     turn(board)
   end
