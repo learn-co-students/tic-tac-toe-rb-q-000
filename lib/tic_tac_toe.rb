@@ -84,6 +84,7 @@ def full?(board)
 end
 
 def draw?(board)
+  !won?(board) && full?(board)
   if full?(board) == true && won?(board).nil?
     puts "Cats Game!"
     true
@@ -112,11 +113,12 @@ def winner(board)
 end
 
 def play(board)
-until over?(board)
+until (over?(board) == true) do
       turn(board)
-         over?(board)
-        winner(board)
+   #       over?(board)
+
   end
+         winner(board)
 end
   #     won?(board)
 #  puts "player #{counter}"
