@@ -29,7 +29,7 @@ end
 #Method takes board and user input as arguments
 #Checks to see if position is taken
 def position_taken?(board, location)
-  !(board[location].nil? || board[location] == " " || board[location] == "")
+  !(board[location].nil? || board[location] == " ")
 end
 
 #Takes board and user_input arguments
@@ -52,6 +52,7 @@ def turn(board)
   while boolCheck == false
     user_input = gets.strip
     if valid_move?(board,user_input) == false
+      puts "#{user_input}"
       puts "Not a valid choice. Please try again"
     else
       boolCheck = true
@@ -115,7 +116,7 @@ end
 #Accepts board argument
 #Uses won? method and draw? to determine game over
 def over?(board)
-  won?(board).class == Array || draw?(board) == true
+  won?(board) != false || draw?(board) == true
 end
 
 #Takes board argument
@@ -135,7 +136,7 @@ def play(board)
     turn(board)
   end
   if won?(board).class == Array
-    puts "Congratulations #{winner(board)}"
+    puts "Congratulations #{winner(board)}!"
   elsif draw?(board) == true
     puts "Cats Game!"
   end
