@@ -10,15 +10,15 @@ WIN_COMBINATIONS = [
 ]
 
 def display_board(board)
-  print " #{board[0]} | #{board[1]} | #{board[2]} "
-  print "-----------"
-  print " #{board[3]} | #{board[4]} | #{board[5]} "
-  print "-----------"
-  print " #{board[6]} | #{board[7]} | #{board[8]} "
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  puts "-----------"
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
+  puts "-----------"
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, location, character = "X")
-  board[location.to_i - 1] = character
+def move(board, position, character = "X")
+  board[position.to_i - 1] = character
 end
 
 def position_taken?(board, position)
@@ -42,10 +42,10 @@ def turn(board)
   position = gets.strip
   if !valid_move?(board, position)
     turn(board)
-  else  
-  move(board, position, character = "X")
+  else
+    move(board, position, current_player(board))
   end
-  display_board(board)
+    display_board(board)
 end
 
 def turn_count(board)
