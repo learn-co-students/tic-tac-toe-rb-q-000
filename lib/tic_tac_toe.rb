@@ -110,10 +110,8 @@ def winner(board)
  end
 
 def play(board)
-  game = 0
-  while game < 9
+  while !over?(board)
     turn(board)
-    game += 1
   end
 end
 
