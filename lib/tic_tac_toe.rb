@@ -19,7 +19,7 @@ def display_board(board)
 end
 
 def move(board, location, player = "X")
-  board[location.to_i-1] = player
+  board[location.to_i - 1] = player
 end
 
 def position_taken?(board, location)
@@ -27,7 +27,7 @@ def position_taken?(board, location)
 end
 
 def valid_move?(board, position)
-  position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
+  position.to_i.between?(1, 9) && !position_taken?(board, position.to_i - 1)
 end
 
 def turn(board)
@@ -42,7 +42,7 @@ def turn(board)
 end
 
 def turn_count(board)
-  board.count {|position| position != " "}  
+  board.count { |position| position != " " }
 end
 
 def current_player(board)
@@ -57,11 +57,11 @@ def won?(board)
 end
 
 def full?(board)
-  board.all? { |position| position != " " } 
+  board.all? { |position| position != " " }
 end
 
 def draw?(board)
-  full?(board) && !won?(board)   
+  full?(board) && !won?(board)
 end
 
 def over?(board)
@@ -69,28 +69,5 @@ def over?(board)
 end
 
 def winner(board)
-  if won?(board)
-    board[won?(board).first]
-  end
+  return board[won?(board).first] if won?(board)
 end
-
-
-def play(board)
-  until over?(board)
-    turn(board)
-  end
-  if won?(board)
-    puts "Congratulations #{winner(board)}!"
-  elsif draw?(board)
-    puts "Cats Game!"
-  end
-    
-end
-
-
-
-
-
-
-
-
