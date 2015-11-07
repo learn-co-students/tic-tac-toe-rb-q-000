@@ -92,7 +92,6 @@ end
 def play(board)
 until over?(board)
 turn(board)
-over?(board)
 end
 finalwin= winner(board)
 if draw?(board)
