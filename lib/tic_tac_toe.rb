@@ -52,7 +52,7 @@ WIN_COMBINATIONS = [
   [3,4,5],  # Middle row
   [6,7,8],  # Bottom row
   [0,4,8],  # Top left diagonal
-  [2,4,6],  # Top right diagonal
+  [6,4,2],  # Top right diagonal
   [0,3,6],  # first column
   [1,4,7],  # middle column
   [2,5,8]  # last column
@@ -92,7 +92,7 @@ def play(board)
     turn(board)
   end
   if won?(board)
-    puts "Congratulations, #{winner(board)}!"
+    puts "Congratulations #{winner(board)}!"
   else
     puts "Cats Game!"
   end
