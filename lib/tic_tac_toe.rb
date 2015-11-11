@@ -39,30 +39,25 @@ def turn(board)
     position = gets.strip
   end
 
-  move(board, position, "X")
+  move(board, position, current_player(board))
   display_board(board)   
 end
 
-# TODO: simplify.
 def turn_count(board)
   count = 0
-  board.each do |elem|
-    if elem == "X" || elem == "O"
-        count +=1
-    end
-  end
+  board.each { |elem| count +=1 if elem == "X" || elem == "O" }
   count
 end
 
-def current_player(board)
-  return turn_count(board) % 2 == 0 ? "X" : "O"
+def current_player(board)    
+  turn_count(board) % 2 == 0 ? "X" : "O"
 end
 
 def won?(board)
   WIN_COMBINATIONS.find do |win_combo|
     x_wins = win_combo.all? { |pos| board[pos] == "X" }
     o_wins = win_combo.all? { |pos| board[pos] == "O" }
-    return win_combo if x_wins || o_wins
+    win_combo if x_wins || o_wins
   end
 end
 
@@ -83,9 +78,9 @@ def winner(board)
 end
 
 def play(board)
-
-  if !won?(board)
-    turn(board)
+  while !won?(board) && !over?(board) && !draw?(board)
+      turn(board)
+      break if draw?(board) || over?(board) || won?(board)
   end
 
   if won?(board)
@@ -95,5 +90,8 @@ def play(board)
   if draw?(board)
     puts "Cats Game!" 
   end
-    
+
+  if over?(board) || won?(board)
+    false
+  end
 end
