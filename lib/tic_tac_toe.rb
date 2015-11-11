@@ -17,35 +17,35 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, location, current_player = "X")
-  board[location.to_i-1] = current_player
+def move(board, pos, current_player = "X")
+  board[pos.to_i-1] = current_player
 end
 
-def position_taken?(board, location)
-  board[location] != " " && board[location] != ""
+def position_taken?(board, pos)
+  board[pos] != " " && board[pos] != ""
 end
 
-def valid_move?(board, position)
-  position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
+def valid_move?(board, pos)
+  pos.to_i.between?(1,9) && !position_taken?(board, pos.to_i-1)
 end
 
 def turn(board)
   puts "Please enter 1-9:"
-  position = gets.strip
+  pos = gets.strip
 
   # TODO: implement recursion
-  until valid_move?(board, position)
+  until valid_move?(board, pos)
     puts "Please enter 1-9:"
-    position = gets.strip
+    pos = gets.strip
   end
 
-  move(board, position, current_player(board))
+  move(board, pos, current_player(board))
   display_board(board)   
 end
 
 def turn_count(board)
   count = 0
-  board.each { |elem| count +=1 if elem == "X" || elem == "O" }
+  board.each { |pos| count +=1 if pos == "X" || pos == "O" }
   count
 end
 
@@ -62,7 +62,7 @@ def won?(board)
 end
 
 def full?(board)
-  board.all? { |pos| pos == "X" || pos == "O"}
+  board.all? { |pos| pos == "X" || pos == "O" }
 end
 
 def draw?(board)

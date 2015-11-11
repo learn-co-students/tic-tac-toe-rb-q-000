@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-11-11T12:13:23-08:00">2015-11-11T12:13:23-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-11-11T13:00:34-08:00">2015-11-11T13:00:34-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -207,13 +207,13 @@
         <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
-          <code class="ruby">def move(board, location, current_player = &quot;X&quot;)</code>
+          <code class="ruby">def move(board, pos, current_player = &quot;X&quot;)</code>
         </li>
       
         <li class="covered" data-hits="20" data-linenumber="21">
           <span class="hits">20</span>
           
-          <code class="ruby">  board[location.to_i-1] = current_player</code>
+          <code class="ruby">  board[pos.to_i-1] = current_player</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="22">
@@ -231,13 +231,13 @@
         <li class="covered" data-hits="1" data-linenumber="24">
           <span class="hits">1</span>
           
-          <code class="ruby">def position_taken?(board, location)</code>
+          <code class="ruby">def position_taken?(board, pos)</code>
         </li>
       
         <li class="covered" data-hits="24" data-linenumber="25">
           <span class="hits">24</span>
           
-          <code class="ruby">  board[location] != &quot; &quot; &amp;&amp; board[location] != &quot;&quot;</code>
+          <code class="ruby">  board[pos] != &quot; &quot; &amp;&amp; board[pos] != &quot;&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="26">
@@ -255,13 +255,13 @@
         <li class="covered" data-hits="1" data-linenumber="28">
           <span class="hits">1</span>
           
-          <code class="ruby">def valid_move?(board, position)</code>
+          <code class="ruby">def valid_move?(board, pos)</code>
         </li>
       
         <li class="covered" data-hits="22" data-linenumber="29">
           <span class="hits">22</span>
           
-          <code class="ruby">  position.to_i.between?(1,9) &amp;&amp; !position_taken?(board, position.to_i-1)</code>
+          <code class="ruby">  pos.to_i.between?(1,9) &amp;&amp; !position_taken?(board, pos.to_i-1)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="30">
@@ -291,7 +291,7 @@
         <li class="covered" data-hits="18" data-linenumber="34">
           <span class="hits">18</span>
           
-          <code class="ruby">  position = gets.strip</code>
+          <code class="ruby">  pos = gets.strip</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="35">
@@ -309,7 +309,7 @@
         <li class="covered" data-hits="18" data-linenumber="37">
           <span class="hits">18</span>
           
-          <code class="ruby">  until valid_move?(board, position)</code>
+          <code class="ruby">  until valid_move?(board, pos)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="38">
@@ -321,7 +321,7 @@
         <li class="covered" data-hits="1" data-linenumber="39">
           <span class="hits">1</span>
           
-          <code class="ruby">    position = gets.strip</code>
+          <code class="ruby">    pos = gets.strip</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
@@ -339,7 +339,7 @@
         <li class="covered" data-hits="18" data-linenumber="42">
           <span class="hits">18</span>
           
-          <code class="ruby">  move(board, position, current_player(board))</code>
+          <code class="ruby">  move(board, pos, current_player(board))</code>
         </li>
       
         <li class="covered" data-hits="18" data-linenumber="43">
@@ -375,7 +375,7 @@
         <li class="covered" data-hits="200" data-linenumber="48">
           <span class="hits">200</span>
           
-          <code class="ruby">  board.each { |elem| count +=1 if elem == &quot;X&quot; || elem == &quot;O&quot; }</code>
+          <code class="ruby">  board.each { |pos| count +=1 if pos == &quot;X&quot; || pos == &quot;O&quot; }</code>
         </li>
       
         <li class="covered" data-hits="20" data-linenumber="49">
@@ -477,7 +477,7 @@
         <li class="covered" data-hits="206" data-linenumber="65">
           <span class="hits">206</span>
           
-          <code class="ruby">  board.all? { |pos| pos == &quot;X&quot; || pos == &quot;O&quot;}</code>
+          <code class="ruby">  board.all? { |pos| pos == &quot;X&quot; || pos == &quot;O&quot; }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="66">
