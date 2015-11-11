@@ -62,7 +62,7 @@ def won?(board)
 end
 
 def full?(board)
- board.all? { |pos| pos != " " } 
+  board.all? { |pos| pos == "X" || pos == "O"}
 end
 
 def draw?(board)
@@ -70,7 +70,7 @@ def draw?(board)
 end
 
 def over?(board)
-  board.all? { |pos| pos == "X" || pos == "O" }
+  draw?(board) || won?(board)
 end
 
 def winner(board)
@@ -88,8 +88,4 @@ def play(board)
   elsif draw?(board)
     puts "Cats Game!" 
   end
-
-  #if over?(board) || won?(board)
-  #  false
-  #end
 end
