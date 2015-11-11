@@ -80,7 +80,6 @@ end
 def play(board)
   while !won?(board) && !over?(board) && !draw?(board)
       turn(board)
-      break if draw?(board) || over?(board) || won?(board)
   end
 
   if won?(board)
