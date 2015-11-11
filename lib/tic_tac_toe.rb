@@ -91,7 +91,7 @@ def play(board)
     puts "Cats Game!" 
   end
 
-  if over?(board) || won?(board)
-    false
-  end
+  #if over?(board) || won?(board)
+  #  false
+  #end
 end
