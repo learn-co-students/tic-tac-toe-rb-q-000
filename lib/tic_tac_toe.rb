@@ -23,8 +23,8 @@ end
 def turn(board)
   puts "Please enter 1-9:"
   location = gets
-  if valid_move?(board, location)
-    move(board, location)
+  if valid_move?(board, position)
+    move(board, position)
   else
    turn(board)
   end
@@ -33,8 +33,8 @@ end
 
 
 
-def move(board, location, current_player = "X")
-  board[location.to_i-1] = current_player(board)
+def move(board, position, current_player = "X")
+  board[position.to_i-1] = current_player(board)
 end
 
 def valid_move?(board, position)
