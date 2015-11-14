@@ -1,11 +1,12 @@
 # Helper Methods
-def display_board(board)
-  puts " #{board[0]} | #{board[1]} | #{board[2]} "
-  puts "-----------"
-  puts " #{board[3]} | #{board[4]} | #{board[5]} "
-  puts "-----------"
-  puts " #{board[6]} | #{board[7]} | #{board[8]} "
+def display_board(brd)
+  line1 = " #{brd[0]} | #{brd[1]} | #{brd[2] } "
+  divide = '-' * 11
+  line2 = " #{brd[3]} | #{brd[4]} | #{brd[5] } "
+  line3 = " #{brd[6]} | #{brd[7]} | #{brd[8] } "
+  puts line1, divide, line2, divide, line3
 end
+
 
 def turn_count(board)
   count = 0
