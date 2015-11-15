@@ -149,9 +149,9 @@ end
 
 
 def play(board)
+display_board(board)
 
   while over?(board) !=true
-  display_board(board)
   char = current_player(board)
   turn(board)
   end
