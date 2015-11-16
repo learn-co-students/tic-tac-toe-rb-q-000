@@ -62,7 +62,7 @@ end
 def current_player(board)
   turn_count(board)
 #   puts turn_count(board)
-    if turn_count(board) % 2 == 0
+    if turn_count(board).even?
       player = "X"
     else
      player = "O"
@@ -120,14 +120,3 @@ until (over?(board) == true) do
   end
          winner(board)
 end
-  #     won?(board)
-#  puts "player #{counter}"
- #  move(board,input = 1,player = "X")
-#         display_board(board)
-
-       # full?(board)
-#         draw?(board)
- #       turn_count(board)
-    #     position_taken?(board,position)
-      #   valid_move?(board, position)
- #  input = gets.strip
