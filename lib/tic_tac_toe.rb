@@ -32,7 +32,7 @@ def draw?(board)
 end
 
 def over?(board)
-  won?(board) || full?(board)
+  won?(board) || draw?(board)
 end
 
 def winner(board)
@@ -67,7 +67,7 @@ def turn(board)
   puts "Please enter 1-9:"
   position = gets.strip
   if valid_move?(board, position)
-    move(board, position)
+    move(board, position, current_player(board))
     display_board(board)
   else
     puts "Invalid input, try again:"
@@ -95,16 +95,13 @@ def current_player(board)
   end
 end
 
-
 def play(board)
-until turn_count(board) == 9
-turn(board)
-end
-if over?(board)
-  if won?(board)
-    puts "Congratulations" + current_player(board)
-  else
-    puts "Cats game!"
+  while !over?(board) do
+    turn(board)
   end
-end
+    if won?(board)
+      puts "Congratulations #{winner(board)}!"
+    elsif draw?(board)
+      puts "Cats Game!"
+  end
 end
