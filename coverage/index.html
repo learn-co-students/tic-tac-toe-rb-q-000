@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-11-16T17:57:48-05:00">2015-11-16T17:57:48-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-11-17T12:50:15-05:00">2015-11-17T12:50:15-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         73.4
+         73.8
        </span>
     </span> hits/line)
   </h2>
@@ -57,7 +57,7 @@
         <td>56</td>
         <td>56</td>
         <td>0</td>
-        <td>73.4</td>
+        <td>73.8</td>
       </tr>
       
     </tbody>
@@ -147,7 +147,7 @@
         <li class="covered" data-hits="19" data-linenumber="10">
           <span class="hits">19</span>
           
-          <code class="ruby">  board[position.to_i-1] = character</code>
+          <code class="ruby">  board[position.to_i - 1] = character</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="11">
@@ -168,28 +168,28 @@
           <code class="ruby">def position_taken?(board, position)</code>
         </li>
       
-        <li class="covered" data-hits="21" data-linenumber="14">
-          <span class="hits">21</span>
+        <li class="covered" data-hits="23" data-linenumber="14">
+          <span class="hits">23</span>
           
-          <code class="ruby">  if board[position.to_i-1] == &quot; &quot; || board[position.to_i-1] == &quot;&quot; || board[position.to_i-1] == nil</code>
+          <code class="ruby"> if board[position.to_i] == &quot;X&quot; || board[position.to_i] == &quot;O&quot;</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="15">
-          <span class="hits">19</span>
-          
-          <code class="ruby">    return false</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="16">
-          <span class="hits">2</span>
-          
-          <code class="ruby">  elsif board[position.to_i-1] == &quot;X&quot; || board[position.to_i-1] == &quot;O&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="17">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="15">
+          <span class="hits">3</span>
           
           <code class="ruby">    return true</code>
+        </li>
+      
+        <li class="covered" data-hits="20" data-linenumber="16">
+          <span class="hits">20</span>
+          
+          <code class="ruby">  else false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="17">
+          
+          
+          <code class="ruby"> end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="18">
@@ -201,25 +201,25 @@
         <li class="never" data-hits="" data-linenumber="19">
           
           
-          <code class="ruby">end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="20">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="21">
+        <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
           <code class="ruby"> def valid_move?(board, position)</code>
         </li>
       
+        <li class="covered" data-hits="21" data-linenumber="21">
+          <span class="hits">21</span>
+          
+          <code class="ruby">    position = position.to_i - 1</code>
+        </li>
+      
         <li class="covered" data-hits="21" data-linenumber="22">
           <span class="hits">21</span>
           
-          <code class="ruby">    if position.to_i.between?(1,9) &amp;&amp; !position_taken?(board,position)</code>
+          <code class="ruby">    if position.between?(0,8) &amp;&amp; !position_taken?(board,position)</code>
         </li>
       
         <li class="covered" data-hits="18" data-linenumber="23">

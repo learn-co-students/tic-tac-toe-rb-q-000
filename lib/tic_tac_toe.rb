@@ -7,19 +7,19 @@ def display_board(board)
 end
 
 def move(board, position, character="X")
-  board[position.to_i-1] = character
+  board[position.to_i - 1] = character
 end
 
 def position_taken?(board, position)
-  if board[position.to_i-1] == " " || board[position.to_i-1] == "" || board[position.to_i-1] == nil
-    return false
-  elsif board[position.to_i-1] == "X" || board[position.to_i-1] == "O"
+ if board[position.to_i] == "X" || board[position.to_i] == "O"
     return true
-end
+  else false
+ end
 end
 
  def valid_move?(board, position)
-    if position.to_i.between?(1,9) && !position_taken?(board,position)
+    position = position.to_i - 1
+    if position.between?(0,8) && !position_taken?(board,position)
       return true
     else false
     end
