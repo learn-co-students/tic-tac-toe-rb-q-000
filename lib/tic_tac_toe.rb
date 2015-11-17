@@ -81,7 +81,6 @@ def turn(board)
     player = current_player(board)
     move(board, input, player)
     display_board(board)
-  else
   end
 
 # Define your play method below
