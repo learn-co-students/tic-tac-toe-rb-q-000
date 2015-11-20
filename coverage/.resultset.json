@@ -3615,10 +3615,6 @@
         null,
         7,
         null,
-        null,
-        null,
-        null,
-        null,
         null
       ],
       "/home/nitrous/code/labs/tic-tac-toe-rb-q-000/.bundle/gems/rspec-core-3.3.2/lib/rspec/core/mocking_adapters/rspec.rb": [
@@ -10861,6 +10857,6 @@
         null
       ]
     },
-    "timestamp": 1448005813
+    "timestamp": 1448008046
   }
 }
