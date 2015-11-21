@@ -23,7 +23,7 @@ end
 
 # #valid_move?
 def valid_move?(board, input)
-  input.to_i.between?(1,9) && position_taken?(board, input.to_i - 1) != true
+  input.to_i.between?(1,9) && !position_taken?(board, input.to_i - 1)
 end
 
 # #turn (using ternary operators)
