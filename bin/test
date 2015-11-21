@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/tic_tac_toe.rb'
+
+board = ["X", "X", " ", " ", " ", " ", " ", " ", " "]
+turn(board)
+puts "#{turn_count(board)}"
+puts "#{won?(board).first}"
