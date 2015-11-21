@@ -6,7 +6,7 @@ WIN_COMBINATIONS = [
   [1,4,7],
   [2,5,8],
   [0,4,8],
-  [2,4,6],
+  [6,4,2],
   ]
 
 def display_board(board)
@@ -41,13 +41,14 @@ end
 
 def turn(board)
   puts "Please enter 1-9:"
-  position = gets.chomp
-  until valid_move?(board,position) == true
+  position = gets.strip
+  until valid_move?(board,position)
     puts "Please enter 1-9:"
-    position = gets.chomp
+    position = gets.strip
   end
-  move(board,position,char = "X")
-  display_board(board)
+    char = current_player(board)
+    move(board,position,char)
+    display_board(board)
 end
 
 def turn_count(board)
@@ -72,7 +73,7 @@ def won?(board)
   indexes = Array.new
   if WIN_COMBINATIONS.any? do |combination|
     indexes = combination
-    board[combination[0]] == "X" && board[combination[1]] == "X" && board[combination[2]] == "X" || board[combination[0]] == "O" && board[combination[1]] == "O" && board[combination[2]] == "O"
+    (board[combination[0]] == "X" && board[combination[1]] == "X" && board[combination[2]] == "X") || (board[combination[0]] == "O" && board[combination[1]] == "O" && board[combination[2]] == "O")
   end
   return indexes
 else
@@ -96,7 +97,7 @@ def draw?(board)
 end
 
 def over?(board)
-  if won?(board) == true || draw?(board) == true || full?(board) == true
+   if won?(board) != false || draw?(board) == true || full?(board) == true
     return true
    else
     return false
@@ -117,5 +118,12 @@ def winner(board)
 end
 
 def play(board)
-  until over?(board) == true
-     turn(board)
+  until over?(board)
+    turn(board)
+end
+   if won?(board)
+    puts "Congratulations #{winner(board)}!"
+   elsif draw?(board)
+    puts "Cats Game!"
+   end
+ end
