@@ -12,7 +12,7 @@ WIN_COMBINATIONS = [
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, location, current_player = "X")
+def move(board, location, current_player = "#{current_player(board)}")
   board[location.to_i-1] = current_player
 end
 
@@ -30,17 +30,10 @@ def turn(board)
   if valid_move?(board, input)
     move(board, input)
   else
+    puts "invalid"
     turn(board)
   end
   display_board(board)
-end
-
-def play(board)
-  times = 0
-  until times == 9
-  times += 1
-  turn(board)
-  end
 end
 
 def turn_count(board)
@@ -80,5 +73,16 @@ end
 def winner(board)
   if winning_combo = won?(board)
     board[winning_combo.first]
+  end
+end
+
+def play(board)
+  until won?(board) || draw?(board) || over?(board)
+    turn(board)
+  end
+  if winner(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
   end
 end
