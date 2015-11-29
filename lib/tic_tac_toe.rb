@@ -82,16 +82,16 @@ def winner(board)
   end
 end
 
-def play(board)
-until over?(board)
-    turn(board)
-display_board(board)
-end
-if won?(board) != false && winner(board) == "X"
-  puts "Congratulations X!"
-elsif won?(board) != false && winner(board) == "O"
-  puts "Congratulations O!"
-elsif draw?(board) == true
-  puts "Cats Game!"
-    end
+def play
+  until over?
+    turn
+    display_board
   end
+  if won? != false && winner == "X"
+    puts "Congratulations X!"
+  elsif won? != false && winner == "O"
+    puts "Congratulations O!"
+  elsif draw? == true
+    puts "Cats Game!"
+  end
+end
