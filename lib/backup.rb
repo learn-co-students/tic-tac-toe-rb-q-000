@@ -36,11 +36,16 @@ def position_taken?(board, location)
 	!(board[location].nil? || board[location] == " ")
 end
 
+#Valid Move Helper Method
 def valid_move?(board, position)
-  return if (position.to_i - 1 < 0)
-  !position_taken?(board,position.to_i-1)
-end
-
+	position = position.to_i - 1
+	if position_taken?(board, position) == false && position <= 8
+		return true
+	else
+		return false
+	end
+	# !position_taken?(board, position) && position <= 8
+end	
 
 #WIN_COMBINATIONS constant
 WIN_COMBINATIONS = [
@@ -111,27 +116,43 @@ end
 def turn(board)
 	puts "Enter 1-9"
 	input = gets.strip
-	until valid_move?(board, input)
-		puts "Please choose an empty square"
-		input = gets.strip
-	end
-	move(board, input, value=current_player(board))
 
-	
+	if valid_move?(board, input) == true
+		move(board, input, value=current_player(board))
+	elsif valid_move?(board, input) == false
+		puts "Please choose an empty square"
+	end
 	display_board(board)
 end
 
 #Game Play
 def play(board)
-	until over?(board)
-		turn(board)
-	end
-	if winner(board) != nil
-		puts "Congratulations #{winner(board)}!"
-	else 
-		puts "Cats Game!"
+
+	while full?(board) != true
+
+		until over?(board) == true
+			turn(board)
+		end
+		if winner(board) != nil
+			puts "Player #{winner(board)} wins!"
+			exit
+		else 
+			puts "Cats Game!"
+			exit
+		end
 	end
 end
 
 
+
+
+
+
+
+
+
+
+
 	
+
+
