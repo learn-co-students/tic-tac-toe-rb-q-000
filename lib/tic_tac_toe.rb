@@ -1,3 +1,5 @@
+require 'pry'
+
 WIN_COMBINATIONS = [
   [0, 1, 2],
   [3, 4, 5],
@@ -8,8 +10,6 @@ WIN_COMBINATIONS = [
   [0, 4, 8],
   [2, 4, 6]
 ]
-
-board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
@@ -35,13 +35,13 @@ end
 def turn(board)
   puts "Please enter 1-9:"
   position = gets.strip
-  if valid_move?(board, position)
-    move(board, position, value=current_player(board))
-    display_board(board)
-  else
+  until valid_move?(board, position)
+    puts "Please enter 1-9:"
+    position = gets.strip
     puts "Please try entering a number again:"
-    turn(board)
   end
+  move(board, position, value=current_player(board))
+  display_board(board)
 end
 
 def turn_count(board)
@@ -77,7 +77,7 @@ def draw?(board)
 end
 
 def over?(board)
-  (draw?(board) || won?(board)) && (full?(board))
+  (draw?(board) || won?(board)) || (full?(board))
 end
 
 def winner(board)
@@ -89,12 +89,15 @@ def winner(board)
 end
 
 def play(board)
-  input = gets
+
   until over?(board)
-    winner(board)
-    puts board
     turn(board)
+  end
+  if won?(board)
+    winner(board) == "X" ? (puts "Congratulations X!") : (puts "Congratulations O!")
+  elsif draw?(board)
+    puts "Cats Game!"
   end
 end
 
-play(board)
+
