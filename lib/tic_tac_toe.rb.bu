@@ -22,13 +22,15 @@ def play(board)
 over = over? board
 
   if draw? board
+    display_board board
      puts "Cats Game!"
   elsif won? board
-    puts "need to print winner"
-  elsif over != true
-    turn board
     display_board board
-
+    board = winner board
+    puts "Congratulations #{board[0]}!"
+  elsif over != true
+    display_board board
+    turn board
   end
 end
 
@@ -99,15 +101,12 @@ def turn(board)
   pos_tak = position_taken? board, choice
 
   if valid == true && pos_tak == false
-
-  char = current_player board
-  move(board, choice, char)
-  display_board board
-  play board
-
-else
-  puts "Try Again Dummie"
-  turn board
+    char = current_player board
+    move(board, choice, char)
+    play board
+  else
+    puts "Try Again Dummie"
+    turn board
 end
 
 end

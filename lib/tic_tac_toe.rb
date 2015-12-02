@@ -19,18 +19,15 @@ WIN_COMBINATIONS = [
 
 def play(board)
 
-over = over? board
+  while !over?(board)
+    turn(board)
+  end
 
-  if draw? board
-    display_board board
-     puts "Cats Game!"
-  elsif won? board
-    display_board board
-    board = winner board
-    puts "Congratulations #{board[0]}!"
-  elsif over != true
-    display_board board
-    turn board
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+       puts "Cats Game!"
+
   end
 end
 
@@ -68,47 +65,31 @@ end
 # Move
 
 def move(board, choice, char)
-  board[choice-1] = char
+  board[choice.to_i-1] = char
 end
 
 # Is the #position_taken?
 
 def position_taken?(board, choice)
-
-  if board[choice-1] == "O" || board[choice-1] == "X"
-    taken = true
-  else # board[choice] == "" || board[choice] == " " || board[choice] == "nil"
-    taken = false
-  end
+  !(board[choice].nil? || board[choice] == " ")
 end
 
 # Is your move valid? #valid_move?
 
-def valid_move?(board, i)
-  if board[i-1] == "X" || board[i-1] == "O" || i < 1 || i > 9
-    valid = false
-    else
-    valid = true
-  end
+def valid_move?(board, choice)
+  !position_taken?(board, choice.to_i-1) && choice.to_i.between?(1,9)
 end
 
 # Take a Turn
 
 def turn(board)
   puts "Please enter 1-9:"
-  choice = gets.chomp.to_i
-  valid = valid_move? board, choice
-  pos_tak = position_taken? board, choice
-
-  if valid == true && pos_tak == false
-    char = current_player board
-    move(board, choice, char)
-    play board
-  else
-    puts "Try Again Dummie"
-    turn board
-end
-
+  choice = gets.chomp
+  if !valid_move?(board, choice)
+    turn(board)
+  end
+  move(board, choice, current_player(board))
+  display_board(board)
 end
 
 
@@ -123,13 +104,9 @@ end
 
 def won?(board)
 
-# if
   WIN_COMBINATIONS.detect do |winner|
     winner.all? {|token| board[token] == "X"} || winner.all? {|token| board[token] == "O"}
    end
-# else
-#  x = false
-# end
 end
 
 # The #full? method should accept a board and return true if every element in the board contains either an "X" or an "O". For example:
@@ -145,18 +122,7 @@ end
 # returns truthy
 
 def draw?(board)
-  if
-  WIN_COMBINATIONS.detect do |winner|
-    winner.all? {|token| board[token] == "X"} || winner.all? {|token| board[token] == "O"}
-  end
-    draw = false
-
-  elsif
-    board.all? {|i| i == "O" || i == "X"}
-    draw = true
-  else
-    draw = false
-  end
+  !won?(board) && full?(board)
 end
 
 
@@ -164,37 +130,15 @@ end
 
 
 def over?(board)
-if
-  WIN_COMBINATIONS.detect do |winner|
-    winner.all? {|token| board[token] == "X"} || winner.all? {|token| board[token] == "O"}
-   end
-  over = true
-elsif
-    board.all? {|i| i == "O" || i == "X"}
-  over = true
-else
-  over = false
-end
-
+  won?(board) || draw?(board)
 end
 
 #winner method should accept a board and return the token, "X" or "O" that has won the game given a winning board
 # returns "X" or "O"
 
 def winner(board)
-  if
-    WIN_COMBINATIONS.detect do |winner|
-      winner.all? {|token| board[token] == "X"}
-      end
-    who_won = "X"
-   elsif
-    WIN_COMBINATIONS.detect do |winner|
-    winner.all? {|token| board[token] == "O"}
-      end
-    who_won = "O"
-
-  else
-    who_won = nil
+  if win_combo = won?(board)
+  board[win_combo.first]
   end
-  end
+end
 ##
