@@ -38,7 +38,7 @@ def turn(board)
 
   input = gets.strip
   if valid_move?(board, input.to_i)
-    move(board, input)
+    move(board, input, current_player(board))
     display_board(board)
   else
     turn(board)
@@ -60,6 +60,8 @@ end
 def current_player(board)
   if turn_count(board).even? 
     "X"
+  else
+    "O"
   end
 end
 #
@@ -90,7 +92,7 @@ def draw?(board)
 end
 
 def over?(board)
-  full?(board) || won?(board)
+  draw?(board) || won?(board)
 end
 
 def winner(board)
@@ -101,6 +103,16 @@ def winner(board)
   end 
 end
 
+def play(board)
+  until over?(board) do
+    turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  else
+    puts "Cats Game!"
+  end  
+end
 
 
 
