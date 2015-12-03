@@ -17,7 +17,7 @@ def move(board, location, current_player = "X")
 end
 
 def position_taken?(board, location)
-  board[location] != " " && board[location] != ""
+  !(board[location].nil? || board[location] == " ")
 end
 
 def valid_move?(board, position)
@@ -35,22 +35,14 @@ def turn(board)
   display_board(board)
 end
 
+
 # Def turn_count to keep track of turn #
 def turn_count(board) # determine what turn it is
-  turn_num = 0
-  board.each do |mark|
-    if mark == "X" || mark == "O"   # For each "X" or "O" in (board)
-      turn_num += 1  # add 1 to turn_num
-    end
-  end
-  return turn_num # return current turn_num
+  board.count{|token| token == "X" || token == "O"}
 end
 
 def current_player(board)
-  if turn_count(board)%1==0 && turn_count(board).to_i.even? == true
-    return "X"
-  else return "O"
-  end
+  turn_count(board) % 2 == 0 ? "X" : "O"
 end
 
 def won?(board)
@@ -74,13 +66,11 @@ def full?(board)
 end
 
 def draw?(board)
-  return true if full?(board) == true && won?(board) == false
+  !won?(board) && full?(board)
 end
 
 def over?(board)
-  if full?(board) == true || won?(board) == true || draw?(board) == true
-    return true
-  end
+  won?(board) || draw?(board)
 end
 
 def winner(board)
@@ -94,22 +84,34 @@ def winner(board)
   end
 end
 
-# Define your play method below
-def play(board)
-  while turn_count(board) < 9 && over?(board) == false && draw?(board) == false
+# Ask user to input turn
+def turn(board)
+    puts "Please enter 1-9:"
+    input= gets.strip
+  if !valid_move?(board, input)
     turn(board)
+  else
+    move(board, input, current_player(board))
+    display_board(board)
   end
 end
 
-=begin
-Failures:
-  1) ./lib/tic_tac_toe.rb #play asks for players input on a turn of the game
-     Failure/Error: expect(self).to receive(:gets).at_least(:once).and_return("1")
-       (#<RSpec::ExampleGroups::LibTicTacToeRb::Play:0x00000002e200e8>).gets(*(any args))
-           expected: at least 1 time with any arguments
-           received: 0 times with any arguments
-     # ./spec/02_play_spec.rb:10:in `block (3 levels) in <top (required)>'
-     # .bundle/binstubs/rspec:16:in `load'
-     # .bundle/binstubs/rspec:16:in `<main>'
-DOESN'T TURN(BOARD) ASK FOR INPUT!? DAFUQ
-=end
+#Def Move - This accepts board/position/token(X/O, default to X)
+def move(board, position, player = "X")
+  board[position.to_i - 1] = player
+end
+
+# Define your play method below
+def play(board)
+  turn_num = 0
+  until over?(board)
+    turn_num += 1
+    turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  end
+  if draw?(board)
+    puts "Cats Game!"
+  end
+end
