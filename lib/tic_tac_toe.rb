@@ -12,7 +12,7 @@ WIN_COMBINATIONS = [
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, location, current_player = "#{current_player(board)}")
+def move(board, location, current_player = "X")
   board[location.to_i-1] = current_player
 end
 
@@ -28,12 +28,12 @@ def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
   if valid_move?(board, input)
-    move(board, input)
+    move(board, input, current_player(board))
+    display_board(board)
   else
     puts "invalid"
     turn(board)
   end
-  display_board(board)
 end
 
 def turn_count(board)
