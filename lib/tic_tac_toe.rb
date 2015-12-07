@@ -118,4 +118,18 @@ the_winner = winner(board)
   elsif draw?(board)
     puts "Cats Game!"
   end
+def play
+  until over?
+  turn
+  end
+  if won?
+    if winner
+
+the_winner = winner
+      puts "Congratulations #{the_winner}!"
+    end
+  elsif draw?
+    puts "Cats Game!"
+  end
+end
 end
