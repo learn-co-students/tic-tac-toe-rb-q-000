@@ -104,12 +104,8 @@ def play(board)
 
 
   if won?(board)
-    if WIN_COMBINATIONS.find{|token| board[token[0]] == "X"}
-      puts "Congratulations X!"
-    elsif WIN_COMBINATIONS.find{|token| board[token[0]] == "O"}
-      puts "Congratulations O!"
-    end
-  else
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
     puts "Cats Game!"
   end
 end
