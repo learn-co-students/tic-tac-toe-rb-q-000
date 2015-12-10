@@ -11,45 +11,34 @@ WIN_COMBINATIONS = [
   [0,4,8],
   [2,4,6]
 ]
-
 def display_board(board)
-  print " #{board[0]} | #{board[1]} | #{board[2]} "
-  print "-----------"
-  print " #{board[3]} | #{board[4]} | #{board[5]} "
-  print "-----------"
-  print " #{board[6]} | #{board[7]} | #{board[8]} "
-end
-
-
-def move(board, play, char = "X")
-  int_play = play.to_i
-  int_play -= 1
-
-  board[int_play] = char
-end
-
-def valid_move?(board, position)
-   position = position.to_i
-   position -= 1
-
-    if position.between?(0, 8) == !true
-      return false
-    else 
-      position_taken?(board, position)
-    end
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  puts "-----------"
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
+  puts "-----------"
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
 def turn(board)
   puts "Please enter 1-9:"
-  position = gets.strip
-  position = position.to_i
+  location = gets.strip
 
-  if(valid_move?(board, position))
-    move(board, position, "X")
-    display_board(board)
+  if valid_move?(board, location)
+    move(board, location, current_player(board))
   else
     turn(board)
   end
+end
+
+def move(board, location, token)
+  location = location.to_i-1
+  board[location] = token
+  display_board(board)
+end
+
+def valid_move?(board, location)
+  location = location.to_i-1
+  location.between?(0,8) && !position_taken?(board, location)
 end
 
 def turn_count(board)
@@ -63,6 +52,35 @@ def turn_count(board)
   return counter
 end
 
+# def turn_count(board)
+#   counter = 0
+#   board.each {|i| x != " " counter += 1}
+#   return counter
+# end
+
+def play(board)
+  until over?(board)
+    turn(board)
+  end
+
+  if winner(board) == "X"
+    puts "Congratulations X!"
+  elsif winner(board) == "O"
+    puts "Congratulations O!"
+  else draw?(board)
+    puts "Cats Game!"
+  end
+end
+# until the game is over
+#   take turns
+# end
+
+# if the game was won
+#   congratulate the winner
+# else if the game was a draw
+#   tell the players it has been a draw
+# end
+
 def current_player(board)
   count = turn_count(board)
 
@@ -73,7 +91,15 @@ def current_player(board)
   end
 end
 
-# Helper Method
+def player_number
+  if current_player(board) == "X"
+    return "Player 1"
+  else
+    return "Player 2"
+  end
+end
+
+# Helper Method - position taken if true, not taken if false.
 def position_taken?(board, location)
   !(board[location].nil? || board[location] == " ")
 end
@@ -102,17 +128,17 @@ end
 
 #returns true if the board has been won, is a draw, or is full. 
 def over?(board)
-  won?(board) || full?(board)
+  won?(board) || draw?(board)
 end
 
 #return the token, "X" or "O" that has won the game given a winning board
-def winner(board)
-  if board[won?(board)[0]] 
-    return board[won?(board)[0]] 
-  else !won?(board)
-    return nil
-  end
-end
+# def winner(board)
+#   if board[won?(board)[0]] 
+#     return board[won?(board)[0]] 
+#   else !won?(board)
+#     return nil
+#   end
+# end
 
 
 def winner(board)
