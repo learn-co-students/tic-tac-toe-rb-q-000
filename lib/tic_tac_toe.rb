@@ -73,11 +73,9 @@ def move(board, position, value = "X")
 end
 
 def position_taken?(board, position)
-  if board[position] == (" " || "")
+  if board[position] == (" ") || board[position] == ("")
     return false
-  elsif board[position] == "X"
-    return true
-  elsif board[position] == "O"
+  elsif board[position] == "X" || board[position] == "O"
     return true
   else
     false
@@ -103,36 +101,8 @@ end
 # end  
 #********************************************************************
 
-# ****** this PASSES in "tic_tac_toe.rb"  lesson, but FAILS in the "valid_move.rb" lesson ******
-
-def position_taken?(board, position)
-  if board[position] == (" " || "")
-    return false
-  elsif board[position] == "X"
-    return true
-  elsif board[position] == "O"
-    return true
-  else
-    false
-  end
-end 
 
 
-
-
-#********************************************************************
-
-# def position_taken?(board, position)
-#   if board[position] == (" " || "")
-#     return false
-#   elsif board[position] == "X"
-#     return true
-#   elsif board[position] == "O"
-#     return true
-#   else
-#     false
-#   end
-# end
 
 # def valid_move?(board,position)
 #     if position_taken?(board,[(position.to_i)-1]) == true
