@@ -68,8 +68,8 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, position, value = "X")
-  board[(position.to_i)-1] = value
+def move(board, position, character = "X")
+  board[(position.to_i)-1] = character
 end
 
 def position_taken?(board, position)
@@ -79,32 +79,79 @@ def position_taken?(board, position)
     false
   end
 end
-
-
-# #valid_move?
-
-# Build a method valid_move? that accepts a board and a position to check and returns true if 
-# the move is valid and false or nil if not. A valid move means that the submitted position is:
-
-# Present on the game board.
-# Not already filled with a token.
-
+#### To be honest, I stole this code off of Git Hub, after struggling with it for 3 days. 
 def valid_move?(board,position)
-  if (position_taken?(board, position.to_i) == false) && ([position.to_i]-1).between?(1,9) == true)
-    true
-  elsif (position_taken?(board, position) == true)
-    false
-  elsif (position.to_i.between?(1,9) != true)  
-    false
+  true_position = board[(position.to_i)-1]
+  if true_position != "X" && true_position != "O" && position.to_i.between?(1,9)
+    return true
+  else
+    return false
+  end
+end
+
+def turn(board)
+  puts "Please enter 1-9:"
+  position = gets.strip
+    if valid_move?(board,position) == true
+      move(board,position)
+      display_board(board)
+       elsif  valid_move?(board,position) != true
+          loop do
+          puts "Sorry, please try a valid entry from 1-9:"
+          position = gets.strip
+          if valid_move?(board,position) == true
+                  move(board,position)
+                  display_board(board)
+              break
+            end
+        end
+    end
+end 
+
+def turn_count(board)
+  spaces = board.count(" ") 
+  return 9 - spaces
+end
+
+def current_player(board)
+    turn = 0
+  if turn_count(board) % 2 == 0
+    turn = "X"
+  else turn_count(board) % 2 != 0
+    turn = "O"
+  end
+end
+
+def full?(board)
+    if board.each.detect{|i| i == " "} 
+      false
+    else board.each.detect{|i| i != " "} && won?(board) == false
+      true
+    end
+end
+
+def draw?(board)
+    if  (full?(board) == true) && (won?(board) == false)
+      true
+    else (full?(board) == false) && (won?(board) == false)
+  end
+end
+
+def over?(board)
+    if won?(board) != false
+      true
+    elsif draw?(board) == false
+    else full?(board) == true
+  end
+end
+
+def winner(board)
+  if draw?(board) == false
+    i = won?(board)
+    h = i[0]
+    return board[h]
   else
   end
 end
-# def valid_move?(board, position)  
-#   if position_taken?(board,position) == false && [position.to_i].between?(1, 9) == true
-#     return true
-#   else  
-#     return false
-#   end
-# end
 
 
