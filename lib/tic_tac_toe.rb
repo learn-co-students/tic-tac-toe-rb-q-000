@@ -68,8 +68,8 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, position, character = "X")
-  board[(position.to_i)-1] = character
+def move(board, position, token = "X")
+  board[(position.to_i)-1] = token
 end
 
 def position_taken?(board, position)
@@ -79,7 +79,8 @@ def position_taken?(board, position)
     false
   end
 end
-#### To be honest, I stole this code off of Git Hub, after struggling with it for 3 days. 
+############################################################################################################
+######## To be honest, I stole the following code off of GitHub, after struggling with it for 3 days. ###### 
 def valid_move?(board,position)
   true_position = board[(position.to_i)-1]
   if true_position != "X" && true_position != "O" && position.to_i.between?(1,9)
@@ -88,19 +89,20 @@ def valid_move?(board,position)
     return false
   end
 end
+############################################################################################################
 
 def turn(board)
   puts "Please enter 1-9:"
   position = gets.strip
     if valid_move?(board,position) == true
-      move(board,position)
-      display_board(board)
+       then move(board,position, current_player(board))
+       display_board(board)
        elsif  valid_move?(board,position) != true
           loop do
           puts "Sorry, please try a valid entry from 1-9:"
           position = gets.strip
           if valid_move?(board,position) == true
-                  move(board,position)
+                  then move(board,position, current_player(board))
                   display_board(board)
               break
             end
@@ -114,11 +116,11 @@ def turn_count(board)
 end
 
 def current_player(board)
-    turn = 0
+    play = 0
   if turn_count(board) % 2 == 0
-    turn = "X"
+    play = "X"
   else turn_count(board) % 2 != 0
-    turn = "O"
+    play = "O"
   end
 end
 
@@ -153,5 +155,48 @@ def winner(board)
   else
   end
 end
+
+# def play(board)
+#       until over?(board) == true
+#       turn(board)
+#     end
+#        if over?(board) == true && draw?(board) == true 
+#         then puts "Cats Game!"
+#        elsif winner(board) == ("O") || winner(board) == ("X")
+#         then puts "Congratulations #{winner(board)}!"
+#       else turn_count(board) == 9
+#       end  
+#     end
+
+
+
+
+
+
+
+
+##############  this gets to 2 of 12 remaining  ##################
+def play(board)
+      turn(board)
+      until over?(board) == true
+      turn(board)
+    end
+       if draw?(board) == true 
+        then puts "Cats Game!"
+       elsif won?(board) != false
+        then puts "Congratulations #{winner(board)}!"
+      else
+      end  
+    end
+##################################################################
+
+
+
+
+
+
+
+
+
 
 
