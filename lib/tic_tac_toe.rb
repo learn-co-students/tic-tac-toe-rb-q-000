@@ -1,5 +1,3 @@
-
-
 board = [" "," "," "," "," "," "," "," "," "]
 
 #display board method
