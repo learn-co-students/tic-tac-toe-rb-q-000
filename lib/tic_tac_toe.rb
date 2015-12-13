@@ -73,41 +73,38 @@ def move(board, position, value = "X")
 end
 
 def position_taken?(board, position)
-  if board[position] == (" ") || board[position] == ("")
-    return false
-  elsif board[position] == "X" || board[position] == "O"
-    return true
-  else
-    false
-  end
-end 
-
-def valid_move?(board,position)
-  if (position_taken?(board, position.to_i) == false) && (position.to_i.between?(1,9) == true)
+  if board[position] == "X" || board[position] == "O"
     true
-  else (position_taken?(board, position) == true) || (position.to_i.between?(1,9) == false)
+  elsif board[position] == " " || board[position] == ""
     false
   end
 end
-    
-# ****** this PASSES in "valid_move.rb" lesson, but FAILS in the "tic_tac_toe.rb"  lesson ******
-# 
-# def position_taken?(board, position)
-#   if (board[(position.to_i-1)] == " " || "") == true && (board[(position.to_i-1)] != "X" || "O")
-#     false
-#   else board[(position.to_i-1)] == "X" || "O"
-#     true
+
+
+# #valid_move?
+
+# Build a method valid_move? that accepts a board and a position to check and returns true if 
+# the move is valid and false or nil if not. A valid move means that the submitted position is:
+
+# Present on the game board.
+# Not already filled with a token.
+
+def valid_move?(board,position)
+  if (position_taken?(board, position.to_i) == false) && ([position.to_i]-1).between?(1,9) == true)
+    true
+  elsif (position_taken?(board, position) == true)
+    false
+  elsif (position.to_i.between?(1,9) != true)  
+    false
+  else
+  end
+end
+# def valid_move?(board, position)  
+#   if position_taken?(board,position) == false && [position.to_i].between?(1, 9) == true
+#     return true
+#   else  
+#     return false
 #   end
-# end  
-#********************************************************************
+# end
 
 
-
-
-# def valid_move?(board,position)
-#     if position_taken?(board,[(position.to_i)-1]) == true
-#       return false
-#     else position.to_i.between?(1,9) == false
-#       return false
-#     end
-#   end
