@@ -60,6 +60,7 @@ win_combination = WIN_COMBINATIONS
   end
 end
 
+
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
@@ -79,8 +80,8 @@ def position_taken?(board, position)
     false
   end
 end
-############################################################################################################
-######## To be honest, I stole the following code off of GitHub, after struggling with it for 3 days. ###### 
+
+
 def valid_move?(board,position)
   true_position = board[(position.to_i)-1]
   if true_position != "X" && true_position != "O" && position.to_i.between?(1,9)
@@ -89,7 +90,7 @@ def valid_move?(board,position)
     return false
   end
 end
-############################################################################################################
+
 
 def turn(board)
   puts "Please enter 1-9:"
@@ -109,6 +110,7 @@ def turn(board)
         end
     end
 end 
+
 
 def turn_count(board)
   spaces = board.count(" ") 
@@ -156,47 +158,34 @@ def winner(board)
   end
 end
 
-# def play(board)
-#       until over?(board) == true
-#       turn(board)
-#     end
-#        if over?(board) == true && draw?(board) == true 
-#         then puts "Cats Game!"
-#        elsif winner(board) == ("O") || winner(board) == ("X")
-#         then puts "Congratulations #{winner(board)}!"
-#       else turn_count(board) == 9
-#       end  
-#     end
-
-
-
-
-
-
-
-
-##############  this gets to 2 of 12 remaining  ##################
 def play(board)
-      turn(board)
-      until over?(board) == true
-      turn(board)
+    while over?(board) == false
+        turn(board)
+        draw?(board) == true
+      end
+        if draw?(board) == true
+           puts "Cats Game!"
+        elsif won?(board) != false
+            puts "Congratulations #{winner(board)}!"
+        else
+      end
     end
-       if draw?(board) == true 
-        then puts "Cats Game!"
-       elsif won?(board) != false
-        then puts "Congratulations #{winner(board)}!"
-      else
-      end  
-    end
-##################################################################
 
 
 
 
+########################################################
+############## 1 of 12 #################################
 
-
-
-
-
-
-
+# def play(board)
+#     while over?(board) == false
+#         turn(board)
+#       end
+#         if draw?(board) == true
+#            puts "Cats Game!"
+#         elsif won?(board) != false
+#             puts "Congratulations #{winner(board)}!"
+#         else
+#       end
+#     end
+########################################################
