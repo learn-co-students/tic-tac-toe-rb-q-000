@@ -3,9 +3,9 @@ def play(board)
     turn(board)
   end
   if won?(board)
-    puts "Congratulations #{winner(board)}!"
+    puts "High Five! #{winner(board)}!"
   elsif draw?(board)
-    puts "Cats Game!"
+    puts "Nap Time!"
   end
 end
 
