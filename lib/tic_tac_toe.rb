@@ -17,8 +17,12 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, location) # the test for third parameter in spec file one doesn't seem compatable with using "current_player" in this method.
-  board[location.to_i-1] = current_player(board)
+def move(board, location, param = 0) # the test for third parameter in spec file one doesn't seem compatable with using "current_player" in this method.
+  if param == 0  
+    board[location.to_i-1] = current_player(board)
+  else
+    board[location.to_i-1] = param
+  end
 end
 
 def position_taken?(board, location)
@@ -104,5 +108,5 @@ def play(board)
     puts "Congratulations #{winner(board)}!"
   else
   puts "Cats Game!"
-  end  
+  end
 end
