@@ -102,14 +102,12 @@ WIN_COMBINATIONS = [
   ]
 
 def won?(board)
-  if three_moves?(board)
     WIN_COMBINATIONS.each do |winning_combo|
       if winning_combo.all?{|i| board[i] == "X"} || winning_combo.all?{|i| board[i] == "O"}
         return winning_combo
       end
     end
     return false
-  end
 end
 
 def full?(board)
