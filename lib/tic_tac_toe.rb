@@ -13,7 +13,7 @@ def turn(board)
     puts "That isn't a valid move, please play again!"
     play = gets.strip
   end
-move(board,play)
+move(board,play,current_player(board))
 display_board(board)
 end
 
@@ -58,11 +58,15 @@ def position_taken?(board, position)
 end
 
 def play(board)
-  counter = 1
-  while counter <= 9
+until over?(board) do
     turn(board)
-    counter += 1
-   end
+    winner = won?(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+   else
+     puts "Cats Game!"
+  end
 end
 
 def position_taken?(board, location)
@@ -83,8 +87,9 @@ WIN_COMBINATIONS = [
 
 
 def won?(board)
-  WIN_COMBINATIONS.detect {|yes|
-    board[yes[0]] == board[yes[1]] && board[yes[0]] == board[yes[2]] && (board[yes[0]] == "X" || board[yes[0]] == "O")}
+  WIN_COMBINATIONS.detect do |yes|
+    (board[yes[0]] == board[yes[1]]) && (board[yes[0]] == board[yes[2]]) && ((board[yes[0]] == "X") || (board[yes[0]] == "O"))
+  end
 end
 
 def full?(board)
@@ -104,9 +109,15 @@ def draw?(board)
   end
 end
 def over?(board)
-  if won?(board) == true || draw?(board) == true || full?(board) == true
-    return true
-  else
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  return true
+  elsif draw?(board)
+    puts "Cats Game!"
+  return true
+  elsif full?(board)
+    puts "full"
+    else
     return false
   end
 end
