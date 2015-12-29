@@ -1,8 +1,16 @@
 #!/usr/bin/env ruby
 
+<<<<<<< HEAD
 require_relative '../lib/tic_tac_toe.rb'
 board = [" "," "," "," "," "," "," "," "," "]
 puts "Welcome to Tic Tac Toe!"
 display_board(board)
 
 play(board)
+=======
+require_relative '../lib/tic_tac_toe'
+board = [" "," "," "," "," "," "," "," "," "]
+puts "Welcome to Tic Tac Toe!"
+display_board(board)
+play(board)
+>>>>>>> 79616b61f6dd0fd8dc1b6d36167bd48c8f7d6755
