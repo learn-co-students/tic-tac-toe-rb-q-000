@@ -1,3 +1,18 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/tic_tac_toe'
+
+puts "Welcome to Tic Tac Toe!"
+
+#defines empty board array
+board = [" "," "," "," "," "," "," "," "," "]
+
+# prints a 3x3 Tic Tac Toe Board
+puts "   |   |   "
+puts "-----------"
+puts "   |   |   "
+puts "-----------"
+puts "   |   |   "
+
+#begin game
+play(board)
