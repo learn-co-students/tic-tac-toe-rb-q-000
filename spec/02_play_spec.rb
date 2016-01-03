@@ -1,5 +1,7 @@
 require_relative '../lib/tic_tac_toe.rb'
-
+RSpec.configure do |config|
+  config.backtrace_exclusion_patterns << /custom_helper/
+end
 describe './lib/tic_tac_toe.rb' do  
   describe '#play' do
     it 'asks for players input on a turn of the game' do
