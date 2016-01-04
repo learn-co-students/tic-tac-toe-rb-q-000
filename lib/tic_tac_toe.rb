@@ -20,7 +20,13 @@ def display_board(board)
 end
 
 def move(board, position, char = "X")
-  board[position.to_i - 1] = char
+  if turn_count(board) == 0
+    board[position.to_i - 1] = char
+  elsif turn_count(board).even?
+    board[position.to_i - 1] = char
+  elsif turn_count(board).odd?
+    board[position.to_i - 1] = "O"
+  end
 end
 
 def position_taken?(board, position)
@@ -65,17 +71,21 @@ else if the game was a draw
   tell the players it has been a draw
 =end
   # rspec spec/02_play_spec.rb
-  counter = 0
-  while counter < 9
-    turn(board)
-    counter += 1
+
+  while over?(board) != true
+    if winner(board) == "X" || winner(board) == "O"
+      break
+    elsif
+      turn(board)
+    end
   end
+
   if draw?(board) == true
-    puts "This game was a draw!"
-  elsif won?(board) == "X"
-    puts "Congratulations player 'X'!"
-  elsif won?(board) == "O"
-    puts "Congratulations player 'O'!"
+    puts "Cats Game!"
+  elsif winner(board) == "X"
+    puts "Congratulations X!"
+  elsif winner(board) == "O"
+    puts "Congratulations O!"
   end
 end
 
