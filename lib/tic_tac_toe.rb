@@ -8,7 +8,7 @@ WIN_COMBINATIONS = [
   [2,5,8], # third column
   [0,4,8], # diagonal left
   [2,4,6] # diagonal right
-]
+        ]
 
 def play(board)
 
@@ -103,7 +103,6 @@ end
 def draw?(board)
 
         !won?(board) && full?(board)
-
 end
 
 def over?(board)
