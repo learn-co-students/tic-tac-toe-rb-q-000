@@ -50,17 +50,26 @@ def valid_move?(board, position)
 end
 
 def turn(board)
-  puts "Please enter 1-9:"
-  input = gets.strip
-  if valid_move?(board, input)
-    if turn_count(board) % 2 == 0
+  if turn_count(board) % 2 == 0
+    puts "Player X: please enter 1 - 9:"
+    input = gets.strip
+    if valid_move?(board, input)
       move(board, input, "X")
-    elsif turn_count(board) % 2 == 1
-      move(board, input, "O")
+    else
+      turn(board)
     end
   else
-    turn(board)
+    if turn_count(board) % 2 == 1
+      puts "Player O: please enter 1 - 9:"
+      input = gets.strip
+      if valid_move?(board, input)
+        move(board, input, "O")
+      else
+        turn(board)
+      end
+    end
   end
+  display_board(board)
 end
 
 def turn_count(board)
