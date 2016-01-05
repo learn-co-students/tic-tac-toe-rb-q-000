@@ -47,6 +47,7 @@ def turn(board)
     move(board, input, current_player(board)) 
   else
     turn(board)
+    return
   end
   display_board(board)
 end
