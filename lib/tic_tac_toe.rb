@@ -72,14 +72,8 @@ def turn(board, mark="X")
   display_board(board)
 end
 
-def turn_count(board)
-  counter = 0
-  board.each do |mark|
-    if mark == "X" || mark == "O"
-      counter += 1
-    end
-  end
-    return counter
+def turn_count(board
+  board.count{ |token| token == "X" || token == "O" }
 end
 
 def current_player(board)
@@ -108,28 +102,18 @@ def full?(board)
 end
 
 def draw?(board)
-  if full?(board)
-    if !won?(board)
-      return true
-    else
-      return false
-    end
-  elsif !won?(board)
-    return false
+  if full?(board) && !won?(board)
+    return true
   else
     return false
   end
 end
 
 def over?(board)
-  if !draw?(board)
-    if !won?(board)
-      return false
-    else
-      return true
-    end
-  else
+  if draw?(board) || won?(board)
     return true
+  else
+    return false
   end
 end
 
