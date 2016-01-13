@@ -1,3 +1,4 @@
+#display_board
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
@@ -6,38 +7,46 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
+#move
 def move(board, location, current_player = "X")
   board[location.to_i-1] = current_player
 end
 
+#position_taken
 def position_taken?(board, location)
   board[location] != " " && board[location] != ""
 end
 
+#valid_move
 def valid_move?(board, position)
   position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
 end
 
+#turn
 def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
   if valid_move?(board, input)
-    move(board, input)
+    move(board, input, current_player(board))
   else
     turn(board)
   end
   display_board(board)
 end
 
-# Define your play method below
+#play
 def play(board)
-  play = 0
-  until play == 9
+  until over?(board)
     turn(board)
-    play += 1
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  else draw?(board)
+    puts "Cats Game!"
   end
 end
 
+#turn_count
 def turn_count(board)
   counter = 0
     board.each do |move|
@@ -48,6 +57,7 @@ def turn_count(board)
 return counter
 end
 
+#current_player
 def current_player(board)
   counter = 0
     board.each do |move|
@@ -63,12 +73,8 @@ def current_player(board)
   end
 end
 
-# Helper Method
-def position_taken?(board, location)
-  !(board[location].nil? || board[location] == " ")
-end
 
-# Define your WIN_COMBINATIONS constant
+#WIN_COMBINATIONS
   WIN_COMBINATIONS = [
   [0,1,2],
   [3,4,5],
@@ -80,6 +86,7 @@ end
   [6,4,2]
 ]
 
+#won
 def won?(board)
   result = false
   WIN_COMBINATIONS.each do |combinations|
@@ -102,19 +109,23 @@ def won?(board)
   result
 end
 
+#full
 def full?(board)
   board.all?{|elements| !(elements == " " || elements == nil)}
 end
 
+#draw
 def draw?(board)
   return true if (won?(board) == false && full?(board) == true)
   return false if (won?(board) != false || full?(board) == false )
 end
 
+#over
 def over?(board)
   won?(board) || full?(board) || draw?(board)
 end
 
+#over
 def winner(board)
   winning_location = won?(board)
   if winning_location
