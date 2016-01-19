@@ -1,3 +1,27 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/tic_tac_toe'
+
+
+#test: rspec spec/02_play_spec.rb
+
+=begin
+pseudo
+
+until the game is over
+  take turns
+end
+
+if the game was won
+  congratulate the winner
+else if the game was a draw
+  tell the players it has been a draw
+end
+
+=end
+
+puts "Welcome to Tic Tac Toe!"
+board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+display_board(board)
+play(board)
+
