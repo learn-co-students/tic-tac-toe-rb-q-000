@@ -75,10 +75,10 @@ def play(board)
   until over?(board)
     turn(board)
   end
-  if winner(board) == 'X'
-    puts 'Congratulations X!'
-  elsif winner(board) == 'O'
-    puts 'Congratulations O!'
+  if current_player(board) == 'X'
+    puts 'X'
+  elsif current_player(board) == 'O'
+    puts 'O'
   elsif draw?(board)
     puts "Cats Game!"
   end
@@ -89,3 +89,6 @@ def current_player(board)
 end
 
 
+def over?(board)
+  won?(board) || draw?(board)
+end
