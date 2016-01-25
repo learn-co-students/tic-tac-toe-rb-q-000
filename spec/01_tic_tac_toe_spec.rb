@@ -46,6 +46,8 @@ describe './lib/tic_tac_toe.rb' do
       board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
       move(board, 1, "O")
       move(board, 9, "X")
+      
+      
 
       expect(board).to eq(["O", " ", " ", " ", " ", " ", " ", " ", "X"])
     end
