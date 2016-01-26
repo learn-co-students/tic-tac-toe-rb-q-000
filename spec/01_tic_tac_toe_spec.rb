@@ -1,5 +1,8 @@
 require_relative '../lib/tic_tac_toe.rb'
 
+require 'simplecov'
+SimpleCov.start
+
 describe './lib/tic_tac_toe.rb' do
   describe 'WIN_COMBINATIONS' do
     it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do
