@@ -43,24 +43,17 @@ def valid_move?(array,space)
 end
 
 def turn(board)
-  ok_move=false
-  while ok_move==false 
-    puts "Please enter 1-9:"
-    player=current_player(board)
+    puts "Pleas enter 1-9"
     input=gets.strip
-    if valid_move?(board,input)
-      move(board,input,player)
-      ok_move=true
-    else
-      puts "Invalid Move! Try again."
+    if !valid_move?(board,input)
+      turn(board)
     end
-  end    
+  move(board,input,current_player(board))
+  display_board(board)   
 end
 
 def turn_count(board)
-  spaces_left=board.select{|i| i==" "}
-  current_turn=(9-spaces_left.count)
-  return current_turn
+  board.count{|turns| turns=="X" || turns=="O"}
 end
 
 def current_player(board)
@@ -72,70 +65,54 @@ else
 end
 
 def won?(board)
-  WIN_COMBINATIONS.detect do |combos|
-    if board[combos[0]]=="X" && board[combos[1]]=="X" && board[combos[2]]=="X"
-        win="X"
-        return true
-      elsif board[combos[0]]=="O" && board[combos[1]]=="O" && board[combos[2]]=="O"
-       win="O"
-        return true
-      else
-         false
-    end
-      
-    if win=="X" || win=="O"
-        FINAL_WIN[0]=win
+
+  WIN_COMBINATIONS.each do | combos |
+    if board[combos[0]] == "X" && board[combos[1]] == "X" && board[combos[2]] == "X"
+      return combos
+    elsif board[combos[0]] == "O" && board[combos[1]] == "O" && board[combos[2]] == "O"
+      return combos
     end
   end
+  false
 end
 
-ARRAY=[0,1,2,3,4,5,6,7,8]
+
+
+    
 def full?(board)
-  ARRAY.all? do |board_pos|
-    position_taken?(board,board_pos)
+  board.all?{|spots| spots =="X" || spots == "O"}
   end
-end
+
 
 def draw?(board)
-  win_ox=won?(board)
-  if win_ox==true
-    return false
-  elsif full?(board)==true
-    return true
-  else
-    return false
-   end
+   !won?(board) && full?(board)
 end
 
 def over?(board)
-  over_xo= won?(board)
-  if over_xo==true 
-    return true
-  elsif draw?(board)==true
-    return true
-  else
-    return false
-  end
+   won?(board) || draw?(board)
 end
 
+
 def winner(board)
-    if won?(board)==true
-     return current_player(board)
-   else
-    nil
-   end
+  WIN_COMBINATIONS.each do |win_combo|
+    if win_combo.all? {|spots| board[spots] == "X" }
+       return "X"
+    elsif win_combo.all? {|spots| board[spots] == "O"}
+       return  "O"
+    end
+    end 
+    nil 
 end
+
 
 
 def play(board)
-  while over?(board)==false
+  while !over?(board)
     turn(board)
-    win_xo=won?(board)
-    if win_xo==true
-      puts "Congratulations, #{winner(board)}!"
-    elsif draw?(board)== true
-      puts "Cats game!"
-    end
-    display_board(board)
-  end    
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  else draw?(board)
+    puts "Cats Game!"
+  end   
 end
