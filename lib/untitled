@@ -1,0 +1,84 @@
+def won?(board)
+  WIN_COMBINATIONS.detect do |combos|
+    if board[combos[0]]=="X" && board[combos[1]]=="X" && board[combos[2]]=="X"
+        win="X"
+        return true
+      elsif board[combos[0]]=="O" && board[combos[1]]=="O" && board[combos[2]]=="O"
+       win="O"
+        return true
+      else
+         false
+    end
+      
+    if win=="X" || win=="O"
+        FINAL_WIN[0]=win
+      else
+        false
+    end
+  end
+end
+def won?(board)
+  WIN_COMBINATIONS.detect do |combos|
+    if board[combos[0]]=="X" && board[combos[1]]=="X" && board[combos[2]]=="X"
+        win= [true,"X"]
+        return win
+      elsif board[combos[0]]=="O" && board[combos[1]]=="O" && board[combos[2]]=="O"
+       win=[true,"O"]
+        return win
+      else
+         win=[false,nil]
+         return win
+    end
+  end
+end
+def won?(board)
+  combo_holder=-1
+  WIN_COMBINATIONS.detect do |combos|
+     combo_holder+=1
+     if board[combos[0]]=="X" && board[combos[1]]=="X" && board[combos[2]]=="X"
+        return WIN_COMBINATIONS[combo_holder]
+      elsif board[combos[0]]=="O" && board[combos[1]]=="O" && board[combos[2]]=="O"
+        return WIN_COMBINATIONS[combo_holder]
+      else
+         false
+      end
+  end
+end
+
+def winner(board)
+  if won?(board)==true
+   [0,1,2,3,4,5,6,7,8].each do |number|
+    if WIN_COMBINATIONS[number].all {|x| x=="X"}
+     win=board[WIN_COMBINATIONS[number]]
+    elsif WIN_COMBINATIONS[number].all {|o| o=="O"}
+      return "O"
+    end
+    end
+  end
+end
+
+def draw?(board)
+  draw_ox=full?(board)
+ if won?(board)==[true,"X"] || won?(board)==[true,"O"]
+  false
+  elsif draw_ox==true
+    true
+  else
+     false
+   end
+end
+
+def turn(board)
+  ok_move=false
+  while ok_move==false 
+    puts "Please enter 1-9:"
+    player=current_player(board)
+    input=gets.strip
+    if valid_move?(board,input)
+      move(board,input,player)
+      ok_move=true
+    else
+      puts "Invalid Move! Try again."
+    end
+  end    
+end
