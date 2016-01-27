@@ -56,6 +56,7 @@ def turn(board)
   if !valid_move?(board, input)
     turn(board)
   end
+  # need to refactor
   player = current_player(board)
   move(board, input, player)
   display_board(board)
