@@ -22,8 +22,8 @@ end
     board[location.to_i - 1] = player
   end
 
-  def position_taken?(board, location)
-    if !(board[location].nil? || board[location] == " " || board[location] == "")
+  def position_taken?(board, position)
+    if !(board[position].nil? || board[position] == " " || board[position] == "")
       true
     else
       false
