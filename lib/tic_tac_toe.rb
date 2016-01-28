@@ -53,6 +53,7 @@ end
 def turn(board)
   puts "Please enter 1-9:"
   input = gets.chomp
+  system "clear"
   if !valid_move?(board, input)
     turn(board)
   end

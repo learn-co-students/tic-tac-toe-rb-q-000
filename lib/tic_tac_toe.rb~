@@ -51,11 +51,13 @@ def valid_move?(board, position)
 end
 
 def turn(board)
+  system "clear"
   puts "Please enter 1-9:"
   input = gets.chomp
   if !valid_move?(board, input)
     turn(board)
   end
+  # need to refactor
   player = current_player(board)
   move(board, input, player)
   display_board(board)
@@ -75,10 +77,10 @@ def play(board)
   until over?(board)
     turn(board)
   end
-  if current_player(board) == 'X'
-    puts 'X'
-  elsif current_player(board) == 'O'
-    puts 'O'
+  if winner(board) == 'X'
+    puts 'Congratulations X!'
+  elsif winner(board) == 'O'
+    puts 'Congratulations O!'
   elsif draw?(board)
     puts "Cats Game!"
   end
@@ -89,6 +91,3 @@ def current_player(board)
 end
 
 
-def over?(board)
-  won?(board) || draw?(board)
-end
