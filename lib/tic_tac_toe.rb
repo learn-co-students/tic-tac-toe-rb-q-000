@@ -18,7 +18,7 @@ def display_board(board)
 end
 
 
-  def move(board, location, player = 'X')
+  def move(board, location, player = "X")
     board[location.to_i - 1] = player
   end
 
@@ -30,9 +30,9 @@ end
     end
   end
 
-  def valid_move?(board, input)
-    input.to_i.between?(1,9) && !position_taken?(board, input.to_i-1)
-  end
+def valid_move?(board, position)
+  position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
+end
 
 
 def turn(board)
@@ -95,6 +95,7 @@ end
 
 
   def full?(board)
+
   board.all?{|i|
       i == "X" || i == "O"
 
@@ -102,14 +103,19 @@ end
   end
 
   def draw?(board)
+
     full?(board) && !won?(board)
+
   end
 
   def over?(board)
+
       draw?(board) || won?(board)
+
   end
 
   def winner(board)
+
     WIN_COMBINATIONS.each do |win_combo|
       if win_combo.all? {|index| board[index] == "X" }
          return "X"
