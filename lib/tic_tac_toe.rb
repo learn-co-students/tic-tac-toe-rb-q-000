@@ -88,11 +88,10 @@ end
 
 
   def full?(board)
-    if board.all? { |all| all == "X" || all == "O" } && !won?(board)
-      return true
-    else
-      return false
-    end
+  board.all?{|i|
+      i == "X" || i == "O"
+
+    }
   end
 
   def draw?(board)
