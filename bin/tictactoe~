@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-require_relative '../lib/tic_tac_toe'
-
-print "Welcome to Tic Tac Toe!"
-board = Array.new(9, " ")
-play(board)
