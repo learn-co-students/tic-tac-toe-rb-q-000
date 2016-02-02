@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/tic_tac_toe'
+
+#board = [" "," "," "," "," "," "," "," "," "]
+board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+puts "draw board:"
+puts draw?(board)
+puts "half board:"
+board = ["X"," ","X"," ","O"," "," "," ","O"]
+puts draw?(board)
+board = [" "," "," "," "," "," "," "," "," "]
+puts "empty board:"
+puts draw?(board)
+
