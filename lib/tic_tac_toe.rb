@@ -5,6 +5,7 @@ def play(board)
   if won?(board)
     puts "Congratulations #{winner(board)}!"
   end
+  draw?(board)
   if draw?(board)
     puts "Cats Game!"
   end
@@ -65,10 +66,11 @@ end
 
 #OVER?: true/false if game is over
 def over?(board)
-#  print "IT'S OVER!"
+  puts "DRAW, PILGRIM!!"
   if(!!won?(board))
     return true
-  elsif(full?(board))
+  end
+  if(draw?(board))
     return true
   end
   return false
