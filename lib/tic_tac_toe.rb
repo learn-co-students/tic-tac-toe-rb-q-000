@@ -1,16 +1,12 @@
 def play(board)
-  playing = true
-  while playing
-    playing = !over?(board)
-    if won?(board)
-      puts "Congratulations #{winner(board)}!"
-      return nil
-    end
-    if draw?(board)
-      puts "Cats Game!"
-      return nil
-    end
+  while !over?(board)
     turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  end
+  if draw?(board)
+    puts "Cats Game!"
   end
 end
 
