@@ -3,12 +3,11 @@ def play(board)
   while playing
     playing = !over?(board)
     if won?(board)
-#      winner = winner(board)
       puts "Congratulations #{winner(board)}!"
       return nil
     end
     if draw?(board)
-      puts "Cat's game!"
+      puts "Cats Game!"
       return nil
     end
     turn(board)
@@ -70,6 +69,7 @@ end
 
 #OVER?: true/false if game is over
 def over?(board)
+#  print "IT'S OVER!"
   if(!!won?(board))
     return true
   elsif(full?(board))
