@@ -30,6 +30,7 @@ def turn(board)
     puts "Invalid move"
     turn(board)
   end
+  display_board(board)
 end
 
 
