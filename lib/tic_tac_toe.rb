@@ -87,6 +87,7 @@ return false
 end
 
 
+
 # accept a board. return true if every element in the board contains either an "X" or an "O".
 def full?(board)
   board.all? do |position|
