@@ -1,0 +1,20 @@
+
+[1mFrom:[0m /home/nitrous/code/labs/tic-tac-toe-rb-q-000/lib/tic_tac_toe.rb @ line 34 Object#turn:
+
+    [1;34m30[0m: [32mdef[0m [1;34mturn[0m(board)
+    [1;34m31[0m:   player_up = current_player(board)
+    [1;34m32[0m:   puts [31m[1;31m"[0m[31mPlayer #{player_up}[0m[31m, Please enter 1-9:[1;31m"[0m[31m[0m
+    [1;34m33[0m:   userEntry = gets.chomp
+ => [1;34m34[0m:   binding.pry
+    [1;34m35[0m:   [32mif[0m valid_move?(board,userEntry) == [1;36mtrue[0m
+    [1;34m36[0m:     move(board,userEntry,player_up)
+    [1;34m37[0m:     display_board(board)
+    [1;34m38[0m:     [32mif[0m over?(board) == [1;36mtrue[0m
+    [1;34m39[0m:       [32mreturn[0m
+    [1;34m40[0m:     [32mend[0m
+    [1;34m41[0m:   [32melse[0m
+    [1;34m42[0m:     puts [31m[1;31m"[0m[31mEntry not valid. Try again[1;31m"[0m[31m[0m
+    [1;34m43[0m:     turn(board)
+    [1;34m44[0m:   [32mend[0m
+    [1;34m45[0m: [32mend[0m
+
