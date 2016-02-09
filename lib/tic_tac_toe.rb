@@ -27,7 +27,12 @@ end
 position = 0
 
 def position_taken?(board, position)
-  !(board[position].nil? || board[position] == " ")
+  position = position.to_i - 1
+  if (board[position] == "X" || board[position] == "O")
+  return true
+  else ((board[position] == " " || board[position] == "") && (board[position] == ![0..8]))
+    return false
+  end
 end
 
 def valid_move?(board, position)
@@ -101,12 +106,15 @@ def over?(board)
 end
 
 def winner(board)
-  if (won?(board) == true) && (position_1 == "X" && position_2 =="X" && position_3 =="X")
-    "X"
-  elsif (won?(board) == true) && (position_1 == "O" && position_2 =="O" && position_3 =="O")
-    "O"
-  else
-    nil
+  result = won?(board)
+   if result.is_a?(Array) 
+     if board[result[0]] == "X"
+        "X"
+     else
+        "O"
+     end
+    else
+      nil
   end
 end
 
