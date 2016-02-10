@@ -66,7 +66,6 @@ end
 
 #OVER?: true/false if game is over
 def over?(board)
-  puts "DRAW, PILGRIM!!"
   if(!!won?(board))
     return true
   end
