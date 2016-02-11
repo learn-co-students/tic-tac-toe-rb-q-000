@@ -1,4 +1,4 @@
-# define a constant for win combinations
+# defines a constant with arrays for each win combination
 WIN_COMBINATIONS = [
   [0, 1, 2], #top row
   [3, 4, 5], #middle row
@@ -10,10 +10,9 @@ WIN_COMBINATIONS = [
   [6, 4, 2]  #up diagonal
 ]
 
-# Define display_board that accepts a board and prints
-# out the current state.
+# display board prints arbitrary arrangements of the board
 def display_board(board)
-  puts "Welcome To Tic Tac Toe"
+  #puts "Welcome To Tic Tac Toe"
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
   puts " #{board[3]} | #{board[4]} | #{board[5]} "
@@ -21,12 +20,12 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
   end
 
-# code your move method here!
-def move(board, location, current_player = "X")
-  board[location.to_i-1] = current_player
+#move allows "X" player in the bottom right and "O" in the top left
+def move(board, input, char = "X")
+  board[input.to_i-1] = char
 end
 
-# code your #position_taken? method here!
+#position_taken? returns true/false based on position in board
 def position_taken?(board, int)
   if board[int] == "X" || board[int] == "O"
     true
@@ -37,7 +36,7 @@ def position_taken?(board, int)
   end
 end
 
-# code your #valid_move? method here
+#valid_move? returns true/false based on position
 def valid_move?(board, position)
   position = position.to_i - 1
   if position.between?(0, 8) == true && position_taken?(board, position) == false
@@ -45,29 +44,30 @@ def valid_move?(board, position)
   end
 end
 
-# Define turn
+#turn makes valid moves asks for input again after a failed validation
 def turn(board)
   puts "Please enter 1-9:"
   square = gets.chomp
   if valid_move?(board, square)
-    move(board, square)
+    move(board, square, current_player(board))
     display_board(board)
   else
     turn(board)
   end
 end
 
+#turn_count counts occupied positions
 def turn_count(board)
 count = 0
-  board.each do |place|
-    if place == "X" || place == "O"
-      count+= 1
+  board.each do |i|
+    if i == "X" || i == "O"
+      count += 1
     end
   end
   return count
 end
 
-# Current player
+#current_player returns the correct player, X, for the third move
 def current_player(board)
   if turn_count(board) % 2 == 0
     return "X"
@@ -76,56 +76,28 @@ def current_player(board)
   end
 end
 
-# Discover if a win can be matched
-def win?(board)
-  WIN_COMBINATIONS.each do |win_combination|
-    win_index_1 = win_combination[0]
-    win_index_2 = win_combination[1]
-    win_index_3 = win_combination[2]
+def won?(board)
+  # First, let's make a local variable that is going
+  # to be the return value of this method.
+  winning_combination = nil
 
-    position_1 = board[win_index_1] # load the value of the board at win_index_1
-    position_2 = board[win_index_2] # load the value of the board at win_index_2
-    position_3 = board[win_index_3] # load the value of the board at win_index_3
+  # Check to see if anyone has won
+  WIN_COMBINATIONS.each do |combo|
+    first_position = board[combo[0]]
+    second_position = board[combo[1]]
+    third_position = board[combo[2]]
 
-    if position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 == "O"
-      return win_combination # return the win_combination indexes that won.
-    else
-      false
+    if first_position == "X" && second_position == "X" && third_position == "X"
+      winning_combination = combo
+    elsif first_position == "O" && second_position == "O" && third_position == "O"
+      winning_combination = combo
     end
   end
-end
 
-# Find a draw
-def draw?(board)
-  if win?(board) == [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]] && full?(board)
-    return true
-  elsif win?(board) == [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]] && !full?(board)
-    return false
-  else
-    false
-  end
-end
-
-# Is the board empty?
-def empty?(board)
-  if board.any?{|i| i != " "}
-    false
-  else
-    true
-  end
-end
-
-# Define won
-def won?(board)
-  if empty?(board) == true
-    return false
-  elsif draw?(board) == true
-    return false
-  elsif win?(board)
-    return win?(board)
-  else
-    return false
-  end
+  # Then no matter what we return winning_combination
+  # it'll either still be nil if no one has won
+  # or it will be the winning_combo we set in the middle
+  return winning_combination
 end
 
 # Is the board full?
@@ -137,38 +109,39 @@ def full?(board)
   end
 end
 
+def draw?(board)
+  if !won?(board) && full?(board)
+    return true
+  elsif !won?(board) && !full?(board)
+    return false
+  elsif won?(board)
+    false
+  end
+end
+
 # Define game over
 def over?(board)
-  if won?(board) != [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]]
-    return true
-  elsif draw?(board) == true
-    return true
-  elsif full?(board) == true
+  if draw?(board) || won?(board) || full?(board)
     return true
   else
-    false
+    return false
   end
 end
 
 # Define winner
 def winner(board)
-  if won?(board) != [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]]
-  win_array = won?(board)
-    if board[win_array[0]] == "X"
-      return "X"
-    else
-      return "O"
-    end
-  else
-    return
+  if win_array = won?(board)
+    return board[win_array[0]]
   end
 end
 
-# Define your play method below
 def play(board)
-count = 0
-  while count < 9
+  while !over?(board)
     turn(board)
-    count += 1
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
   end
 end
