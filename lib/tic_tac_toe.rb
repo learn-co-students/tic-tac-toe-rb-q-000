@@ -17,27 +17,22 @@ WIN_COMBINATIONS = [
   print " #{board[6]} | #{board[7]} | #{board[8]} "
  end
 
-display_board(board)
-
 def move(board, position, player = "X")
-  #position = position.to_i
   board[position.to_i-1] = player
 end
 
-#position = 0
+position = position.to_i-1
 
 def position_taken?(board, position)
-  position = position.to_i-1
-  #!board[position].nil? || board[position] == " "
   if (board[position] == "X" || board[position] == "O")
-  return true
-  else #((board[position] == " " || board[position] == "" || board[position] == nil) && (board[position] == ![0..8]))
+    return true
+  else
     return false
   end
 end
 
 def valid_move?(board, position)
-  if position.to_i.between?(1,9) == true && !position_taken?(board, position)
+  if position.to_i.between?(1,9) == true && !position_taken?(board, position.to_i-1)
     true
   else
     false
