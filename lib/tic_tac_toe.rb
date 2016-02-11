@@ -20,17 +20,18 @@ WIN_COMBINATIONS = [
 display_board(board)
 
 def move(board, position, player = "X")
-  position = position.to_i
+  #position = position.to_i
   board[position.to_i-1] = player
 end
 
-position = 0
+#position = 0
 
 def position_taken?(board, position)
-  position = position.to_i - 1
+  position = position.to_i-1
+  #!board[position].nil? || board[position] == " "
   if (board[position] == "X" || board[position] == "O")
   return true
-  else ((board[position] == " " || board[position] == "") && (board[position] == ![0..8]))
+  else #((board[position] == " " || board[position] == "" || board[position] == nil) && (board[position] == ![0..8]))
     return false
   end
 end
@@ -45,25 +46,22 @@ end
 
 def turn(board)
   puts "Please enter 1-9:"
-  position = gets.strip
-  if !position_taken?(board, position) && valid_move?(board, position)
-    move(board, position, value = "X")
-    display_board(board)
+  input = gets.strip
+  if valid_move?(board, input)
+    move(board, input)
   else
     turn(board)
   end
+  display_board(board)
 end
 
+
 def turn_count(board)
-    board.count("X") + board.count("O")
+    board.count{|token| token == "X" || token == "O"}
   end
 
 def current_player(board)
-  if turn_count(board).even? 
-    "X"
-  else
-    "O"
-end
+  turn_count(board).even? ? "X" : "O"
 end
 
 def won?(board)
@@ -80,51 +78,31 @@ def won?(board)
 end
 
 def full?(board)
-  if board.count("X") + board.count("O") < 9
-    false
-  else
-    true
-  end
+  board.all?{|token| token == "X" || token == "O"}
 end
 
 def draw?(board)
-  if (board.count("X") + board.count("O") == 9) && (won?(board) == false)
-    true
-  elsif (board.count("X") + board.count("O") < 9) && (won?(board) == true)
-    false
-  else won?(board) == true
-    false  
-  end
+  !won?(board) && full?(board)
 end
 
 def over?(board)
-  if won?(board) == true || draw?(board) == true || full?(board) == true
-    true
-  else
-    false
-  end
+  won?(board) || draw?(board)
 end
 
 def winner(board)
-  result = won?(board)
-   if result.is_a?(Array) 
-     if board[result[0]] == "X"
-        "X"
-     else
-        "O"
-     end
-    else
-      nil
-  end
+  win = won?(board)
+    return board[win[0]] if win
+    nil
 end
+
 
 def play(board)
   until over?(board)
     turn(board)
   end
   if won?(board)
-    puts "Congratulations! #{winner(board)}"
-  else
+    puts "Congratulations #{winner(board)}!"
+  else 
     puts "Cats Game!"
   end
 end
