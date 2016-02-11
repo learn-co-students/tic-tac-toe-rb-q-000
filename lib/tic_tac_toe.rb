@@ -48,7 +48,7 @@ def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
   if valid_move?(board, input)
-    move(board, input)
+    move(board, input, current_player(board))
   else
     turn(board)
   end
@@ -58,7 +58,7 @@ end
 
 def turn_count(board)
     board.count{|token| token == "X" || token == "O"}
-  end
+end
 
 def current_player(board)
   turn_count(board).even? ? "X" : "O"
@@ -98,12 +98,11 @@ end
 
 def play(board)
   until over?(board)
-    current_player(board)
     turn(board)
   end
   if won?(board)
     puts "Congratulations #{winner(board)}!"
-  else 
+  elsif draw?(board)
     puts "Cats Game!"
   end
 end
