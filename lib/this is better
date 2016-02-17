@@ -1,0 +1,15 @@
+def play (board)
+  turn(board)
+  if over?(board) == true
+    if winner(board) == 'O'
+      return puts "Congratulations O!"
+    elsif winner(board) == 'X'
+      return puts "Congratulations X!"
+    elsif draw?(board) == true
+      return puts "Cats Game!"
+    end
+
+  elsif over?(board) == false
+    play(board)
+  end
+end
