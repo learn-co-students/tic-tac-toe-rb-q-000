@@ -1,8 +1,17 @@
-WIN_COMBINATIONS=[
+
+
+class TicTacToe
+
+  def initialize(board)
+    @board = board
+    @board = Array.new(9," ")
+  end
+
+  Win_combinations = [
   [0,1,2],[3,4,5],[1,4,7],[2,5,8],[0,3,6],[6,7,8],[0,4,8],[2,4,6]
   ]
-board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-def display_board(board)
+
+  def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
   puts " #{board[3]} | #{board[4]} | #{board[5]} "
@@ -31,6 +40,24 @@ def turn(board)
     turn(board)
   end
   display_board(board)
+end
+
+def turn_count(board)
+  counter = 0
+  board.each do |choices|
+    if "#{choices}" == "X" || "#{choices}" == "O"
+      counter += 1
+    end
+  end
+  counter
+end
+
+def current_player(board)
+  if turn_count(board) % 2 == 0
+    "X"
+  else
+    "O"
+  end
 end
 
 def full?(board)
@@ -96,26 +123,6 @@ def winner(board)
   end
 end
 
-def turn_count(board)
-  counter = 0
-  board.each do |choices|
-    if "#{choices}" == "X" || "#{choices}" == "O"
-      counter += 1
-    end
-  end
-  counter
-end
-
-def current_player(board)
-  if turn_count(board) % 2 == 0
-    "X"
-  else
-    "O"
-  end
-end
-
-
-
 def play(board)
   while over?(board) != true
     turn(board)
@@ -126,5 +133,11 @@ def play(board)
     puts "Cats Game!"
   end
 end
+
+
+end
+
+
+
 
 
