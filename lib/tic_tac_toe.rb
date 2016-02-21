@@ -59,20 +59,10 @@ def turn(board)
 end
 
 def won?(board)
-  win_combination = []
-  WIN_COMBINATIONS.each do |line|
-    if line.all? { |pos| board[pos] == "X" }
-      win_combination = line
-    end
-    if line.all? { |pos| board[pos] == "O" }
-      win_combination = line
-    end
+  win_combination = WIN_COMBINATIONS.select do |line|
+    line.all? { |pos| board[pos] == "X" } || line.all? { |pos| board[pos] == "O" }
   end
-  if win_combination != []
-    win_combination
-  else
-    false
-  end
+  win_combination != [] ? win_combination.flatten : false
 end
 
 def full?(board)
@@ -101,8 +91,7 @@ def play(board)
   end
   if won?(board)
     puts "Congratulations #{winner(board)}!"
-  end
-  if draw?(board)
+  elsif draw?(board)
     puts("Cats Game!")
   end
 end
