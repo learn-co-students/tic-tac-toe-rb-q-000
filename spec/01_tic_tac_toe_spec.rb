@@ -118,6 +118,18 @@ describe './lib/tic_tac_toe.rb' do
   end
 
   describe '#current_player' do
+    it 'returns the correct player, X, for the first move' do
+      board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+
+      expect(current_player(board)).to eq("X")
+    end
+
+    it 'returns the correct player, O, for the second move' do
+      board = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
+
+      expect(current_player(board)).to eq("O")
+    end
+    
     it 'returns the correct player, X, for the third move' do
       board = ["O", " ", " ", " ", "X", " ", " ", " ", " "]
 
