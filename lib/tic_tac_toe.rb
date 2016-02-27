@@ -1,16 +1,3 @@
-WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4,2]]
-
-def play(board)
-  while !over?(board)
-    turn(board)
-  end
-  if won?(board)
-    puts "Congratulations #{winner(board)}!"
-  elsif draw?(board)
-    puts "Cats Game!"
-  end
-end
-
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
@@ -19,16 +6,22 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def valid_move?(board, input)
-  input.to_i.between?(1,9) && !position_taken?(board, input.to_i-1)
+WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4,2]]
+
+def valid_move?(board, pos)
+  pos.to_i.between?(1,9) && !position_taken?(board, pos.to_i-1)
 end
 
 def won?(board)
-  WIN_COMBINATIONS.detect do |combo|
-    board[combo[0]] == board[combo[1]] &&
-    board[combo[1]] == board[combo[2]] &&
-    position_taken?(board, combo[0])
-  end
+WIN_COMBINATIONS.detect do |arr| 
+ if board[arr[0]] == "X" && board[arr[1]] == "X" && board[arr[2]] == "X"
+   arr
+ elsif board[arr[0]] == "O" && board[arr[1]] == "O" && board[arr[2]] == "O"
+   arr
+ else
+   false
+ end
+end 
 end
 
 def full?(board)
@@ -74,5 +67,16 @@ end
 def winner(board)
   if winning_combo = won?(board)
     board[winning_combo.first]
+  end
+end
+
+def play(board)
+  while !over?(board)
+    turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
   end
 end
