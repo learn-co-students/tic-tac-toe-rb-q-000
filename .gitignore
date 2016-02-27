@@ -4,7 +4,8 @@
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb config/secrets.yml
 ## Environment normalization:
-/.bundle /vendor/bundle
+/.bundle
+/vendor/bundle
 # these should all be checked in to normalize the environment: Gemfile.lock, .ruby-version, .ruby-gemset unless supporting rvm < 1.11.0 or doing 
 # something fancy, ignore this:
 .rvmrc
