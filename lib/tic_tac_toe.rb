@@ -20,22 +20,22 @@ def display_board(board)
 end
 
 #allows a player to make a move
-def move(board, location, char='X')
-  board[location-1] = char
+#location is an integer 1-9
+def move(board, location, token='X')
+  board[location-1] = token
 end
 
 #checks if a position is already filled
-def position_taken?(board, array_location)
-  if board[array_location] == 'X' || board[array_location] == 'O'
-    return true
-  else
-    return false
-  end
+#position is an integer 0-8
+def position_taken?(board, position)
+  return board[position] == 'X' || board[position] == 'O'
 end
 
 #check if user input is valid and that position is open
+#location is a string
 def valid_move?(board, location)
-  if location.to_i < 1 || location.to_i > 9
+  #if location.to_i < 1 || location.to_i > 9
+  if !location.to_i.between?(1,9)
     return false
   elsif position_taken?(board, location.to_i-1)
     return false
@@ -69,11 +69,7 @@ end
 
 #determines whose turn it is
 def current_player(board)
-  if turn_count(board) % 2 == 0
-    return "X"
-  else
-    return "O"
-  end
+  turn_count(board) % 2 == 0 ? "X" : "O"
 end
 
 #determines if someone has won, returns an array of the winning combination
@@ -101,13 +97,7 @@ end #end of won? method
 
 #determines if the board has all 9 spaces occupied
 def full?(board)
-  isFilled = 0
-  board.each do |position|
-    if position == 'X' || position == 'O'
-      isFilled += 1
-    end
-  end
-  return isFilled == 9
+  board.all? {|position| position == 'X' || position == 'O'}
 end
 
 #determines if the game is a draw
@@ -123,16 +113,12 @@ end
 
 #determines if game is over
 def over?(board)
-  if won?(board) || draw?(board) || full?(board)
-    return true
-  else
-    return false
-  end
+  won?(board) || draw?(board) || full?(board)
 end
 
 #determines who the winner is
 def winner(board)
-  return won?(board) ? board[won?(board)[0]] : nil
+  won?(board) ? board[won?(board)[0]] : nil
 end
 
 #game logic
