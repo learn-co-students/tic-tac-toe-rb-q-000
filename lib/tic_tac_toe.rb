@@ -48,8 +48,7 @@ def turn(board)
     display_board(board)
     input = gets.strip
   end
-  move(board, input, current_player(board))
-  display_board(board)   
+  move(board, input, current_player(board))   
 end
 
 def turn_count(board)
@@ -128,6 +127,7 @@ def play(board)
         display_board(board)
         turn(board)
     end
+    display_board(board)
     puts "Thank you for playing!"
     if won?(board) != false
       puts "Congratulations #{winner(board)}!"
