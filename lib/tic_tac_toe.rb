@@ -22,5 +22,5 @@ end
 
 # used for testing ...
 
-#board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-#play (board)
+board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+play (board)
