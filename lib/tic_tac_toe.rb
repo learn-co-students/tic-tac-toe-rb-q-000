@@ -49,18 +49,18 @@ def turn(board)
 end
 
 # Define your play method below
-def play(board)
+def play
 
-  while over?(board) == false
-    turn(board)
-    if draw?(board) == true
+  while over?== false
+    turn
+    if draw? == true
       break
     end
   end
-  if draw?(board) == true
+  if draw? == true
     puts "Cats Game!"
   else
-    puts "Congratulations #{winner(board)}!"
+    puts "Congratulations #{@board.winner}!"
   end
 end
 
