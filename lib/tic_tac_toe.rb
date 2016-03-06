@@ -13,34 +13,39 @@ end
 
 # Define your play method below
 def play(board)
-  turn_counter = 0
 
-  while turn_counter < 9
-   turn(board)
-   turn_counter += 1
-     if over?(board)
+  #ready = gets
 
-  if cats_game?(board)
+
+  #turn_counter = 0
+
+  until over?(board) #turn_counter < 9
+
+    turn(board)
+   # turn_counter += 1
+     #if over?(board)
+
+    if cats_game?(board)
        puts "Cat's Game!"
        return
-   end
-   if won?(board)
+    end
+    if won?(board)
      if winner?(board) == "X"
        puts "Congratulations X!"
      else
        puts "Congratulations O!"
      end
      return
-   end
+    end
 
+   #end
    end
-end
 end
 
 def turn(board)
   puts "#{current_player(turn_count(board))} is the current player"
   puts "Please enter 1-9:"
-  input = gets.chomp
+  input = gets
   if valid_move?(board, input)
     move(board, input, current_player(turn_count(board)))
   else
@@ -84,12 +89,14 @@ def won?(board)
   WIN_COMBINATIONS.each do |subarray|
     if board[subarray[0]] == "X" && board[subarray[1]] == "X" && board[subarray[2]] == "X"
       #puts "X is the winner"
-      return subarray
+      #return subarray
+      return true
     end
 
     if board[subarray[0]] == "O" && board[subarray[1]] == "O" && board[subarray[2]] == "O"
      # puts "O is the winner"
-     return subarray
+     #return subarray
+      return true
     end
   end
   return nil
