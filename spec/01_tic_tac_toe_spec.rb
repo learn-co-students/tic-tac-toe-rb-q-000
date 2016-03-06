@@ -121,7 +121,7 @@ describe './lib/tic_tac_toe.rb' do
     it 'returns the correct player, X, for the third move' do
       board = ["O", " ", " ", " ", "X", " ", " ", " ", " "]
 
-      expect(current_player(board)).to eq("X")
+      expect(current_player(turn_count(board))).to eq("X")
     end
   end
 
@@ -193,23 +193,23 @@ describe './lib/tic_tac_toe.rb' do
     end
   end
 
-  describe '#winner' do
+  describe '#winner?' do
     it 'return X when X won' do
       board = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
 
-      expect(winner(board)).to eq("X")
+      expect(winner?(board)).to eq("X")
     end
 
     it 'returns O when O won' do
       board = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
 
-      expect(winner(board)).to eq("O")
+      expect(winner?(board)).to eq("O")
     end
 
     it 'returns nil when no winner' do
       board = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
 
-      expect(winner(board)).to be_nil
+      expect(winner?(board)).to be_nil
     end
   end
 end
