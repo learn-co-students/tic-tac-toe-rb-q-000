@@ -53,10 +53,10 @@ def turn(board)
   position = gets.strip
   if valid_move?(board, position) == true
     move board, position, current_player(board)
-  else valid_move?(board, position) == false
+    display_board(board)
+   else valid_move?(board, position) == false
     turn(board)
   end
-  display_board(board)
 end
 
 
