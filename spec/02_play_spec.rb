@@ -43,7 +43,7 @@ describe './lib/tic_tac_toe.rb' do
 
       expect(board).to match_array(["X", "O", "X", " ", " ", " ", " ", " ", " "])
     end
-
+##
     it 'checks if the game is won after every turn' do
       board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
       allow($stdout).to receive(:puts)
