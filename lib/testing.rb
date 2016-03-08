@@ -92,8 +92,10 @@ def winner(board)
   end
 end
 
+
+
 def play(board)
- if draw?(board) 
+  if draw?(board) 
   puts "Cats Game!"
 end 
   until won?(board) != false || draw?(board) == true 
@@ -107,12 +109,10 @@ else
 end 
 over?(board)
 won?(board)
-if draw?(board) 
-    puts "Cats Game!"
-    break
-  end 
 end
-  if won?(board) 
+  if won?(board)
     puts "Congratulations #{winner(board)}!"
   end 
 end 
+
+play(["X", "O", "X", "O", "X", "X", "O", "X", "O"])
