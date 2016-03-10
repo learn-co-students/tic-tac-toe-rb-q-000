@@ -19,7 +19,7 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, input, value = "X")
+def move(board, input, value = current_player(board))
   board[(input.to_i-1)] = value 
 end
 
