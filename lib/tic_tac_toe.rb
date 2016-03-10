@@ -37,10 +37,10 @@ def turn(board)
   input = gets.strip
   if valid_move?(board, input)
     move(board, input)
+    display_board(board)
   else
     turn(board)
   end
-  display_board(board)
 end
 
 def turn_count(board)
@@ -96,7 +96,7 @@ end
 
 #takes in a board and returns 
 def over?(board) 
-  if (won?(board) == true || full?(board) == true)
+  if (won?(board) || draw?(board))
     true
   else 
     false
@@ -114,12 +114,10 @@ end
 def play(board)
   until over?(board) 
     turn(board)
-  end
+  end 
 if won?(board)
-  winner = winner(board)
-  puts "Congratulations! #{winner}!"
+  return puts "Congratulations #{winner(board)}!"
 elsif draw?(board)
-  puts "Cats Game!"
-end 
+  return puts "Cats Game!" 
 end
-
+end 
