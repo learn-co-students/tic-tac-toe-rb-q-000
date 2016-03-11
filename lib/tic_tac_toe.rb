@@ -50,13 +50,14 @@ def play(board)
  #input = gets.strip
  until over?(board)
  	turn(board)
- end
  if won?(board)
  	puts "Congratulations #{winner(board)}!"
  end
  if draw?(board)
 	puts "Cats Game!"
  end
+ end
+
 end
 
 # Define your WIN_COMBINATIONS constant
@@ -85,6 +86,7 @@ def full?(board)
 end
 
 def draw?(board)
+	#puts "in draw?"
 	!won?(board) && full?(board)
 end
 
