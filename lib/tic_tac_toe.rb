@@ -32,25 +32,19 @@ end
 def full?(board)
   if board.all?{|taken| taken != " "}
     return true
-  else
-    return false
   end
 end
 
 def draw?(board)
   if full?(board) && !won?(board)
     return true
-  else
-    return false
   end
 
 end
 
 def over?(board) 
-  if full?(board)|| won?(board)
+  if full?(board)|| won?(board) || draw?(board)
     return true
-  else
-    return false
   end
   
 end
@@ -87,8 +81,6 @@ end
 def valid_move?(board,position)
   if position.to_i.between?(1,9) && !position_taken?(board,position.to_i-1) 
     return true
-  else
-    return false
   end
   
 end
