@@ -118,26 +118,15 @@ end
 
 def play(board)
 
-  # until the game is over
   until over?(board)
-    # take turns
     turn(board)
-
-  # end
   end
  
-  # if the game was won
   if won?(board)
-    #  congratulate the winner
     puts "Congratulations #{winner(board)}!"
-  # else if the game was a draw
   else
-    #   tell the players it has been a draw
     puts "Cats Game!"
-  # end
   end
-
-  
 end
 
 
