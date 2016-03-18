@@ -57,9 +57,10 @@ def turn(board)
   input = gets.strip
   if !valid_move?(board, input)
     turn(board)
-  end
+  else
   move(board, input, current_player(board))
   display_board(board)
+  end
 end
 
 def position_taken?(board, location)
