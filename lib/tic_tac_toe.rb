@@ -1,3 +1,4 @@
+require 'pry'
 WIN_COMBINATIONS = [
     [0,1,2], [3,4,5], [6,7,8],  # horizontal
     [0,3,6], [1,4,7], [2,5,8],  # vertical
@@ -30,7 +31,7 @@ def position_taken?(board, position)
   elsif board[position] == "X" || board[position] == "O"
     return true
   else 
-    return
+    return true
   end
 end
 
@@ -40,15 +41,14 @@ def valid_move?(board,position)
   position_taken = position_taken?(board, position)
   if position > 8 || position_taken == true || position < 0
     return false
-  elsif position < 9 && position_taken == false
+  elsif position < 9 && position_taken == false # NIL here!!
     return true
-  else
-    return
   end
 end
 
 
 def turn(board)
+  
   player = current_player(board)
   puts "Please enter 1-9:"
   position = gets
@@ -131,12 +131,12 @@ end
 
 def play(board)
   while !over?(board)
-    currentPlayer = current_player(board)
-    turn(board)  
-    if won?(board)
-      puts "Congratulations #{currentPlayer}!"
-    elsif draw?(board)
-      puts "Cats Game!" 
-    end
+    turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
+    return
   end
 end
