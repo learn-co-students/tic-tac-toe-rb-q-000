@@ -68,11 +68,11 @@ end
 def turn(board)
     puts "Please enter 1-9:"
     input = gets.strip
-    if !move(board, input)
+    if !move(board, input, current_player(board))
         puts "Number is not valid"
         puts "Please enter 1-9:"
         input = gets.strip
-        if !move(board, input)
+        if !move(board, input, current_player(board))
             return puts "Please enter a valid number"
         end
     end
