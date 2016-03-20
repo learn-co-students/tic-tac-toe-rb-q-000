@@ -27,7 +27,7 @@ describe './lib/tic_tac_toe.rb' do
       allow($stdout).to receive(:puts)
       allow(self).to receive(:gets).and_return("1")
 
-      allow(self).to receive(:over?).and_return(false, true)
+      allow(self).to receive(:over?).and_return(true)
 
       play(board)
       expect(board).to match_array(["X", " ", " ", " ", " ", " ", " ", " ", " "])
@@ -37,7 +37,7 @@ describe './lib/tic_tac_toe.rb' do
       board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
       allow($stdout).to receive(:puts)
       allow(self).to receive(:gets).and_return("1","2","3")
-      allow(self).to receive(:over?).and_return(false, false, false, true)
+      allow(self).to receive(:over?).and_return(false, false, true)
 
       play(board)
 
