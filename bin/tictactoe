@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/tic_tac_toe'
+
+puts "Welcome to Tic Tac Toe!"
+
+#Define a board array.
+board = Array.new(9," ")
+
+#Display board
+display_board(board)
+
+#Play
+play(board)
