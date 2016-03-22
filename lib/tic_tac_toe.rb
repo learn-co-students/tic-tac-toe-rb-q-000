@@ -36,17 +36,6 @@ def valid_move?(board, position)
   end
 end
 
-def turn(board)
-  puts "Please enter 1-9:"
-  input = gets.strip
-  if valid_move?(board, input) == true
-     move(board, input.to_i)
-     display_board(board)
-  else
-    turn(board)
-  end
-end
-
 def turn_count(board)
     counter = 0
     board.each{|element| counter += 1 if element == "X" || element == "O"}
@@ -97,16 +86,27 @@ def winner(board)
     return nil
 end
 
+def turn(board)
+  puts "Please enter 1-9:"
+  input = gets.strip
+  character = current_player(board)
+ if valid_move?(board, input) == true
+      move(board, input.to_i, character)
+      display_board(board)
+    else
+      turn(board)
+ end
+end
+
 def play(board)
   while over?(board) != true
-    puts "Please enter 1-9:"
-    input = gets.strip
-        if valid_move?(board, input) == true
-           move(board, input.to_i)
-           display_board(board)
-           else
-           play(board)
-        end
+    turn(board)
+    if winner(board) == "X"
+      puts "Congradulations! 'X' wins"
+    else
+      puts "Congradulations! 'O' wins"
+    end
   end
 end
+
 
