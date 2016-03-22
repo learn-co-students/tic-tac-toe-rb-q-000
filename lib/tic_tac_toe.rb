@@ -26,14 +26,11 @@ board[location] = xoro
 end
 
 def valid_move?(board, position)
-index = position.to_i - 1
 
-if position_taken?(board, index) == true
+if position_taken?(board, index = position.to_i - 1) == true
    false
 elsif (0..8).cover?(index) == true
   return true
-  else
-  false
 end
 end
 
@@ -82,6 +79,7 @@ end
 end
 
 def won?(board)
+
 WIN_COMBINATIONS.each do |winarray|
   win_index_1 = winarray[0]
   win_index_2 = winarray[1]
@@ -95,8 +93,7 @@ WIN_COMBINATIONS.each do |winarray|
     return winarray # return the win_combination indexes that won.
   elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
     return winarray
-  else
-    false
+
   end
 end
 false
@@ -156,7 +153,7 @@ until over?(board) == true
 end
 
   if won?(board) == true
-    puts "Congratulations #{current_player(board)}!"
+    puts "Congratulations #{winner(board)}!"
 
   elsif draw?(board) == true
     puts "Cats Game!"
