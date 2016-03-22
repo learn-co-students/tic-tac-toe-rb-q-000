@@ -16,7 +16,6 @@ def display_board(board = [])
   puts  "-----------"
   puts  " #{board[6]} " + "|" + " #{board[7]} " + "|" + " #{board[8]}  "
 end
-
 def move(board, position, character = "X")
   board[position.to_i - 1] = character
 end
@@ -63,14 +62,12 @@ def current_player(board)
 end
 
 def won?(board)
-        win = WIN_COMBINATIONS.select do |combo|
-board[combo[0]] + board[combo[1]] + board[combo[2]] == "OOO" || board[combo[0]] + board[combo[1]] + board[combo[2]] == "XXX"
+        return WIN_COMBINATIONS.any? do |combo|
+        if
+        board[combo[0]] + board[combo[1]] + board[combo[2]] == "XXX" || board[combo[0]] + board[combo[1]] + board[combo[2]] == "OOO"
+        return combo
         end
-    if win.length == 1
-    return win[0]
-    else
-    return nil
-    end
+        end
 end
 
 def full?(board)
@@ -78,7 +75,7 @@ def full?(board)
 end
 
 def draw?(board)
-    if full?(board) == true &&  won?(board) == nil
+    if full?(board) == true &&  won?(board) == false
         return true
     else
         return false
@@ -94,10 +91,22 @@ def over?(board)
 end
 
 def winner(board)
-   if  won?(board) != nil
+   if  won?(board) != false
         return board[won?(board)[0]]
    end
     return nil
 end
 
+def play(board)
+  while over?(board) != true
+    puts "Please enter 1-9:"
+    input = gets.strip
+        if valid_move?(board, input) == true
+           move(board, input.to_i)
+           display_board(board)
+           else
+           play(board)
+        end
+  end
+end
 
