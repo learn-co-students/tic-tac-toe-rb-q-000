@@ -83,7 +83,7 @@ def draw?(board)
 end
 
 def over?(board)
-  won?(board) || full?(board)
+  won?(board) || draw?(board)
 end
 
 def winner(board)
@@ -95,18 +95,13 @@ end
 
 # Define your play method below
 def play(board)
-  9.times do
+  until over?(board)
+    
     turn(board)
-    if over?(board)
-      
-      if won?(board)
-        puts "Congratulations #{winner(board)}!"
-      else draw?(board)
-        puts "Cats Game!"
-      end
-
-    else
-      false
-    end
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  else draw?(board)
+    puts "Cats Game!"
   end
 end
