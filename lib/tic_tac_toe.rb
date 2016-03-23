@@ -72,7 +72,7 @@ def draw?(board)
 end
 
 def over?(board)
-    if draw?(board) == true || full?(board) == true || won?(board) == true
+    if draw?(board) == true || full?(board) == true
         return true
     else
         return false
@@ -99,14 +99,12 @@ def turn(board)
 end
 
 def play(board)
-  while over?(board) != true
-    turn(board)
-    if winner(board) == "X"
-      puts "Congradulations! 'X' wins"
-    else
-      puts "Congradulations! 'O' wins"
-    end
+  while over?(board) == false &&  won?(board) == false
+     turn(board)
   end
+  if won?(board) != true
+     puts "Congratulations #{winner(board)}!"
+  end
+     puts "Cats Game!"
 end
-
 
