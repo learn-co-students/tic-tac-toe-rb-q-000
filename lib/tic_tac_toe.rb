@@ -19,33 +19,32 @@ end
 
 #Define a valid move
 def valid_move?(board, position)
-position.to_i.between?(1,9) && position_taken?(board, position.to_i)
+  if position_taken?(board, (position.to_i - 1)) == true || position.to_i.between?(1, 9) == false
+    return nil
+  else
+    return true
+  end
 end
 
 #Define a position taken method
 def position_taken?(board, position)
-  if board[position.to_i-1] == " " || board[position.to_i-1] == ""
+  if  board[position] == "X" || board[position] == "O" || board[position] == "x" || board[position] == "o"
     return true
-  else board[position-1] == "X" || board[position-1] == "O"
+  else
     return false
   end
 end
 
 def turn(board)
   puts "Please enter 1-9:"
-  def turn(board)
-    position = gets.strip
-    if valid_move?(board, position)
-      puts move(board, position, player = 'X')
-      puts display_board(board)
+  input = gets.strip
+  character = current_player(board)
+ if valid_move?(board, input) == true
+      move(board, input.to_i, character)
+      display_board(board)
     else
-      puts "Please enter 1-9:"
-      position = gets.strip
-      valid_move?(board, position)
-      puts move(board, position, player = 'X')
-      puts display_board(board)
-    end
-  end
+      turn(board)
+ end
 end
 
 
@@ -91,32 +90,28 @@ def won?(board)
   end
 
 
-def full?(board)
-  board.each do |piece|
-    if piece == " "
-      return false
-    end
+  def full?(board)
+      return board.all?{|element| element == "X" || element == "O"}
   end
-  return true
-end
 
 def draw?(board)
   board.each do |piece|
-    if won?(board) == false
+    if won?(board) == false && full?(board) == true
       return true
-    end
+   else
+       return false
+   end
   end
-  return false
 end
 
 def over?(board)
-  board.each do |piece|
-    if full?(board) == true
-      return true
+    if draw?(board) == true || full?(board) == true
+        return true
+    else
+        return false
     end
   end
-  return false
-end
+
 
 def winner(board)
   if won?(board)
@@ -141,6 +136,12 @@ WIN_COMBINATIONS = [
 
 
 def play(board)
-  inputs = gets
-  over?()
+  while over?(board) == false &&  won?(board) == false
+     turn(board)
+  end
+  if (won?(board) == false) != true
+     puts "Congratulations #{winner(board)}!"
+  else
+     puts "Cats Game!"
+  end
 end
