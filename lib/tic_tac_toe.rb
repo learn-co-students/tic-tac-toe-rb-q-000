@@ -21,12 +21,10 @@ puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
 def move(board, input, xoro = "X")
-location = input.to_i - 1
-board[location] = xoro
+board[input.to_i - 1] = xoro
 end
 
 def valid_move?(board, position)
-
 if position_taken?(board, index = position.to_i - 1) == true
    false
 elsif (0..8).cover?(index) == true
@@ -34,19 +32,8 @@ elsif (0..8).cover?(index) == true
 end
 end
 
-
-# re-define your #position_taken? method here, so that you can use it in the #valid_move? method above.
 def position_taken?(board, position)
-  location = position.to_i
-  if board[location] == " "
-    false
-   elsif board[location] == ""
-    false
-   elsif board[location] == nil
-    false
-    else
-    true
-  end
+ !(board[position].nil? || board[position] == " ")
 end
 
 def turn(board)
@@ -61,13 +48,8 @@ position = gets.strip
 end
 
 def turn_count(board)
-  turns = 0
-  board.each do |x|
-    if x == "X" || x == "O"
-      turns +=1
-    end
-  end
-  turns
+ board.count do |turn| turn == "X" || turn == "O"
+ end
 end
 
 def current_player(board)
@@ -79,8 +61,7 @@ end
 end
 
 def won?(board)
-
-WIN_COMBINATIONS.each do |winarray|
+WIN_COMBINATIONS.collect do |winarray|
   win_index_1 = winarray[0]
   win_index_2 = winarray[1]
   win_index_3 = winarray[2]
@@ -93,29 +74,25 @@ WIN_COMBINATIONS.each do |winarray|
     return winarray # return the win_combination indexes that won.
   elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
     return winarray
-
   end
 end
 false
 end
 
 def full?(board)
-if board.detect{|i| i == " "}; false; else; true; end
+board.all?{|i| i == "X" || i == "O"}
 end
 
 def draw?(board)
-if board.detect{|i| i != " "} && won?(board) == false; true;
-  elsif won?(board) == true; false;
-  elsif board.detect{|i| i == " "}; false;
+won?(board) == false && full?(board)
 end
-end
-
 
 def over?(board)
-if full?(board) == false; return false; end
- if draw?(board) == true; true;
-    elsif won?(board) != false; true;
-    end
+if won?(board) == false && draw?(board) == false
+  false
+  else
+  true
+end
 end
 
 
@@ -139,10 +116,10 @@ if draw?(board) == true; nil;
     winner = "O"
     return winner
   else
-    false
+    nil
   end
 end
-false
+nil
 end
 end
 
