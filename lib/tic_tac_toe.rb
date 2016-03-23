@@ -35,12 +35,12 @@ def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
   if valid_move?(board, input)
-    move(board, input)
+    move(board, input, current_player(board))
   else
       puts "Please enter 1-9:"
   input = gets.strip
     if valid_move?(board, input)
-      move(board, input)
+      move(board, input, current_player(board))
     else
       draw?(board)
     end
@@ -48,18 +48,9 @@ def turn(board)
   display_board(board)
 end
 
-def turn_count(board)
- turn_number = 0
-
-  board.each do |space|
-    if space != " "
-      turn_number += 1
-    else space == " "
-      turn_number += 0
-    end
+  def turn_count(board)
+    board.count{|token| token == "X" || token == "O"}
   end
-  turn_number
-end
 
 def current_player(board) 
   turn_count(board).even? ? "X" : "O"
