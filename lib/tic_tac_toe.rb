@@ -18,19 +18,15 @@ def move(board,position,char="X")
 end
 
 def position_taken?(board,position)
-  if board[position.to_i-1] == " "
+  if board[position.to_i] == " "
     false
-    elsif board[position.to_i-1] == ""
-    false
-    elsif board[position.to_i-1] == nil
-    false
-    else board[position.to_i-1] == "X" || "O"
+    else board[position.to_i] == "X" || "O"
     true
   end
 end
 
 def valid_move?(board,position)
- if position.to_i.between?(1,9)  && !position_taken?(board,position)
+ if position.to_i.between?(1,9)  && !position_taken?(board,position.to_i-1)
    true
  end
 end
