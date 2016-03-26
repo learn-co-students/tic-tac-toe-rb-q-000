@@ -7,9 +7,9 @@ def display_board(board)
 end
 
 
-def move(board, position, current_player = "X")
+def move(board, position, char = "X")
   position = position.to_i - 1
-  board[position] = current_player
+  board[position] = char
 end
 
 
@@ -101,7 +101,6 @@ end
 
 def draw?(board)
     full?(board) && !won?(board)
-    puts "Cats Game!"
 end
 
 
