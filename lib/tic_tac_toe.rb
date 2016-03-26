@@ -66,7 +66,7 @@ end
 
 
 def play(board)
-  until over?
+  until over?(board)
     turn(board)
   end
 end
@@ -101,6 +101,7 @@ end
 
 def draw?(board)
     full?(board) && !won?(board)
+    puts "Cats Game!"
 end
 
 
