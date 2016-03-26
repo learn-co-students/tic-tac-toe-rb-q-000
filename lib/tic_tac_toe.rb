@@ -7,9 +7,9 @@ def display_board(board)
 end
 
 
-def move(board, position, char = "X")
+def move(board, position, current_player = "X")
   position = position.to_i - 1
-  board[position] = char
+  board[position] = current_player
 end
 
 
