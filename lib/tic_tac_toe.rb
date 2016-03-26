@@ -9,6 +9,7 @@ end
 
 def move(board, position, char = "X")
   position = position.to_i - 1
+  char = current_player(board)
   board[position] = char
 end
 
@@ -68,6 +69,11 @@ end
 def play(board)
   until over?(board)
     turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
   end
 end
 
