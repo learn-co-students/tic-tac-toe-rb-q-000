@@ -40,6 +40,7 @@ def turn(board)
   else
     turn(board)
   end
+
   display_board(board)
 end
 
@@ -57,19 +58,17 @@ end
 
 def current_player(board)
   if turn_count(board) % 2 == 0
-      return "X"
+      "X"
   elsif turn_count(board) % 2 == 1
-      return "O"
+      "O"
   end
 end
 
 
 def play(board)
-  count = 0
-  until count == 9
+  until over?
     turn(board)
-    count += 1
-    end
+  end
 end
 
 
