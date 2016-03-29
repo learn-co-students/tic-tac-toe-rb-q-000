@@ -1,32 +1,26 @@
 # -*- encoding: utf-8 -*-
+# stub: coderay 1.1.1 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "coderay"
   s.version = "1.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib"]
   s.authors = ["Kornelius Kalnbach"]
   s.date = "2016-02-20"
   s.description = "Fast and easy syntax highlighting for selected languages, written in Ruby. Comes with RedCloth integration and LOC counter."
   s.email = ["murphy@rubychan.de"]
   s.executables = ["coderay"]
   s.extra_rdoc_files = ["README_INDEX.rdoc"]
-  s.files = ["bin/coderay", "README_INDEX.rdoc"]
+  s.files = ["README_INDEX.rdoc", "bin/coderay"]
   s.homepage = "http://coderay.rubychan.de"
   s.licenses = ["MIT"]
   s.rdoc_options = ["-SNw2", "-mREADME_INDEX.rdoc", "-t CodeRay Documentation"]
-  s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.6")
   s.rubyforge_project = "coderay"
-  s.rubygems_version = "1.8.23"
+  s.rubygems_version = "2.4.3"
   s.summary = "Fast syntax highlighting for selected languages."
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 4
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-    else
-    end
-  else
-  end
+  s.installed_by_version = "2.4.3" if s.respond_to? :installed_by_version
 end

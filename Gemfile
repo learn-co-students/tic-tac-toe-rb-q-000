@@ -2,6 +2,7 @@
 source "https://rubygems.org"
 
 # gem "rails"
+gem 'json'
 gem 'rake'
 gem 'rspec'
 gem 'pry'
