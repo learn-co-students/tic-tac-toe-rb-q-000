@@ -9,6 +9,18 @@
    [6,4,2]
  ]
 
+ def play(board)
+  while !over?(board)
+    turn(board)
+  end
+
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
+  end
+end
+
 def display_board(board)
    puts " #{board[0]} | #{board[1]} | #{board[2]} "
    puts "-----------"
@@ -18,7 +30,7 @@ def display_board(board)
  end
 
 def move(board, location, value = "O")
-   board[location.to_i-1] = current_player(board)
+   board[location.to_i-1] = value
  end
 
 def position_taken?(board, location)
@@ -36,12 +48,11 @@ def valid_move?(board, input)
 def turn(board)
    puts "Please enter 1-9:"
    input = gets.strip
-   if valid_move?(board, input)
-     move(board, input)
-     display_board(board)
-   else
+   if !valid_move?(board, input)
      turn(board)
    end
+   move(board, input, current_player(board))
+   display_board(board)
  end
 
  def turn_count(board)
@@ -78,12 +89,6 @@ def winner(board)
  end
 end
 
-def play(board)
-  until over?(board) == true
-    turn(board)
-  end
-
-  end
 
 
 
