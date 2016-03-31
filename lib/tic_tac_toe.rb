@@ -9,7 +9,7 @@
    [6,4,2]
  ]
 
- def play(board)
+def play(board)
   while !over?(board)
     turn(board)
   end
@@ -83,35 +83,5 @@ def winner(board)
     board[winning_combo.first]
  end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
