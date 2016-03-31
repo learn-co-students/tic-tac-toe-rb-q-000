@@ -29,20 +29,28 @@ def display_board(board)
    puts " #{board[6]} | #{board[7]} | #{board[8]} "
  end
 
-def move(board, location, value = "O")
-   board[location.to_i-1] = value
+def valid_move?(board, input)
+   input.to_i.between?(1,9) && !position_taken?(board, input.to_i-1)
  end
 
-def position_taken?(board, location)
-   !(board[location].nil? || board[location] == " ")
- end 
-
-def valid_move?(board, input)
-   if input.to_i.between?(1,9)
-     if !position_taken?(board, input.to_i-1)
-       true
-     end
+def won?(board)
+   WIN_COMBINATIONS.detect do |combo|
+     board[combo[0]] == board[combo[1]] &&
+     board[combo[1]] == board[combo[2]] &&
+     position_taken?(board, combo[0])
    end
+ end
+
+ def full?(board)
+   board.all?{|token| token == "X" || token == "O"}
+ end
+ 
+def draw?(board)
+   full?(board) && !won?(board)
+ end
+
+def over?(board)
+  won?(board) || full?(board)
  end
 
 def turn(board)
@@ -55,32 +63,20 @@ def turn(board)
    display_board(board)
  end
 
- def turn_count(board)
-  board.count{|marker| marker == "X" || marker == "O"}
-end
+ def position_taken?(board, location)
+   !(board[location].nil? || board[location] == " ")
+ end 
  
 def current_player(board)
   turn_count(board) % 2 == 0 ? "X" : "O"
-  end
+  end 
 
-def won?(board)
-   WIN_COMBINATIONS.detect do |combo|
-     board[combo[0]] == board[combo[1]] &&
-     board[combo[1]] == board[combo[2]] &&
-     position_taken?(board, combo[0])
-   end
- end
- 
-def full?(board)
-   board.all?{|token| token == "X" || token == "O"}
- end
- 
-def draw?(board)
-   full?(board) && !won?(board)
- end
+ def turn_count(board)
+  board.count{|marker| marker == "X" || marker == "O"}
+end
 
-def over?(board)
-  won?(board) || full?(board)
+def move(board, location, value = "O")
+   board[location.to_i-1] = value
  end
 
 def winner(board)
