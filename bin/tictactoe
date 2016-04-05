@@ -7,5 +7,4 @@ puts "Welcome to Tic Tac Toe!"
 puts "Where would you like to go?"
 display_board(board)
 play(board)
-input = gets.strip
-display_board(board)
+

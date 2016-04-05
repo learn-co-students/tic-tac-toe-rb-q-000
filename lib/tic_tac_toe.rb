@@ -38,7 +38,7 @@ def turn(board)
     move(board, input, current_player(board))
   else
   	until valid_move?(board, input)
-  	puts "Move is invalid"
+  	puts "Move is invalid, please try again"
     input = gets.strip
     end
   end
@@ -63,11 +63,11 @@ end
 
 ##PLAY
 def play(board)
-	until over?(board) == true 
+	while !over?(board)
 		turn(board)
 		end
 	     if won?(board) 
-		    puts "Congratulations #{winner(board)}"
+		    puts "Congratulations #{winner(board)}!"
 	     elsif draw?(board)
 		    puts "Cats Game!"
 	     end
@@ -110,7 +110,7 @@ end
 
 #OVER METHOD
 def over?(board)
-	won?(board) == true || draw?(board) == true || full?(board) == true
+	won?(board) || draw?(board)
 end
 
 #WINNER METHOD
