@@ -22,7 +22,7 @@ def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
   if valid_move?(board, input)
-    move(board, input, current_player(board))   ### added third argument
+    move(board, input, current_player(board))
   else
     turn(board)
   end
@@ -117,41 +117,18 @@ def winner(board)
 end
 
 def play(board)
-  #result = nil
   until over?(board)
     turn(board)
     if won?(board)
       break
     end
   end
-=begin
+
   if won?(board)
-    result = winner(board)
-  end
-=end
-  if won?(board)
-  #if result == "X" || result == "O"
     puts "Congratulations #{winner(board)}!"
   else
     puts "Cats Game!"
   end
-
-
-=begin
-  result = nil
-  9.times do
-    result = turn(board)
-    if result.kind_of?(Array)
-      break
-    end
-  end
-
-  puts "GAME OVER"
-  #puts "winner is #{board[result[0]]}"
-  puts "Congratulations #{board[result[0]]}!"
-  puts "result is #{result}"
-=end
-
 end
 
 
