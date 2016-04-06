@@ -17,8 +17,8 @@ def position_taken?(board,position)
 end
 
 def valid_move?(board,position)
-  position = position.to_i
-  (position.between?(1, 9) && !position_taken?(board, position-1))
+  position = position.to_i - 1
+  position.between?(0, 8) && !position_taken?(board, position)
 end
 
 def turn(board)
@@ -59,15 +59,18 @@ def won?(board)
   board.all? { |position| position == "X"}
 
   WIN_COMBINATIONS.each do |win_combination|
-    position_1 = board[win_combination[0]]
-    position_2 = board[win_combination[1]]
-    position_3 = board[win_combination[2]]
+    win_combination.each do |win_index|
+    position_1 = board[win_index[0]]
+    position_2 = board[win_index[1]]
+    position_3 = board[win_index[2]]
+  end
     if (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
       return win_combination
     end
   end
   return false
 end
+
 
 def full?(board)
   board.all? {|position| position == "X" || position == "O"}
