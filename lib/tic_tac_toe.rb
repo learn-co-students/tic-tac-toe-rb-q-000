@@ -9,6 +9,17 @@ WIN_COMBINATIONS = [
 [6,4,2]
 ]
 
+def play(board)
+  while !over?(board)
+    turn(board)
+  end
+    if won?(board)
+    puts "Congratulations #{winner(board)}!"
+    else draw?(board)
+      puts "Cats Game!"
+    end
+end
+
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
@@ -33,7 +44,7 @@ def turn(board)
   puts "Please enter 1-9:"
   position = gets.strip
   if valid_move?(board, position)
-    move(board, position, "X")
+    move(board, position, current_player(board))
     display_board(board)  
   else
     puts "Invalid move!!!"
@@ -93,12 +104,6 @@ def winner(board)
     return board[won?(board)[0]]
   else
     nil
-  end
-end
-
-def play(board)
-  while !over?(board)
-    turn(board)
   end
 end
 
