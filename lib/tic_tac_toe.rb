@@ -90,7 +90,7 @@ end
 
 def play(board)
 
-  while !over?(board)
+  until over?(board) || draw?(board)
     turn(board)
   end
 
