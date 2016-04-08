@@ -29,7 +29,7 @@ end
 
 # re-define your #position_taken? method here, so that you can use it in the #valid_move? method above.
 def position_taken?(board, location)
-  !(board[location].nil? || board[location] == " " || board[location] == "")
+  !(board[location] == " " || board[location] == "")
 end
 
 def move(board, position, player = "X")
