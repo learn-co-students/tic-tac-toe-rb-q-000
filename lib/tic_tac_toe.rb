@@ -10,7 +10,7 @@ WIN_COMBINATIONS = [
   [0,4,8], # diag to right
   [6,4,2]  # diag to left
   ]
-board = [ " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+board = [ " ", " ", " ", " ", " "," ", " ", " ", " " ]
 
 def display_board(board)
 puts " #{board[0]} | #{board[1]} | #{board[2]} "
@@ -98,12 +98,9 @@ def winner(board)
 end
 
 def play(board)
-  until over?(board)
-  turn(board)
- current_player(board)
+  while !over?(board)
+    turn(board)
+    over?(board)
   end
- winner(board) == "X"
-  "Congratulations X!"
-  winner(board) == "O"
-  "Congratulations O!"
+  winner(board)
 end
