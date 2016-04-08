@@ -22,10 +22,11 @@ def valid_move?(board,position)
 end
 
 def turn(board)
+  turn_count(board)
   puts "Please enter 1-9:"
   position = gets.strip
   if valid_move?(board, position)
-    move(board, position, character="X")
+    move(board, position, "#{current_player(board)}")
     display_board(board)
   else 
     turn(board)
@@ -52,19 +53,14 @@ end
 
 def won?(board)
     WIN_COMBINATIONS.each do |win_combination|
-    win_combination.each do |win_index|
-    position_1 = board[win_index[0]]
-    position_2 = board[win_index[1]]
-    position_3 = board[win_index[2]]
-        if (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
-      return win_combination
+    position_1 = board[win_combination[0]]
+    position_2 = board[win_combination[1]]
+    position_3 = board[win_combination[2]]
+      if (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
+        return win_combination
+      end
     end
-    if draw?(board)
-      return false
-    end
-  end
   return false
-end
 end
 
 
@@ -78,7 +74,7 @@ def draw?(board)
 end
 
 def over?(board)
-  won?(board) == true || draw?(board) == true
+  won?(board) != false || draw?(board) == true
 end
 
 def winner(board)
@@ -92,10 +88,11 @@ end
 
 def play(board)
   until over?(board)
+    turn(board)
   end
   if won?(board)
-    puts "Congratulations".chomp 
+    puts "Congratulations #{winner(board)}!"
   elsif draw?(board)
-    puts "Cat's Game"
+    puts "Cats Game!"
   end
 end
