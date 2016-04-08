@@ -85,22 +85,11 @@ def full?(board)
 end
 
 def draw?(board)
-  if !won?(board) && full?(board)
-    true
-  else
-    false
-  end
-
+  !won?(board) && full?(board)
 end
 
 def over?(board)
-  if draw?(board)
-    return true
-  elsif won?(board)
-    return true
-  else
-    false
-  end
+  won
 end
 
 def empty?(board)
@@ -136,12 +125,9 @@ def play(board)
   while !over?(board)
     turn(board)
   end
-  if draw?(board)
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
     puts "Cats Game!"
-  end
-  if winner(board) != nil && winner(board) == "X"
-    puts "Congratulations X!"
-  else
-    puts "Congratulations O!"
   end
 end
