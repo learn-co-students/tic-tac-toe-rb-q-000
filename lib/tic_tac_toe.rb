@@ -19,17 +19,18 @@ end
 
 def valid_move?(board, position)
   if !(position.to_i.between?(1, 9))
-    return false
+    false
   elsif position_taken?(board, position)
-    return false
+    false
   else
-    return true
+    true
   end
 end
 
 # re-define your #position_taken? method here, so that you can use it in the #valid_move? method above.
 def position_taken?(board, location)
-  !(board[location] == " " || board[location] == "")
+  location = location.to_i
+  !(board[location].nil? || board[location] == " " || board[location] == "")
 end
 
 def move(board, position, player = "X")
@@ -125,4 +126,21 @@ end
 
 def current_player(board)
   turn_count(board) % 2 == 0 ? "X" : "O"
+end
+
+def play(board)
+  counter = 0
+  while !over?(board)
+
+    turn(board)
+    counter += 1
+  end
+  if draw?(board)
+    puts "Cats Game!"
+  end
+  if winner(board) != nil && winner(board) == "X"
+    puts "Congratulations X!"
+  else
+    puts "Congratulations O!"
+  end
 end
