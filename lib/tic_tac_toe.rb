@@ -100,9 +100,11 @@ end
 
 
 def over?(board)
-  if !full?(board)
-    return false
-  elsif won?(board) || draw?(board)
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+    return true
+  elsif draw?(board)
+    puts "Cats Game!"
     return true
   end
 end
@@ -140,13 +142,7 @@ end
 
 def play(board)
   until over?(board)
-    if won?(board)
-        return puts "Congratulations #{winner(board)}!"
-    elsif draw?(board)
-        return puts "Cats Game!"
-    else
-      turn(board)
-    end
+    turn(board)
   end
 end
 
