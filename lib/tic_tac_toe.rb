@@ -1,6 +1,5 @@
 #Ann John Github
 
-
 WIN_COMBINATIONS= [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4,2]]
 
 def display_board(board)
@@ -9,7 +8,7 @@ def display_board(board)
   puts " #{board[3]} | #{board[4]} | #{board[5]} "
   puts "-----------"
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
-end 
+end
 
 def move(board,position,char="X")
   board[position.to_i-1]= char
@@ -19,14 +18,9 @@ def position_taken?(board, location)
   !(board[location].nil? || board[location] == " ")
 end
 
+# kailee gray
 def valid_move?(board,position)
-  if (position.to_i-1).between?(0,8) && position_taken?(board,position.to_i-1) == false
-    true
-  elsif position_taken?(board,position.to_i-1) == true
-    false 
-  else
-    false
-  end
+ position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
 end
 
 
@@ -43,7 +37,7 @@ end
 
 def turn_count(board)
   counter = 0
-  board.each do |cell| 
+  board.each do |cell|
    if cell == "X" || cell == "O"
     counter += 1
     end
@@ -60,7 +54,7 @@ def current_player(board)
 end
 
 def won?(board)
-WIN_COMBINATIONS.detect do |position| 
+WIN_COMBINATIONS.detect do |position|
   if board[position[0]] == "X" && board[position[1]] == "X" && board[position[2]] == "X"
     position
   elsif board[position[0]] == "O" && board[position[1]] == "O" && board[position[2]] == "O"
@@ -68,7 +62,7 @@ WIN_COMBINATIONS.detect do |position|
   else
     false
   end
-end 
+end
 end
 
 
@@ -86,7 +80,7 @@ def draw?(board)
   else won?(board)
     false
   end
-end 
+end
 
 def over?(board)
   if won?(board) || full?(board) || draw?(board)
@@ -98,11 +92,11 @@ end
 
 def winner(board)
  if solution = won?(board)
-  board[solution.first]
+  board[solution.first] 
  else
   nil
  end
-end 
+end
 
 def play(board)
 while over?(board) == false
@@ -112,7 +106,7 @@ end
  puts "Congratulations #{winner(board)}!"
   elsif draw?(board)
   puts  "Cats Game!"
-  end 
+  end
 end
 
 
