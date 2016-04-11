@@ -156,7 +156,6 @@ end
 # Game looping method
 def play(board)
   until over?(board)
-    #input = turn(board)
     turn(board)
   end
 
