@@ -20,12 +20,8 @@ puts " ----------- "
 puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, position, player = "X")
-  if board[position.to_i-1] = player
-    display_board(board)
-    else
-    move(board, position, player)
-end
+def move(board, location, current_marker = "X")
+  board[location.to_i-1] = current_marker
 end
 
 def position_taken?(board, location)
@@ -40,16 +36,25 @@ if !position_taken?(board, position.to_i-1) && position.to_i.between?(1, 9)
 end
   end
 
+def current_player(board)
+  if turn_count(board) % 2 == 0
+     "X"
+    else
+     "O"
+end
+end
+
 def turn(board)
   puts "Please enter 1-9:"
- input = gets.strip
- if valid_move?(board, input)
-   move(board, input)
-    else
-   turn(board)
+  position = gets.strip
+  if valid_move?(board, position)
+    current_marker = current_player(board)
+    move(board, position, current_marker)
+  else
+    turn(board)
   end
   display_board(board)
-  end
+end
 
 def turn_count(board)
   counter = 0
@@ -61,13 +66,7 @@ def turn_count(board)
    counter
 end
 
-def current_player(board)
-  if turn_count(board) % 2 == 0
-     "X"
-    else
-     "O"
-end
-end
+
 
 def won?(board)
   WIN_COMBINATIONS.detect do |combo|
@@ -101,6 +100,6 @@ def play(board)
   while !over?(board)
     turn(board)
     over?(board)
-  end
-  winner(board)
+    winner(board)
+end
 end
