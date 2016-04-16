@@ -139,6 +139,26 @@ end
 
 
 
+def play(board)
+  9.times do
+    turn(board)
+  end
+end
+
+
+def turn_count(board)
+    count = 0
+for num in board
+  if position_taken(board, num) == true
+    count +=1
+  end
+end
+   
+  end
+
+
+
+
 
 
 
