@@ -8,12 +8,8 @@ def move(board, position, char="X")
   board[position-1] = char
 end
 
-def position_taken?(board, position)
-  if board[position] != " "
-    return true
-  else
-    return false 
-  end 
+def position_taken?(board, location)
+  !(board[location].nil? || board[location] == " ")
 end
 
 def valid_move?(board, position)
@@ -24,20 +20,17 @@ def valid_move?(board, position)
   end
 end
 
-
 def turn(board)
   x=0
   while x==0
   puts "Please enter 1-9:"
 input=gets.to_i
 if valid_move?(board, input)==true
-  move(board, input, current_player(board))
+  move(board, input, char="X")
 x+=1
-else 
-  puts "try again"
-end
 end
 display_board(board)
+end
 end
 
 def turn_count(board)
@@ -88,28 +81,38 @@ def draw?(board)
 end 
 
 def over?(board)
-  if draw?(board) || full?(board) || won?(board)
-    return true
-  else
-    return false
-  end
-end
+  board.all? do |element|
+    element == "X" || element == "O"
+  end 
+end 
 
 def winner(board)
-  if won?(board) 
-    #won?(board)[0] is the first index in the winning combination. here we 
-    #map it onto the board and return that. 
+  if won?(board)
     return board[won?(board)[0]]
   end
 end
 
+
+
 def play(board)
-until over?(board)
-  turn(board)
-end
-if won?(board)
-  puts "Congratulations #{winner(board)}!"
-  elsif draw?(board)
-    puts "Cats Game!"
-  end
+  if draw?(board) 
+  puts "Cats Game!"
 end 
+  until won?(board) != false || draw?(board) == true 
+  puts "Please enter 1-9:"
+input=gets.to_i
+if valid_move?(board, input)
+  move(board, input, current_player(board))
+  display_board(board)
+else 
+  return false 
+end 
+over?(board)
+won?(board)
+end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  end 
+end 
+
+play(["X", "O", "X", "O", "X", "X", "O", "X", "O"])

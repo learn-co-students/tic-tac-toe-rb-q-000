@@ -31,7 +31,7 @@ def turn(board)
   puts "Please enter 1-9:"
 input=gets.to_i
 if valid_move?(board, input)==true
-  move(board, input, current_player(board))
+  move(board, input, char="X")
 x+=1
 else 
   puts "try again"
@@ -88,7 +88,11 @@ def draw?(board)
 end 
 
 def over?(board)
-  if draw?(board) || full?(board) || won?(board)
+  if draw?(board) 
+    return true
+  elsif full?(board)
+    return true
+  elsif won?(board)
     return true
   else
     return false
@@ -97,19 +101,9 @@ end
 
 def winner(board)
   if won?(board) 
-    #won?(board)[0] is the first index in the winning combination. here we 
-    #map it onto the board and return that. 
+    puts won?(board)[1]
     return board[won?(board)[0]]
   end
 end
 
-def play(board)
-until over?(board)
-  turn(board)
-end
-if won?(board)
-  puts "Congratulations #{winner(board)}!"
-  elsif draw?(board)
-    puts "Cats Game!"
-  end
-end 
+puts winner(["X", " ", " ", " ", "X", " ", " ", " ", "X"])
