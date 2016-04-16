@@ -140,25 +140,36 @@ end
 
 
 def play(board)
-  9.times do
+ puts "Please enter a position 1-9"
+  input = gets.chomp
+  if over?(board) == false
     turn(board)
+    if winner(board) == true
+      puts "Congratulations"
+    end
   end
 end
 
 
 def turn_count(board)
-    count = 0
-for num in board
-  if position_taken(board, num) == true
+  count = 0
+  num = 0
+  bl = board.length
+  bl.times do |num|
+
+  if board[num] != " "
     count +=1
   end
+
+ end
+  count
 end
-   
+
+def current_player(board)
+  if turn_count(board).even?
+    return "X"
+    else
+    return "O"
   end
-
-
-
-
-
-
+end
 
