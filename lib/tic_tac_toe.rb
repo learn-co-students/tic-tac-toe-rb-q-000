@@ -93,13 +93,12 @@ end
 
 def full?(board)
   is_full = true
-  board.each do |number|
-    number = number.to_i
-    number +=1
+  9.times do |number|
+
     if position_taken?(board, number) == false
       is_full = false
-
     end
+    number +=1
   end
   return is_full
 end
@@ -114,7 +113,7 @@ def draw?(board)
 end
 
 def over?(board)
-  if won?(board) == true || draw?(board) == true || full?(board) == true
+  if won?(board) != false || draw?(board) == true || full?(board) == true
     true
   else
     false
@@ -135,8 +134,8 @@ end
 def turn_count(board)
   count = 0
   num = 0
-  bl = board.length
-  bl.times do |num|
+  
+  9.times do |num|
 
   if board[num] != " "
     count +=1
@@ -158,11 +157,12 @@ def play(board)
     turn(board)
 
   end
-  if won?(board) == true
+         if won?(board) != false
+
+        puts "Congratulations #{winner(board)}!"
+      elsif draw?(board) == true
+        puts "Cats Game!"
+      end
 
 
-    puts "Congratulations #{current_player(board)}!"
-  elsif draw?(board) == true
-    puts "Cats Game!"
-  end
 end
