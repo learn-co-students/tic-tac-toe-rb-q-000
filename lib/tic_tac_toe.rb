@@ -1,15 +1,13 @@
 def turn(board)
   puts "Please enter 1-9:"
-  num = gets.chomp
+  num = gets.strip
 
-  if(valid_move?(board, num))
-    num = num.to_i
-    move(board, num)
-  else
+  if !valid_move?(board, num)
     turn(board)
-
   end
-display_board(board)
+    move(board, num, current_player(board))
+
+    display_board(board)
 end
 
 # code your #valid_move? method here
@@ -107,14 +105,11 @@ def full?(board)
 end
 
 def draw?(board)
-  if won?(board) == false
-    if full?(board) == true
+  if won?(board) == false && full?(board) == true
       true
-    elsif full?(board) == false
+    elsif won?(board) == false && full?(board) == false
       false
-    else
-      false
-    end
+    
   end
 end
 
@@ -137,20 +132,6 @@ def winner(board)
  end
 end
 
-
-
-def play(board)
- puts "Please enter a position 1-9"
-  input = gets.chomp
-  if over?(board) == false
-    turn(board)
-    if winner(board) == true
-      puts "Congratulations"
-    end
-  end
-end
-
-
 def turn_count(board)
   count = 0
   num = 0
@@ -172,4 +153,16 @@ def current_player(board)
     return "O"
   end
 end
+def play(board)
+  until over?(board) == true
+    turn(board)
 
+  end
+  if won?(board) == true
+
+
+    puts "Congratulations #{current_player(board)}!"
+  elsif draw?(board) == true
+    puts "Cats Game!"
+  end
+end
