@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
+require_relative '../lib/tic_tac_toe'
+
 puts "Welcome to To Tic Tac Toe!"
+
+input = gets.strip
+
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 play(board)
-require_relative '../lib/tic_tac_toe'
+
+
