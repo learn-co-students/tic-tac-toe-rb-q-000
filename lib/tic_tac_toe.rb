@@ -23,11 +23,6 @@ def display_board(board)
 	" #{board[6]} " + "|" +  " #{board[7]} " + "|" + " #{board[8]} " 
 end
 
-# code your move method here!
-def move(board, position, character = "X")
-	 board[position.to_i - 1] = character
-end
-
 # code your #position_taken? method here!
 def position_taken?(board, position)
 	if board[position] == " " || board[position] == ""
@@ -35,8 +30,7 @@ def position_taken?(board, position)
 	elsif board[position] == nil
 		return false
 			else 
-				return true
-			
+				return true			
 	end
 end
 
@@ -50,8 +44,7 @@ def valid_move?(board, position)
 	elsif board[position] == nil
 		return false
 			else 
-				return true
-			
+				return true			
 	end
 end
 
@@ -60,7 +53,7 @@ def turn(board)
 	input = gets.strip
 
 	if valid_move?(board, input)
-		move(board, input)
+		move(board, input, current_player(board))
 		display_board(board)
 	else
 		turn(board)
@@ -79,9 +72,9 @@ end
 
 def current_player(board)
 	if turn_count(board).even? 
-	"X"
+	return "X"
 	else
-	"O"
+	return "O"
 	end
 	
 end
@@ -117,11 +110,16 @@ def winner(board)
 	end
 end
 
+# code your move method here!
+def move(board, position, current_player)
+	 board[position.to_i - 1] = current_player
+end
+
 # Define your play method below
 def play(board)
- while !over?(board)
- 	turn(board)
-end
+ 	while !over?(board)
+ 		turn(board)
+	end
   	if won?(board)
   		puts "Congratulations #{winner(board)}!"
   	elsif draw?(board)
