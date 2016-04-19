@@ -84,7 +84,7 @@ end
   return false
 
   end
-  end
+ end
 
 def valid_move?(board, position)
   position = position.to_i - 1
@@ -97,11 +97,11 @@ end
 
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 def play(board)
-  turn(board)
-  over?(board)
+
   counter = 0
 until counter == 9
-  binding.pry
+  over?(board)
+  turn(board)
   counter  +=1
 
   end
