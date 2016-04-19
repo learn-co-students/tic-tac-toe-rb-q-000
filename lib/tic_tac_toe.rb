@@ -104,8 +104,7 @@ until counter == 9
 
   end
 end
-turn(board)
-over?(board)
+
 
 def winner(board)
   if winning_combo = won?(board)
@@ -116,6 +115,3 @@ end
 
 
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-#display_board(board)
-#display_board(board)
-#display_board(board)
