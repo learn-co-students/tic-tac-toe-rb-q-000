@@ -94,12 +94,14 @@ def valid_move?(board, position)
     return false
   end
 end
+
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 def play(board)
   turn(board)
   over?(board)
   counter = 0
 until counter == 9
+  binding.pry
   counter  +=1
 
   end
