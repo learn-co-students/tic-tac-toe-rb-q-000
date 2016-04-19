@@ -9,6 +9,18 @@ WIN_COMBINATIONS = [
     [2, 4, 6]
   ]
 
+def play(board)
+  while !over?(board)
+    turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
+  end
+end
+
+
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
@@ -19,12 +31,6 @@ end
 
 def move(board, pos, char = "X")
   board[pos.to_i - 1] = char
-  board
-end
-
-def valid_move?(board, position)
-  pos = position.to_i - 1
-  !position_taken?(board,pos) && !board[pos].nil? if pos >= 0
 end
 
 def position_taken?(board, position)
@@ -48,27 +54,21 @@ def position_taken?(board, position)
 end
 
 def valid_move?(board, position)
-  pos = position.to_i - 1
-  !position_taken?(board, pos) && !board[pos].nil? && pos >= 0
+  position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
 end
 
 def move(board, pos, sign = "X")
-  board[pos - 1] = sign
-  board
+  board[pos.to_i - 1] = sign
 end
 
 def turn(board)
-  loop do
-    puts 'Please enter 1-9:'
-    position = gets.strip
-    if valid_move?(board, position)
-      move(board, position.to_i, current_player(board))
-      display_board(board)
-      break
-    else
-      puts "invalid"
-    end
+  puts "Please enter 1-9:"
+  input = gets.strip
+  if !valid_move?(board, input)
+    turn(board)
   end
+  move(board, input, current_player(board))
+  display_board(board)
 end
 
 def turn_count(board)
@@ -77,17 +77,6 @@ end
 
 def current_player(board)
   turn_count(board) % 2 == 0 ? "X" : "O"
-end
-
-def play(board)
-  while !over?(board)
-    turn(board)
-  end
-  if won?(board)
-    puts "Congratulations #{winner(board)}!"
-  elsif draw?(board)
-    puts "Cats Game!"
-  end
 end
 
 def won?(board)
