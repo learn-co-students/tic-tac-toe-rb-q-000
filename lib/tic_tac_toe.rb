@@ -22,7 +22,7 @@ def turn(board)
   puts "Please enter 1-9:"
   position = gets.strip
   if valid_move?(board, position) == true
-   move(board, position, value = "X")
+   move(board, position, current_player(board))
   else
     turn(board)
   end
@@ -101,19 +101,15 @@ board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   while !over?(board)
     turn(board)
   end
+    current_player(board)
   if won?(board)
     puts "Player somebody won"
   elsif draw?(board)
     puts "This game is a draw"
   end
-end
-end
-
-  #counter = 0
-#until counter == 9
+  end
 
 
- # counter  +=1
 
 
 def winner(board)
