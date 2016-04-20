@@ -102,6 +102,7 @@ def play(board)
 until counter == 9
   over?(board)
   turn(board)
+  valid_move(board)
   counter  +=1
 
   end
