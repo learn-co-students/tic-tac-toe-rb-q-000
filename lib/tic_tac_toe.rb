@@ -96,17 +96,24 @@ def valid_move?(board, position)
 end
 
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-def play(board)
 
-  counter = 0
-until counter == 9
-  over?(board)
-  turn(board)
-  valid_move(board)
-  counter  +=1
-
+  def play(board)
+  while !over?(board)
+    turn(board)
+  end
+  if won?(board)
+    puts "Player somebody won"
+  elsif draw?(board)
+    puts "This game is a draw"
   end
 end
+end
+
+  #counter = 0
+#until counter == 9
+
+
+ # counter  +=1
 
 
 def winner(board)
