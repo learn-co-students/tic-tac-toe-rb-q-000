@@ -39,9 +39,9 @@ end
 
 def current_player(board)
   if turn_count(board) % 2 == 0
-    "X" 
+    "X"
   else
-    "O" 
+    "O"
   end
 end
 
@@ -72,7 +72,7 @@ end
  end
 
     def valid_move?(board, position)
-      input.to_i.between?(1,9) && !position_taken?(board, input.to_i-1)
+  position.to_i.between?(1,9) && !position_taken?(board,position.to_i-1)
 end
 
 
