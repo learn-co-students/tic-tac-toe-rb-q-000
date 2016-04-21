@@ -37,15 +37,24 @@ def position_taken?(board, position)
 end
 
 
+# check if integer
+def is_number?(position)
+  position.to_s == position.to_i.to_s 
+end
+
 # check if player's move is valid
-def valid_move?(board, position)
-  if position.to_i.between?(0, 10)
-    if position_taken?(board, position.to_i)
+def valid_move?(board, position)\
+  if is_number?(position)
+    if position.to_i.between?(0, 10)
+      if position_taken?(board, position.to_i-1)
+        false
+      else
+        true
+      end
+    else 
       false
-    else
-      true
     end
-  else 
+  else
     false
   end
 end
@@ -61,7 +70,7 @@ def turn(board)
     position = gets.chomp
   end
 
-  move(board, position, "X")
+  move(board, position, player_move = current_player(board))
 
   display_board(board)
 end
@@ -80,7 +89,12 @@ end
 
 
 #  check who's turn it is
-def current_player
+def current_player(board)
+  if turn_count(board) % 2 == 0
+    "X"
+  else
+    "O"
+  end
 end
 
 
@@ -146,7 +160,16 @@ def winner(board)
   end
 end
 
-
+def play(board)
+  while !over?(board)
+    turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
+  end
+end
 
 
 
