@@ -44,11 +44,10 @@ WIN_COMBINATIONS = [
     puts "Please enter 1-9:"
     input = gets.strip
     if valid_move?(board, input)
-      move(board, input, "X")
+      move(board, input, current_player(board))
       display_board(board)
     else
-      puts "Please enter 1-9:"
-      input = gets.strip
+      turn(board)
     end
   end
 
@@ -71,9 +70,10 @@ WIN_COMBINATIONS = [
     end
   end
   def won?(board)
-  if board.reject{|i| i == " "} == []
-    return false
-  end
+   if empty?(board)
+     return false
+   end
+
  WIN_COMBINATIONS.each do |win|
   win_index_1 = win[0]
   win_index_2 = win[1]
@@ -92,6 +92,11 @@ WIN_COMBINATIONS = [
     end
   end
 
+def empty?(board)
+   if board.reject{|i| i == " "} == []
+    return false
+  end
+end
 
   def full?(board)
     if board.select{|i| i == " "} == []
@@ -115,18 +120,27 @@ WIN_COMBINATIONS = [
     if won?(board)
       return true
     end
-    if !won?(board) && full?(board)
+    if draw?(board)
        return true
     end
-    if !won?(board) && !full?(board)
+    if !won?(board) && !draw?(board)
       return false
     end
   end
 
   def winner(board)
-    winning_combination = won?(board)
-    if winning_combination
-      winning_position = winning_combination[0]
-      board[winning_position]
+    if won?(board)
+      board[won?(board)[0]]
     end
   end
+
+def play(board)
+  until over?(board)
+    turn(board)
+  end
+  if draw?(board)
+  puts "Cats Game!"
+  elsif won?(board)
+    puts "Congratulations #{winner(board)}!"
+  end
+end
