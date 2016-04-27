@@ -121,18 +121,20 @@ elsif won?(board).all? {|index| board[index] == "X"}
 end
 end
 
-def play(board)
+play(TicTacToe) = TicTacToe.new
 
-  if !won?(board) || !draw?(board) || !full(board)
-  until over?(board) == true do
-    current_player(board)
-    turn(board)
+def play(TicTacToe)
+
+  if !won? || !draw? || !full
+  until over? == true do
+    current_player
+    turn
               end
   end
 
-  if won?(board)
-    puts "Congratulations #{winner(board)}!"
-    elsif draw?(board)
+  if won?
+    puts "Congratulations #{winner}!"
+    elsif draw?
     puts "Cats Game!"
   end
   end
