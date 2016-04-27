@@ -108,16 +108,16 @@ def play(board)
     turn(board)
   end
 
-#  if turn_count(board) do
-#    turn(board)
-#  end
+ #until turn_count(board) do
+    #turn(board)
+  #end
 
   if draw?(board)
     puts "Cats Game!"
   end
 
   if won?(board)
-    puts "Congratulations #{winner()}!"
+    puts "Congratulations #{winner(board)}!"
   end
 end
 
