@@ -36,7 +36,7 @@ def turn(board)
      puts "Please enter 1-9:"
      location = gets.strip
   end
-  move(board, location, char="X")
+  move(board, location, current_player(board))
   display_board(board)
 end
 
@@ -104,13 +104,10 @@ def winner(board)
 end
 
 def play(board)
-  while !over?(board) do
+
+  while !over?(board)
     turn(board)
   end
-
- #until turn_count(board) do
-    #turn(board)
-  #end
 
   if draw?(board)
     puts "Cats Game!"
