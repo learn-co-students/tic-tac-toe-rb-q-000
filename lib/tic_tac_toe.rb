@@ -21,6 +21,11 @@ def move(board, location, current_player = "X")
   board[location.to_i-1] = current_player
 end
 
+#def position_taken?(board, location)
+#  board[location].nil? || board[location] == " "
+#end
+
+
 def position_taken?(board, location)
   board[location] != " " && board[location] != ""
 end
@@ -29,27 +34,16 @@ def valid_move?(board, position)
   position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
 end
 
-#def turn(board)
-  #puts "Please enter 1-9:"
-  #input = gets.strip
-  #if valid_move?(board, input)
-    #move(board, input)
- # else
- #   turn(board)
-#  end
- # display_board(board)
-#end
-
 def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
-  if !valid_move?(board, input)
+  if valid_move?(board, input)
+    move(board, input)
+  else
     turn(board)
   end
-  move(board, input, current_player(board))
   display_board(board)
 end
-
 
 
 def turn_count(board)
@@ -134,7 +128,7 @@ def play(board)
   end
 
   if won?(board)
-    puts "Congrats winner!"
+    puts "Congratulations #{winner(board)}!"
   elsif draw?(board)
     puts "Cat's Game!"
   end
