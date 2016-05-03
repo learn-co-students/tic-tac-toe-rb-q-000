@@ -101,7 +101,7 @@ end
 
 #OVER
 def over?(board)
-  if full?(board) && won?(board) || draw?(board)
+  if full?(board) || won?(board) || draw?(board)
     true
   end
 end
@@ -120,5 +120,11 @@ end
 def play(board)
 while !over?(board)
     turn(board)
+  if won?(board)
+  "Congratulations X!"
+    elsif draw?(board)
+    "A draw!"
   end
+end
+
 end
