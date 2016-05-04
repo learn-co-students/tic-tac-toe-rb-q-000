@@ -32,7 +32,7 @@ end
 
 def turn_count(board)
   counter = 0
-  board.count("X") + board.count("O") {|board| counter += 1}
+  board.count("X") + board.count("O") {|board| board counter += 1}
 end
 
 def current_player(board)
@@ -87,6 +87,7 @@ def winner(board)
 end
 
 def play(board)
+
   until over?(board)
     turn(board)
   end
