@@ -1,14 +1,4 @@
-WIN_COMBINATIONS = [
-  [0,1,2],
-  [0,3,6],
-  [0,4,8],
-  [1,4,7],
-  [2,5,8],
-  [2,4,6],
-  [3,4,5],
-  [6,7,8]
-  ]
-
+WIN_COMBINATIONS = [  [0,1,2],  [0,3,6],  [0,4,8],  [1,4,7],  [2,5,8],  [2,4,6],  [3,4,5],  [6,7,8]  ]
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
@@ -16,19 +6,15 @@ def display_board(board)
   puts "-----------"
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
-
 def valid_move?(board, position)
   post = position.to_i-1
   board_ = board[post]
   valid = true
-
   if post < 0 || post > 8 || position_taken?(board,post)
       valid = false
   end
-
   valid
 end
-
 def move(board, position, marker)
   post = position.to_i-1
   valid = valid_move?(board,position)
@@ -36,13 +22,10 @@ def move(board, position, marker)
     board[post] = marker
   end
   board
-
 end
-
 def position_taken?(board, location)
   !(board[location].nil? || board[location] == " ")
 end
-
 def turn(board)
     puts "Please enter 1-9:"
     position = gets.strip
@@ -55,10 +38,8 @@ def turn(board)
       board
     end
 end
-
 def turn_count(board)
   val = 0
-
   board.each do |cell|
     if cell == "X" || cell == "O"
       val = val + 1
@@ -66,7 +47,6 @@ def turn_count(board)
   end
   val
 end
-
 def current_player(board)
   val = turn_count(board)
   if val % 2 == 0
@@ -75,12 +55,9 @@ def current_player(board)
     "O"
   end
 end
-
 def won?(board)
-
   win = false
   counter = 0
-
   while counter < 8 && win == false
     index = WIN_COMBINATIONS[counter]
     marker = board[index[0]]
@@ -93,8 +70,6 @@ def won?(board)
   end
   win
 end
-
-
 def full?(board)
   index = 0
   cont = true
@@ -104,19 +79,10 @@ def full?(board)
   end
   cont
 end
-
 def draw?(board)
-  full?(board) && !won?(board)
-  val = false
-  if won?(board) == false
-    if full?(board)
-      val = true
-    end
-  end
-  val
+  !won?(board) && full?(board)
 
 end
-
 def over?(board)
   val = false
   if won?(board) == false
@@ -128,19 +94,15 @@ def over?(board)
   end
   val
 end
-
 def winner(board)
   if over?(board) && !draw?(board)
     board[won?(board)[0]]
   end
 end
-
 def play(board)
-
   until over?(board)
     turn(board)
     draw?(board)
-
   end
   if draw?(board)
     puts "Cats Game!"
