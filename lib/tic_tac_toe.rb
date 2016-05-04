@@ -9,7 +9,7 @@ WIN_COMBINATIONS = [
   [2,5,8] # Right Row
 ]
 
-def display_board (board)
+def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
   puts " #{board[3]} | #{board[4]} | #{board[5]} "
@@ -17,11 +17,11 @@ def display_board (board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move (board, location, char="X")
+def move(board, location, char)
   board[location.to_i - 1] = char
 end
 
-def position_taken? (board, position)
+def position_taken?(board, position)
   if board[position] == " " || board[position] == "" || board[position] == nil
     false
   elsif board[position] == "X" || board[position] == "O"
@@ -29,7 +29,7 @@ def position_taken? (board, position)
   end
 end
 
-def valid_move? (board, move)
+def valid_move?(board, move)
   interger = move.to_i - 1
   if position_taken?(board, interger) == true
     false
@@ -91,8 +91,6 @@ end
 def draw?(board)
   if won?(board) == false && full?(board)
     true
-  elsif won?(board) == false && full?(board) == false
-    false
   end
 end
 
