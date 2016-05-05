@@ -6,13 +6,25 @@
   [1,4,7],
   [2,5,8],
   [0,4,8],
-  [6,4,2]
+  [6,4,2],
 ]
 # 0 | 1 | 2   
 #-----------
 #3 | 4 | 5   
 #-----------
 # 6 | 7 | 8  
+
+def play(board)
+  while !over?(board)
+    turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
+  end
+end
+
 
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} " 
@@ -91,31 +103,5 @@ def winner(board)
     board[winning_combo.first]
   end
 end
-
-  def play(board)
-  input = gets
-  turn_count = 0
-  while turn_count < 9 && !over?(board)
-    turn(board)
-    turn_count+=1
-    if 
-  end
-end
-
-
-
-
-  #counter = 0
-  #loop turn until over
-  #if full?(board) || draw?(board) 
-   # puts "Its a draw!"
-    ## puts "Congratulations {input}!"
-    #else
-
-    #end
-    #if 
-  ## turn(board)
-  #end
-#end
 
 

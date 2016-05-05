@@ -2,15 +2,11 @@
 
 require_relative '../lib/tic_tac_toe'
 
-puts "Welcome to Tic Tac Toe!"
-board = Array.new(9, " ")
+board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
-turn(board)
-turn(board)
-turn(board)
-turn(board)
-turn(board)
-turn(board)
-turn(board)
-turn(board)
-turn(board)
+
+puts "Welcome to Tic Tac Toe!"
+display_board(board)
+
+
+play(board)
