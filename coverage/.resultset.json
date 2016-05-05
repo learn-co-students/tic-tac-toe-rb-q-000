@@ -4,8 +4,6 @@
       "/home/alice/code/labs/tic-tac-toe-rb-q-000/lib/tic_tac_toe.rb": [
         1,
         null,
-        1,
-        null,
         null,
         null,
         null,
@@ -96,10 +94,7 @@
         null,
         1,
         40,
-        6,
         34,
-        14,
-        null,
         null,
         null,
         1,
@@ -127,6 +122,6 @@
         null
       ]
     },
-    "timestamp": 1462401330
+    "timestamp": 1462427234
   }
 }

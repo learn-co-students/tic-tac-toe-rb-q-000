@@ -1,5 +1,3 @@
-require 'pry'
-
 WIN_COMBINATIONS = [
   [0,1,2], # Top Row
   [3,4,5], # Middle Row
@@ -91,11 +89,8 @@ def full?(board)
 end
 
 def draw?(board)
-  if full?(board) && won?(board) == false
-    true
-  elsif won?(board) == false && full?(board) == false
-    false
-  end
+  return true if full?(board) && won?(board) == false
+  return false if won?(board) == false && full?(board) == false
 end
 
 def over?(board)
