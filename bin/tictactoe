@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 
+board = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
+
+
 require_relative '../lib/tic_tac_toe'
+puts display_board(board)
