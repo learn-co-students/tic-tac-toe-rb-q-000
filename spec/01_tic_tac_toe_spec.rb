@@ -1,237 +1,123 @@
-require_relative '../lib/tic_tac_toe.rb'
+WIN_COMBINATIONS = [
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [2,4,6]
+]
 
-describe './lib/tic_tac_toe.rb' do
-  describe 'WIN_COMBINATIONS' do
-    it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do
-      expect(WIN_COMBINATIONS.size).to eq(8)
+def display_board(board)
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  puts "-----------"
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
+  puts "-----------"
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
+end
 
-      expect(WIN_COMBINATIONS).to include_array([0,1,2])
-      expect(WIN_COMBINATIONS).to include_array([3,4,5])
-      expect(WIN_COMBINATIONS).to include_array([6,7,8])
-      expect(WIN_COMBINATIONS).to include_array([0,3,6])
-      expect(WIN_COMBINATIONS).to include_array([1,4,7])
-      expect(WIN_COMBINATIONS).to include_array([2,5,8])
-      expect(WIN_COMBINATIONS).to include_array([0,4,8])
-      expect(WIN_COMBINATIONS).to include_array([6,4,2])
-    end
+def move (board, location, player_character = "X")
+  board[location.to_i-1] = player_character
+end
+
+def position_taken?(board, position)
+  if board[position.to_i] == " " || board[position.to_i] == "" || board[position.to_i] == nil
+    false
+  else
+    true
   end
+end
 
-  describe '#display_board' do
-    it 'prints arbitrary arrangements of the board' do
-      board = ["X", "X", "X", "X", "O", "O", "X", "O", "O"]
-
-      output = capture_puts{ display_board(board) }
-
-      expect(output).to include(" X | X | X ")
-      expect(output).to include("-----------")
-      expect(output).to include(" X | O | O ")
-      expect(output).to include("-----------")
-      expect(output).to include(" X | O | O ")
-
-
-      board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
-      output = capture_puts{ display_board(board) }
-
-      expect(output).to include(" X | O | X ")
-      expect(output).to include("-----------")
-      expect(output).to include(" O | X | X ")
-      expect(output).to include("-----------")
-      expect(output).to include(" O | X | O ")
-    end
+def valid_move?(board, position)
+  if position.to_i.between?(1, 9) && !position_taken?(board, position.to_i-1)
+   true
+  else
+    false
   end
+end
 
-  describe '#move' do
-
-    it 'does not allow for a default third argument' do
-      board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-
-      expect{move(board, 1)}.to raise_error(ArgumentError)
-    end
-
-    it 'takes three arguments: board, position, and player token' do
-      board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-
-      expect{move(board, 1, "X")}.to_not raise_error(ArgumentError)
-    end
-
-    it 'allows "X" player in the bottom right and "O" in the top left ' do
-      board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-      move(board, 1, "O")
-      move(board, 9, "X")
-
-      expect(board).to eq(["O", " ", " ", " ", " ", " ", " ", " ", "X"])
-    end
-  end
-
-  describe '#position_taken?' do
-    it 'returns true/false based on position in board' do
-      board = ["X", " ", " ", " ", " ", " ", " ", " ", "O"]
-
-      position = 0
-      expect(position_taken?(board, position)).to be(true)
-
-      position = 8
-      expect(position_taken?(board, position)).to be(true)
-
-      position = 1
-      expect(position_taken?(board, position)).to be(false)
-
-      position = 7
-      expect(position_taken?(board, position)).to be(false)
-    end
-  end
-
-  describe '#valid_move?' do
-    it 'returns true/false based on position' do
-      board = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
-
-      position = "1"
-      expect(valid_move?(board, position)).to be_truthy
-
-      position = "5"
-      expect(valid_move?(board, position)).to be_falsey
-
-      position = "invalid"
-      expect(valid_move?(board, position)).to be_falsey
-    end
-  end
-
-  describe '#turn' do
-    it 'makes valid moves' do
-      board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-
-      allow($stdout).to receive(:puts)
-
-      expect(self).to receive(:gets).and_return("1")
-
+def turn(board)
+  puts "Please enter 1-9:"
+  position = gets.strip
+  if valid_move?(board, position)
+    move(board, position, current_player(board))
+    display_board(board)
+    return position
+  else
+      position.to_i.between?(1,9) ==true
       turn(board)
+  end
+end
 
-      expect(board).to match_array(["X", " ", " ", " ", " ", " ", " ", " ", " "])
-    end
-
-    it 'asks for input again after a failed validation' do
-      board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-
-      allow($stdout).to receive(:puts)
-
-      expect(self).to receive(:gets).and_return("invalid")
-      expect(self).to receive(:gets).and_return("1")
-
-      turn(board)
+def turn_count(board)
+  count = 0
+    board.each do |position|
+    if "#{position}" == "X" || "#{position}" == "O"
+    count += 1
     end
   end
-
-  describe '#turn_count' do
-    it 'counts occupied positions' do
-      board = ["O", " ", " ", " ", "X", " ", " ", " ", "X"]
-
-      expect(turn_count(board)).to eq(3)
-    end
+  return count
   end
 
-  describe '#current_player' do
-    it 'returns the correct player, X, for the third move' do
-      board = ["O", " ", " ", " ", "X", " ", " ", " ", " "]
 
-      expect(current_player(board)).to eq("X")
-    end
+def current_player(board)
+  if turn_count(board) % 2 == 0
+    "X"
+  else
+    "O"
   end
+end
 
-  describe "#won?" do
-    it 'returns false for a draw' do
-      board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
-      expect(won?(board)).to be_falsey
+def won?(board)
+  WIN_COMBINATIONS.each do |win_combo|
+    if (board[win_combo[0]] == "X" && board[win_combo[1]] == "X" && board[win_combo[2]] == "X") ||
+       (board[win_combo[0]] == "O" && board[win_combo[1]] == "O" && board[win_combo[2]] == "O")
+      return win_combo
+      end
     end
+    nil
+end
 
-    it 'returns true for a win' do
-      board = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
-
-      expect(won?(board)).to be_truthy
-    end
+def full?(board)
+  !board.detect do |pos|
+    pos == " "
   end
+end
 
-  describe '#full?' do
-    it 'returns true for a draw' do
-      board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
-      expect(full?(board)).to be_truthy
-    end
-
-    it 'returns false for an in-progress game' do
-      board = ["X", " ", "X", " ", "X", " ", "O", "O", " "]
-
-      expect(full?(board)).to be_falsey
-    end
+  def draw?(board)
+    if won?(board) || !full?(board)
+      false
+    else
+      true
   end
+end
 
-  describe '#draw?' do
-
-    it 'calls won? and full?' do
-      board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-      expect(self).to receive(:won?).with(board)
-      expect(self).to receive(:full?).with(board)
-
-      draw?(board)
-    end
-
-    it 'returns true for a draw' do
-      board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
-      expect(draw?(board)).to be_truthy
-    end
-
-    it 'returns false for a won game' do
-      board = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
-
-      expect(draw?(board)).to be_falsey
-    end
-
-    it 'returns false for an in-progress game' do
-      board = ["X", " ", "X", " ", "X", " ", "O", "O", "X"]
-
-      expect(draw?(board)).to be_falsey
-    end
+def over?(board)
+  if won?(board) || draw?(board)
+    true
+  else
+    false
   end
+end
 
-  describe '#over?' do
-    it 'returns true for a draw' do
-      board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
-      expect(over?(board)).to be_truthy
-    end
-
-    it 'returns true for a won game' do
-      board = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
-
-      expect(over?(board)).to be_truthy
-    end
-
-    it 'returns false for an in-progress game' do
-      board = ["X", " ", "X", " ", "X", " ", "O", "O", " "]
-
-      expect(over?(board)).to be_falsey
-    end
+def winner(board)
+  if won?(board)
+    return board[won?(board)[0]]
+  else
+    nil
   end
+end
 
-  describe '#winner' do
-    it 'return X when X won' do
-      board = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
-
-      expect(winner(board)).to eq("X")
-    end
-
-    it 'returns O when O won' do
-      board = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
-
-      expect(winner(board)).to eq("O")
-    end
-
-    it 'returns nil when no winner' do
-      board = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
-
-      expect(winner(board)).to be_nil
-    end
+def play(board)
+  until over?(board)
+    turn(board)
   end
+    if won?(board)
+      winner(board)
+        puts "Congratulations #{winner(board)}!"
+    else draw?(board)
+      puts "Cats Game!"
+    end
 end
