@@ -124,7 +124,6 @@ end
 def play(board)
   input=gets
   if turn(board)
-    over?(board)
     won?(board)
     draw?(board)
   elsif draw?(board) || won?(board)
