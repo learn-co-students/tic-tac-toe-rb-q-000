@@ -38,7 +38,7 @@ WIN_COMBINATIONS =
 
   def valid_move?(board, position)
     #binding.pry
-      if position.to_i.between?(0, 9)
+      if position.to_i.between?(1, 9)
         postionvar = position.to_i - 1
           if position_taken?(board, postionvar) == false
             return true
@@ -55,9 +55,8 @@ WIN_COMBINATIONS =
     puts "Please enter 1-9:"
     input = gets.strip
     location = input.to_i
-    position = location.to_i
     if valid_move?(board, location)
-      move(board, location, current_player(position))
+      move(board, location, current_player(board))
       display_board(board)
     else
       turn(board)
@@ -118,7 +117,7 @@ WIN_COMBINATIONS =
   end
 
   def play(board)
-    count = 0
+    count = 1
     while count < 9
       turn(board)
       count += 1
