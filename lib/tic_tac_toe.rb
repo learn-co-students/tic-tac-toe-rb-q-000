@@ -124,7 +124,9 @@ end
 def play(board)
   input=gets
   if turn(board)
-      3.tmes{over?(board)}
+      over?(board)
+      over?(board)
+      over?(board)
       won?(board)
       draw?(board)
   end
