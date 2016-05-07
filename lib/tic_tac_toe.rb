@@ -127,8 +127,7 @@ def play(board)
     over?(board)
     won?(board)
     draw?(board)
-  end
-  if draw?(board) || won?(board)
+  elsif draw?(board) || won?(board)
     !play(board)
   end
 end
