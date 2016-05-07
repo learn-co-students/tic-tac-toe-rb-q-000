@@ -62,9 +62,66 @@ end
 def turn_count(board)
     counter = 0
     board.each do | occupied_positions |
-      if  occupied_positions == "X" ||   occupied_positions =="O"
+      if  occupied_positions == "X" ||  occupied_positions =="O"
         counter+=1
       end
     end
      counter
+end
+
+def current_player(board)
+  turn_count(board)
+  if turn_count(board) % 2 == 0
+     return "X"
+   else
+     return "O"
+  end
+end
+
+def won?(board)
+  WIN_COMBINATIONS.detect do | win_combination |
+    # win_combination = [0,1,2], [3,4,5], [0,4,8], ... [2,4,6]
+
+    win_index_1 = win_combination[0] # 0, 3
+    win_index_2 = win_combination[1] # 1, 4
+    win_index_3 = win_combination[2] # 2, 5
+
+    position_1 = board[win_index_1] # "X", "O"
+    position_2 = board[win_index_2] # "O", "X"
+    position_3 = board[win_index_3] # "X", "O"
+
+    if position_1 ==  position_2 && position_2 ==  position_3 && position_1 != " "
+      return win_combination # return the win_combination indexes that won.
+    else
+      false
+    end
+  end
+end
+
+def full?(board)
+  board.none? do | position |
+    position == " "
+  end
+end
+
+def draw?(board)
+  !won?(board) && full?(board)
+end
+
+def over?(board)
+  won?(board) || draw?(board)
+end
+
+def winner(board)
+  win_combination = won?(board)
+
+  if win_combination
+    win_index = win_combination[0]
+    board[win_index]
+  end
+end
+
+# Define your play method below
+def play(board)
+  9.times{turn(board)}
 end
