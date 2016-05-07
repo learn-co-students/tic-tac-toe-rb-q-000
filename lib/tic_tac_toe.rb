@@ -124,15 +124,21 @@ end
 def play(board)
   input=gets
   if turn(board)
+      over?(board)
+      over?(board)
+      over?(board)
+      won?(board)
+      draw?(board)
+  end
+  if draw?(board) || won?(board)
     over?(board)
-    won?(board)
-    draw?(board)
-  elsif draw?(board) || won?(board)
-    !!play(board)
   end
-  if winner(board) =="X"
-    puts "Congratulations X!"
-  elsif winner(board) =="O"
-    puts "Congratulations O!"
-  end
+
+
+  # if winner(board) =="X"
+  #   over?(board)
+  #   puts "Congratulations X!"
+  # elsif winner(board) =="O"
+  #   puts "Congratulations O!"
+  # end
 end
