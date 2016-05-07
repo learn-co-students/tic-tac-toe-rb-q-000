@@ -25,36 +25,40 @@ def position_taken?(board, location)
 end
 
 def valid_move?(board, location)
-  location.between?(0,8) && !position_taken?(board, location)
+  location = location.to_i
+  location.between?(1,9) && !position_taken?(board, location - 1)
 end
 
 def turn(board)
-  done = false
-  ctr = 0
-  until done
-    puts "Please enter 1-9:"
-    move = gets.strip
-    if valid_move?(board, move)
-      ind = move.to_i
-      if ctr % 2 == 0
-        move(board, ind, "X")
-      else
-          move(board, ind, "O")
+    done = false
+    until done
+      puts "Please enter 1-9:"
+      move = gets.strip
+      if valid_move?(board, move)
+        ind = move.to_i
+        if turn_count(board) % 2 == 0
+          move(board, ind, "X")
+        else
+            move(board, ind, "O")
+        end
+        display_board(board)
+        done = true
       end
-      display_board(board)
-      ctr += 1
-      done = true
-    end
-  end #until
+    end # until
 end # def
 
 # Define your play method below
 def play(board)
+  until over?(board)
+    turn(board)
+  end
 
-  i = 0
-  while i < 9
-      turn(board)
-      i +=1
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif
+    if draw?(board)
+      puts "Cats Game!"
+    end
   end
 end
 
@@ -98,9 +102,8 @@ end
 
 def draw?(board)
 
-  x=full?(board)
-  y=won?(board)
-  x && !y
+  !won?(board) && full?(board)
+
 end
 
 def over?(board)
