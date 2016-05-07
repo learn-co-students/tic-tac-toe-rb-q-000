@@ -114,7 +114,6 @@ end
 
 def winner(board)
   win_combination = won?(board)
-
   if win_combination
     win_index = win_combination[0]
     board[win_index]
@@ -123,5 +122,10 @@ end
 
 # Define your play method below
 def play(board)
-  9.times{turn(board)}
+  input=gets
+  if turn(board)
+    over?(board)
+    won?(board)
+    draw?(board)
+  end
 end
