@@ -128,4 +128,7 @@ def play(board)
     won?(board)
     draw?(board)
   end
+  if draw?(board) || won?(board)
+    !play(board)
+  end
 end
