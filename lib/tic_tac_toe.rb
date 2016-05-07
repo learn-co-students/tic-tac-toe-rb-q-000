@@ -36,18 +36,9 @@ def position_taken?(board, position)
   end
 end
 
-def position_taken?(board, position)
-  if board[position] == "" || board[position] == " " || board[position] == nil
-      return false
-   elsif board[position] == "X" || board[position] == "O"
-      return true
-  end
-end
-
 #check if player made a valid move
 def valid_move?(board, position)
   index = position.to_i-1
-
   if index.between?(0,8) && !position_taken?(board, index)
     return true
    else
@@ -59,7 +50,6 @@ def valid_move?(board, position)
 def turn(board)
   puts "Please enter 1-9:"
   user_input = gets
-
   if valid_move?(board, user_input)
     move(board, user_input, token="X")
     display_board(board)
@@ -67,4 +57,14 @@ def turn(board)
   else
     turn(board)
   end
+end
+
+def turn_count(board)
+    counter = 0
+    board.each do | occupied_positions |
+      if  occupied_positions == "X" ||   occupied_positions =="O"
+        counter+=1
+      end
+    end
+     counter
 end
