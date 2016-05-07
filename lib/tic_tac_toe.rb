@@ -17,7 +17,7 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, input, character = "X")
+def move(board, input, character)
   input = input.to_i
   input = input - 1
   board[input] = character
@@ -56,6 +56,13 @@ def turn(board)
     board[position] = "X"
     puts display_board(board)
   end
+end
+
+def move(board, input, character)
+  input = input.to_i
+  input = input - 1
+  board[input] = character
+  return board
 end
 
 def turn_count(board)
@@ -104,7 +111,7 @@ def full?(board)
 end
 
 def draw?(board)
-  if full?(board) && !won?(board)
+  if !won?(board) && full?(board)
     return true
   else
     return false
@@ -124,10 +131,18 @@ def winner(board)
 end
 
 def play(board)
-  input = gets.chomp
-  i = 0
-  until i == 9
+  until over?(board)
+    if won?(board)
+      puts "Congratulations #{winner(board)}!"
+    elsif draw?(board)
+      puts "Cats Game!"
+    end
     turn(board)
-    i += 1
+    turns = 0
+    position = gets.chomp
+    while !won?(board) && position <= 9
+      turn(board)
+      turns += 1
+    end
   end
 end
