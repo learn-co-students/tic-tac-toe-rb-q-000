@@ -136,13 +136,8 @@ def play(board)
       puts "Congratulations #{winner(board)}!"
     elsif draw?(board)
       puts "Cats Game!"
-    end
-    turn(board)
-    turns = 0
-    position = gets.chomp
-    while !won?(board) && position <= 9
+    else
       turn(board)
-      turns += 1
     end
   end
 end
