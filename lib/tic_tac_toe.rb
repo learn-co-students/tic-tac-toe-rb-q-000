@@ -17,12 +17,6 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def move(board, input, character)
-  input = input.to_i
-  input = input - 1
-  board[input] = character
-  return board
-end
 
 # code your #valid_move? method here
 def position_taken?(board, position)
@@ -44,6 +38,13 @@ def valid_move?(board, position)
   end
 end
 
+def move(board, input, character)
+  input = input.to_i
+  input = input - 1
+  board[input] = character
+  return board
+end
+
 def turn(board)
   puts "Please enter 1-9:"
   position = gets.chomp
@@ -53,16 +54,9 @@ def turn(board)
   else
     position = position.to_i
     position = position - 1
-    board[position] = "X"
+    board[position] = current_player(board)
     puts display_board(board)
   end
-end
-
-def move(board, input, character)
-  input = input.to_i
-  input = input - 1
-  board[input] = character
-  return board
 end
 
 def turn_count(board)
@@ -131,13 +125,13 @@ def winner(board)
 end
 
 def play(board)
-  until over?(board)
     if won?(board)
       puts "Congratulations #{winner(board)}!"
     elsif draw?(board)
       puts "Cats Game!"
     else
-      turn(board)
+      until over?(board)
+        turn(board)
+      end
     end
-  end
 end
