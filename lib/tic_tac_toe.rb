@@ -111,16 +111,19 @@ WIN_COMBINATIONS =
   def winner(board)
     if won?(board)
       won?(board).each do |each|
+        puts "Congratulations #{board[each]}!"
         return board[each]
       end
     end
   end
 
-  def play(board)
-    count = 0
-    while count < 9
+  def play(board) #full?(board) over won draw to replace counter
+    while !over?(board)
       turn(board)
-      over?(board)
-      count += 1
+    end
+    if won?(board)
+      winner(board)
+    elsif draw?(board) == true
+      puts "Cats Game!"
     end
   end
