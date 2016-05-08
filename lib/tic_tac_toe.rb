@@ -122,16 +122,14 @@ end
 
 # Define your play method below
 def play(board)
-  input=gets
-  if turn(board)
-      over?(board)
-      over?(board)
-      over?(board)
-      won?(board)
-      draw?(board)
+  while over?(board) ==false
+    turn(board)
   end
-  if draw?(board) || won?(board)
-    over?(board)
+if won?(board)
+  puts "Congratulations #{winner(board)}!"
+elsif draw?(board)
+  puts "Cats Game!"
+end
   end
 
 
@@ -141,4 +139,3 @@ def play(board)
   # elsif winner(board) =="O"
   #   puts "Congratulations O!"
   # end
-end
