@@ -122,7 +122,7 @@ end
 
 # Define your play method below
 def play(board)
-  while over?(board) ==false
+  while !over?(board)
     turn(board)
   end
 if won?(board)
