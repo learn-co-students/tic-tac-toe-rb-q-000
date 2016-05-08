@@ -51,7 +51,7 @@ def turn(board)
   puts "Please enter 1-9:"
   user_input = gets
   if valid_move?(board, user_input)
-    move(board, user_input, token="X")
+    move(board, user_input, current_player(board))
     display_board(board)
     return true
   else
