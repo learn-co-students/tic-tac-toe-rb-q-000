@@ -46,7 +46,7 @@ def valid_move?(board, position)
    end
   end
 
-#counts occupied position
+# create the logic for a single complete turn 
 def turn(board)
   puts "Please enter 1-9:"
   user_input = gets
