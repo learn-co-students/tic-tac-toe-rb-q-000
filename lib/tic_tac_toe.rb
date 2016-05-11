@@ -39,23 +39,22 @@ end
 
 def turn(board)
   puts "Please enter 1-9:"
-  input = gets.strip
-  while !valid_move?(board,input)
-    turn(board)
+  position = gets.strip
+  if valid_move?(board, position) == true
+    move(board, position, char = current_player(board))
+   elsif
+    until valid_move?(board, position) == true
+    puts "Invalid move.  Please select an unoccupied position on the board."
+    position = gets.strip
+   end
   end
-   if current_player(board).to_s=="X"
-    move(board, input,"X")
-    display_board(board)
-   elsif current_player(board).to_s=="O"
-    move(board, input,"O")
-    display_board(board)
-  end
+  display_board(board)
 end
 
 def turn_count(board)
-
+  counter = 0
   board.each  do |player|
-    counter = 0
+
      x = board.count "X"
      o = board.count "O"
      counter= x+o
@@ -95,13 +94,7 @@ def full?(board)
   !board.any? {|element| (element ==" ") || (element =="")}
 end
 def draw?(board)
-
-  if won?(board)||(!won?(board)&&!full?(board))
-    return false
-  elsif full?(board) && !won?(board)
-    return true
-
-  end
+  !won?(board) && full?(board) ?  true : false
 end
 def over?(board)
   if won?(board)||full?(board)||draw?(board)
@@ -122,20 +115,17 @@ def play(board)
     if over?(board)
        break
     end
-
     turn(board)
-    count+=1
+
    	if won?(board)||draw?(board)
     	break
     end
-
   end
+    count+=1
     winner(board)
     if won?(board)
         puts "Congratulations #{winner(board)}!"
       elsif draw?(board)
         puts "Cats Game!"
       end
-
-
 end
