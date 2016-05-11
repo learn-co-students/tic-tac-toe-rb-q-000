@@ -21,36 +21,35 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 # code your move method here!
-def move(board, input, value = "X")
+def move(board, input, value )
   board[input.to_i - 1] = value
 end
 # code your #position_taken? method here!
-def position_taken?(board, position)
-  if (board[position] == "X") || (board[position] == "O")
-    true
-  else
-    false
-  end
-end
-# code your #valid_move? method here
-def valid_move?(board, position)
-  if (!position_taken?(board, position) || board[position.to_i - 1] == " ") && (position.to_i >=1 && position.to_i <=9)
-    true
-  else
-    false
-  end
+def position_taken?(board, location)
+  location=location.to_i
+  board[location] != " " && board[location] != ""
 end
 
-# code your turn method here!
+# code your #valid_move? method here
+def valid_move?(board, location)
+  location=location.to_i-1
+  location.between?(0,8) && !position_taken?(board, location)
+end
+
+
 def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
   while !valid_move?(board,input)
     turn(board)
-    break
   end
-  move(board, input, "X")
-  display_board(board)
+   if current_player(board).to_s=="X"
+    move(board, input,"X")
+    display_board(board)
+   elsif current_player(board).to_s=="O"
+    move(board, input,"O")
+    display_board(board)
+  end
 end
 
 def turn_count(board)
@@ -96,12 +95,12 @@ def full?(board)
   !board.any? {|element| (element ==" ") || (element =="")}
 end
 def draw?(board)
-  if !won?(board) && full?(board)
+
+  if won?(board)||(!won?(board)&&!full?(board))
+    return false
+  elsif full?(board) && !won?(board)
     return true
-  elsif !won?(board)&&!full?(board)
-    return false
-  elsif won?(board)
-    return false
+
   end
 end
 def over?(board)
@@ -120,7 +119,23 @@ end
 def play(board)
   count=1
   until count == 10
+    if over?(board)
+       break
+    end
+
     turn(board)
     count+=1
+   	if won?(board)||draw?(board)
+    	break
+    end
+
   end
+    winner(board)
+    if won?(board)
+        puts "Congratulations #{winner(board)}!"
+      elsif draw?(board)
+        puts "Cats Game!"
+      end
+
+
 end
