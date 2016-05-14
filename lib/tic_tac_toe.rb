@@ -38,8 +38,7 @@ def move(board, input, n = "X")
     # and enter either an "X" or "O" in the spot
     # or else the move is invalid
     if valid_move?(board, input) && (n == "X" || n == "O")
-        board[input.to_i - 1] = n
-        return true
+        return board[input.to_i - 1] = n
     else
         return false
     end
