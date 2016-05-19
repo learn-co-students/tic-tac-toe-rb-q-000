@@ -56,7 +56,7 @@ def turn(board)
     if valid_move?(board, input)
       move(board, input, value)
       display_board(board)
-    else
+    elsif !valid_move?(board, input)
       "Please enter valid number"
     end
   end
