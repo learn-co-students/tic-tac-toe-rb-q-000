@@ -24,7 +24,6 @@ def input_to_index(board)
 end
 
 def move(board, input, value)
-
     board[input - 1] = value
 end
 
@@ -41,14 +40,15 @@ def position_taken?(board, input)
   end
 
   def valid_move?(board, input)
-    if input.to_i.between?(1,9) && !position_taken?(board, input)
+    input = input.to_i
+    if input.between?(1,9) && !position_taken?(board, input - 1)
        true
     else
        false
     end
   end
 
-def turn
+def turn(board)
   input = 0
   while input < 10
     puts "Please make a move between 1 and 9"
@@ -127,7 +127,7 @@ def turn_count(board)
 
   def play(board)
     until over?(board)
-      turn
+      turn(board)
       turn_count(board)
     end
     if won?(board)
