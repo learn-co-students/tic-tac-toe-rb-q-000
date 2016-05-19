@@ -54,7 +54,7 @@ def turn(board)
     puts "Please make a move between 1 and 9"
     input = gets.chomp.to_i - 1
     if valid_move?(board, input)
-      board[input] = ???????
+      move(board, input, value)
       display_board(board)
     elsif !valid_move?(board, input)
       "Please enter valid number"
