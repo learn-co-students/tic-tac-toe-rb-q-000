@@ -42,7 +42,7 @@ end
 def turn_count(board)
   count = 0
   board.each do |spot|
-  if "#{spot}" == "X" || "#{spot}" == "O"
+  if spot == "X" || spot == "O"
     count += 1
   end
   end
@@ -111,11 +111,16 @@ def winner(board)
 end
 
 def play(board)
-  turn(board)
-  over?(board)
-    if over?(board) == false
-      turn_count(board)
-      current_player(board)
-      play(board)
-    end
+  until over?(board)
+    turn(board)
+    turn_count(board)
+    current_player(board)
+    play(board)
+  end
+  winner(board)
+  if won?(board)
+    puts ("Congratulations #{winner(board)}!")
+  else draw?(board)
+    puts ("Cats Game!")
+  end
 end
