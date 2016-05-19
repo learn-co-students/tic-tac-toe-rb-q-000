@@ -24,7 +24,8 @@ def input_to_index(board)
 end
 
 def move(board, input, value)
-    board[input] = value
+
+    board[input - 1] = value
 end
 
 def position_taken?(board, input)
@@ -40,7 +41,7 @@ def position_taken?(board, input)
   end
 
   def valid_move?(board, input)
-    if input.to_i.between?(1,9) && !position_taken?(board, position)
+    if input.to_i.between?(1,9) && !position_taken?(board, input)
        true
     else
        false
