@@ -30,10 +30,6 @@ end
 def position_taken?(board, input)
   if board[input] == " "
       false
-    elsif board[input] == ""
-      false
-    elsif board[input] == nil
-      false
     else board[input] == "X" || board[input] == "O"
       true
     end
@@ -58,15 +54,6 @@ def position_taken?(board, input)
        "Please enter valid number"
     end
 end
-
-
-def turn_count(board)
-    move_count = 0
-    while move_count < 10
-      move_count += 1
-    end
-    return move_count
-  end
 
 def turn_count(board)
   board.count {|x| x == "X" || x == "O" }
