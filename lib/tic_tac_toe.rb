@@ -19,8 +19,8 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def input_to_index(user_input)
-  user_input.to_i - 1
+def input_to_index(input)
+  input.to_i - 1
 end
 
 def move(board, input, value)
@@ -40,7 +40,7 @@ def position_taken?(board, input)
   end
 
   def valid_move?(board, input)
-    if input_to_index.between?(1,9) && !position_taken?(board, input)
+    if input.between?(0,8) && !position_taken?(board, input)
        true
     else
        false
@@ -49,29 +49,33 @@ def position_taken?(board, input)
 
   def turn(board)
     puts "Please make a move between 1 and 9"
-    user_input = gets.strip
-    input = input_to_index(user_input)
+    input = gets.strip
+    input = input_to_index(input)
     if valid_move?(board, input)
       move(board, input, current_player(board))
       display_board(board)
-    else
+    else turn(board)
        "Please enter valid number"
     end
 end
 
 
 def turn_count(board)
-    move = 0
-    while move < 9
-      move += 1
+    move_count = 0
+    while move_count < 10
+      move_count += 1
     end
-    return move
+    return move_count
+  end
+
+def turn_count(board)
+  board.count {|x| x == "X" || x == "O" }
   end
 
   def current_player(board)
     if turn_count(board) % 2 != 0
        return 'O'
-    else
+    else turn_count(board) % 2 == 0
        return 'X'
     end
   end
