@@ -20,32 +20,37 @@ def display_board(board)
 end
 
 def input_to_index(input)
-  input.to_i - 1
+  input.to_i
 end
 
 def move(board, input, value)
-    board[input] = value
+    board[input - 1] = value
 end
 
-def position_taken?(board, input)
-  if board[input] == " "
-      false
-    else board[input] == "X" || board[input] == "O"
-      true
+def position_taken?(board, current_move)
+  if board[current_move] == " "
+    return false
+  elsif board[current_move] == ""
+    return false
+  elsif board[current_move] == nil
+    return false
+  else board[current_move] == "X" || board[current_move] == "O"
+    return true
     end
   end
 
   def valid_move?(board, input)
-    if input.between?(0,8) && !position_taken?(board, input)
-       true
+    current_move = input.to_i - 1
+    if current_move.between?(0,8) && !position_taken?(board, current_move)
+       return true
     else
-       false
+       return false
     end
   end
 
   def turn(board)
     puts "Please make a move between 1 and 9"
-    input = gets.strip
+    input = gets.strip.to_i
     input = input_to_index(input)
     if valid_move?(board, input)
       move(board, input, current_player(board))
@@ -95,10 +100,11 @@ def turn_count(board)
   def draw?(board)
     if !won?(board) && full?(board)
       return true
-    else !won?(board) && !full?(board) || !won?(board)
+    else
       return false
     end
   end
+
 
   def over?(board)
     if draw?(board) || won?(board) || full?(board)
@@ -119,9 +125,11 @@ def turn_count(board)
         turn(board)
         turn_count(board)
     end
-    if won?(board)
-      puts "Congrats, you won!"
-    elsif draw?(board)
+    if winner(board) == "X"
+      puts "Congratulations X!"
+    elsif winner(board) == "O"
+      puts "Congratulations O!"
+    else draw?(board)
       puts "Cats Game!"
     end
   end
