@@ -1,15 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/tic_tac_toe'
-
-player = 'X'
-board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 puts "Welcome to Tic Tac Toe!"
+board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 display_board(board)
-while !won?(board) && !draw?(board)
-  turn(board, player)
-  if player == 'X'
-    player = 'O'
-  else player = 'X'
-  end
-end
+play(board)
