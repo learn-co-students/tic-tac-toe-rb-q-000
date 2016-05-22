@@ -79,7 +79,7 @@ def won?(board)
 end
 
 def full?(board)
-  board.all? {|p| position_taken?(board, p.to_i + 1)} ? true : false
+  board.none? {|p| p == nil || p == "" || p == " "} ? true : false
 end
 
 def draw?(board)
@@ -100,9 +100,10 @@ def play(board)
   until over?(board)
       turn(board)
   end
-      if won?(board) == true
+      if won?(board) 
       puts "Congratulations #{winner(board)}!"
       elsif draw?(board) == true
       puts "Cats Game!"
       end
+  
 end
