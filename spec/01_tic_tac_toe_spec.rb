@@ -190,10 +190,16 @@ describe './lib/tic_tac_toe.rb' do
 
   describe '#draw?' do
 
-    it 'calls won? and full?' do
+    it 'calls full?' do
+      board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      expect(self).to receive(:full?).with(board)
+
+      draw?(board)
+    end
+
+    it 'calls won?' do
       board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
       expect(self).to receive(:won?).with(board)
-      expect(self).to receive(:full?).with(board)
 
       draw?(board)
     end
@@ -222,6 +228,13 @@ describe './lib/tic_tac_toe.rb' do
       board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       expect(over?(board)).to be_truthy
+    end
+
+    it 'calls won?' do
+      board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      expect(self).to receive(:won?).with(board)
+
+      draw?(board)
     end
 
     it 'returns true for a won game' do
