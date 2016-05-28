@@ -1,15 +1,8 @@
 
 def play(board)
-if over?(board) == true
-    if draw?(board)
-      puts "Cats Game!"
-    elsif won?(board)
-      puts "Congratulations #{winner(board)}!"
-    else
-    end
-else turn(board)
-
-  end
+  until over?(board) == true
+    turn(board)
+end
 end
 
 WIN_COMBINATIONS = [
@@ -112,7 +105,7 @@ def draw?(board)
 end
 
 def over?(board)
-  won?(board) || full?(board) || full?(board)
+  won?(board) || full?(board)
 end
 
 def winner(board)
