@@ -1,9 +1,13 @@
 
 def play(board)
-  until over?(board) == true
+  until over?(board)
     turn(board)
   end
-over?(board)
+  if draw?(board)
+      puts "Cats Game!"
+  else 
+      puts "Congratulations #{winner(board)}!"
+  end
 end
 
 WIN_COMBINATIONS = [
@@ -27,7 +31,7 @@ end
 def input_to_index(input)
     input.to_i - 1
 end
-#ttt-8-trun
+#ttt-8-turn
 def position_to_index(position)
     position.to_i - 1
 end
@@ -57,11 +61,11 @@ def turn(board)
   position = gets.strip
   index = position_to_index(position)
   token = current_player(board)
-  if valid_move?(board, position)
-      move(board, index, token)
-      display_board(board)
-  else
+  if !valid_move?(board, position)
       turn(board)
+  else
+    move(board, index, token)
+    display_board(board)
   end
 end
 
@@ -102,11 +106,11 @@ def full?(board)
 end
 
 def draw?(board)
-  won?(board) == nil && full?(board) == true
+    won?(board) == nil && full?(board) == true
 end
 
 def over?(board)
-  won?(board) || full?(board)
+  won?(board) || draw?(board)
 end
 
 def winner(board)
