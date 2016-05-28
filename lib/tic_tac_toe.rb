@@ -2,7 +2,8 @@
 def play(board)
   until over?(board) == true
     turn(board)
-end
+  end
+over?(board)
 end
 
 WIN_COMBINATIONS = [
