@@ -109,10 +109,10 @@ describe './lib/tic_tac_toe.rb' do
       board = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
 
       position = 0
-      expect(valid_move?(board, position)).to be_truthy
+      expect(valid_move?(board, position)).to be_falsey
 
       position = 4
-      expect(valid_move?(board, position)).to be_falsey
+      expect(valid_move?(board, position)).to be_truthy
 
       position = -1
       expect(valid_move?(board, position)).to be_falsey
