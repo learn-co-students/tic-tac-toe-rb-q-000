@@ -3,6 +3,8 @@ SimpleCov.start do
   add_filter "/spec"
 end
 
+# RSpec::Expectations.configuration.warn_about_potential_false_positives =
+#  false
 
 RSpec.configure do |config|
   config.order = :default
