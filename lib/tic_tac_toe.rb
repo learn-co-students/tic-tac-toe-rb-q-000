@@ -25,7 +25,6 @@ def display_board(board)
 end
 
 def play(board)
-
     until over?(board)
       turn(board)
     end
@@ -33,7 +32,7 @@ def play(board)
         won = won?(board)
         #require 'pry'
         #binding.pry
-        puts "Congratulations #{board[won[0]]}!"
+        puts "Congratulations #{winner(board)}!"
         #binding.pry
     elsif draw?(board)
         puts "Cats Game!"
