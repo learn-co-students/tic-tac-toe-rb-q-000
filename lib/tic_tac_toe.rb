@@ -12,6 +12,7 @@ WIN_COMBINATIONS = [
     def play(board)
       until over?(board)
         turn(board)
+      end  
         if over?(board)
           if won?(board)
             puts "Congratulations #{winner(board)}!"
