@@ -11,17 +11,20 @@ WIN_COMBINATIONS = [
 
     def play(board)
       until over?(board)
-        turn(board) 
-        if over?(board)
-          if won?(board)
-            puts "Congratulations #{winner(board)}!"
-          elsif draw?(board)
-            puts "Cats Game!"
-          end
+        turn(board)
+      end
+      message(board) 
+    end
+
+    def message(board)
+      if over?(board)
+        if won?(board)
+          puts "Congratulations #{winner(board)}!"
+        elsif draw?(board)
+          puts "Cats Game!"
         end
       end
     end
-
 
   def display_board(xo)
     puts [" #{xo[0]} " + "|" + " #{xo[1]} " + "|" + " #{xo[2]} "]
