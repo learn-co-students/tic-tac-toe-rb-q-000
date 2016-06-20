@@ -20,19 +20,15 @@ def display_board(board)
 end
 
 def play(board)
-  turn_count = 0
-  while turn_count < 9
-    #Check for Coditions that end the Game
-    if over?(board) && !draw?(board)
-      puts "Congratulations #{winner(board)}!"
-      break
-    elsif over?(board) && draw?(board)
-      puts "Cats Game!"
-      break
-    end
-
+  while !over?(board)
     turn(board)
-    turn_count += 1
+  end
+
+  #Check for Coditions that end the Game
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
   end
 end
 
@@ -80,10 +76,6 @@ def turn(board)
 end
 
 def won?(board)
-  if !board.include?("X") && !board.include?("O")
-    return false
-  end
-
   WIN_COMBINATIONS.each do |winning_line|
     if board[winning_line.first] != " " && (board[winning_line[0]] == board[winning_line[1]]) && (board[winning_line[1]] == board[winning_line[2]])
       return winning_line.to_a
@@ -102,13 +94,7 @@ def draw?(board)
 end
 
 def over?(board)
-  if draw?(board) || full?(board)
-    return true
-  elsif won?(board)
-    return true
-  else
-    return false
-  end
+  won?(board) || draw?(board)
 end
 
 def winner(board)
