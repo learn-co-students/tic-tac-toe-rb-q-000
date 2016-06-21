@@ -92,7 +92,7 @@ def position_taken?(board, index)
 end
 
 def draw?(board)
-  full?(board) && !won?(board)
+  !won?(board) && full?(board)
 end
 
 def over?(board)
