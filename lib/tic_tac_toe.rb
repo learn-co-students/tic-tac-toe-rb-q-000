@@ -20,16 +20,13 @@ end
 
 def play(board)
    turn_count = 0
-   while turn_count < 9
-     if over?(board) && !draw?(board)
-       puts "Congratulations #{winner(board)}!"
-      break
-     elsif over?(board) && draw?(board)
-       puts "Cats Game!"
-       break
+   while !over?(board)
+    turn(board)
      end
-     turn(board)
-     turn_count += 1
+     if !draw?(board)
+       puts "Congratulations #{winner(board)}!"
+else
+  puts "Cats Game!"
    end
  end
 

@@ -39,10 +39,10 @@ describe './lib/tic_tac_toe.rb' do
       allow($stdout).to receive(:puts)
       allow(self).to receive(:gets).and_return("1","2","3")
       allow(self).to receive(:over?).and_return(false, false, false, true)
-      allow(self).to receive(:turn) do
-        num_of_turns += 1
-        Process.exit!(true) if num_of_turns > 10
-      end
+      #allow(self).to receive(:turn) do
+        #num_of_turns += 1
+      #  Process.exit!(true) if num_of_turns > 10
+      #end
 
       play(board)
 
