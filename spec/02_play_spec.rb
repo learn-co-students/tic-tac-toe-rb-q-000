@@ -1,6 +1,6 @@
 require_relative '../lib/tic_tac_toe.rb'
 
-describe './lib/tic_tac_toe.rb' do  
+describe './lib/tic_tac_toe.rb' do
   describe '#play' do
     it 'asks for players input on a turn of the game' do
       board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -42,7 +42,7 @@ describe './lib/tic_tac_toe.rb' do
       allow(self).to receive(:turn) do
         num_of_turns += 1
         Process.exit!(true) if num_of_turns > 10
-      end.and_call_original
+      end
 
       play(board)
 
