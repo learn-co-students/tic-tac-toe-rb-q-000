@@ -24,7 +24,6 @@ end
 
 def move(board,index,character)
     board[index] = character
-  return board
 end
 
 def position_taken?(board, index)
@@ -37,7 +36,7 @@ end
 
 def valid_move?(board, index)
 
-    if (!position_taken?(board, index) && (index>-1 && index<9))
+    if (!position_taken?(board, index) && ((index>-1) && (index<9)))
         return true
     else
       return false
@@ -45,13 +44,10 @@ def valid_move?(board, index)
 end
 
 def turn(board)
-  if won?(board) != nil
-    exit
-  end
   puts "Please enter 1-9:"
   number = input_to_index(gets.strip)
-  until valid_move?(board, number) == true
-    puts "Error. Please enter 1-9:"
+  until valid_move?(board, number)
+    puts "Error. Please enter from 1-9:"
     number = input_to_index(gets.strip)
     valid_move?(board, number)
   end
@@ -195,13 +191,18 @@ def winner(board)
     return nil
   else
     return board[won?(board)[0]]
-end
+  end
 end
 
 def play(board)
-  number = 0
-  while (number < 9)
-    turn(board)
-    number += 1
+
+  until over?(board)
+  turn(board)
+  end
+
+  if won?(board) != nil
+    puts "Congratulations"
+  else
+    puts "Game was a draw"
   end
 end
