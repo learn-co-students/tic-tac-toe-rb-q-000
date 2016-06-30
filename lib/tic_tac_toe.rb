@@ -75,9 +75,8 @@ end
 
 def current_player(board)
   turns = turn_count(board)
-  if turns == 0
-    return "X"
-  elsif (turns % 2 == 0)
+
+  if (turns % 2 == 0)
     return "X"
   else
     return "O"
@@ -177,12 +176,12 @@ def draw?(board)
 end
 
 def over?(board)
-  if draw?(board) == true
+  if won?(board)!= nil
     return true
-  elsif full?(board) == false
+  elsif draw?(board)
+    return true
+  else
     return false
-  elsif won?(board) != nil
-    return true
   end
 end
 
@@ -197,12 +196,14 @@ end
 def play(board)
 
   until over?(board)
-  turn(board)
+    turn(board)
   end
 
   if won?(board) != nil
-    puts "Congratulations"
-  else
-    puts "Game was a draw"
+    puts "Congratulations #{winner(board)}!"
+  end
+
+  if draw?(board)
+    puts "Cats Game!"
   end
 end
