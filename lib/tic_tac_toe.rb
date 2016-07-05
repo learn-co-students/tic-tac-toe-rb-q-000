@@ -117,9 +117,11 @@ end
 
 def play(board)
   counter = 0
-  until counter == 9
+  until counter == 9 || won?(board) || over?(board) || draw?(board)
+    user_input = gets.strip
     turn(board)
-    current_player
+    current_player(board)
+    turn_count(board)
     counter += 1
   end
 end
