@@ -124,5 +124,12 @@ def play(board)
     turn_count(board)
     counter += 1
   end
+  if board == won?("X")
+    print "Congratulations X!"
+  elsif
+    print "Congratulations O!"
+  else board == draw?(board)
+    print "Cats Game!"
+  end
 end
 
