@@ -40,13 +40,8 @@ def turn(board)
   if (!valid_move?(board, index))
     number = gets.strip
   else
-    puts "display_board(board)"
-    puts "   |   |   "
-    puts "-----------"
-    puts "   |   |   "
-    puts "-----------"
-    puts "   | X |   "
-    move(board, 0, "X")
+    move(board, 0, current_player(board))
+    display_board(board)
   end
 end
 
@@ -96,7 +91,7 @@ def draw?(board)
 end
 
   def over?(board)
-    if full?(board) == true
+    if won?(board) || draw?(board)
       return true
     else
     return false
@@ -116,20 +111,7 @@ def winner(board)
 end
 
 def play(board)
-  counter = 0
-  until counter == 9 || won?(board) || over?(board) || draw?(board)
-    user_input = gets.strip
+  until over?(board)
     turn(board)
-    current_player(board)
-    turn_count(board)
-    counter += 1
-  end
-  if board == won?("X")
-    print "Congratulations X!"
-  elsif
-    print "Congratulations O!"
-  else board == draw?(board)
-    print "Cats Game!"
   end
 end
-
