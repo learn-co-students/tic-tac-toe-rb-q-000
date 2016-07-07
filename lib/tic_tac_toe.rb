@@ -1,3 +1,4 @@
+require "pry"
 WIN_COMBINATIONS = [
 [0, 1, 2],
 [3, 4, 5],
@@ -40,7 +41,7 @@ def turn(board)
   if (!valid_move?(board, index))
     number = gets.strip
   else
-    move(board, 0, current_player(board))
+    move(board, index, current_player(board))
     display_board(board)
   end
 end
@@ -64,15 +65,15 @@ def current_player(board)
 end
 
 def won?(board)
-    WIN_COMBINATIONS.each do |win|
-      if board[win[0]] != " " && board[win[0]] == board[win[1]] && board[win[1]] == board[win[2]] 
-       return win
-  end
+  WIN_COMBINATIONS.each do |win|
+    if board[win[0]] != " " && board[win[0]] == board[win[1]] && board[win[1]] == board[win[2]] 
+     return win
     end
-    false
   end
+  false
+end
 
-  def full?(board)
+def full?(board)
     board.each do |position|
       if position == " "
         return false
@@ -99,13 +100,10 @@ end
 end
 
 def winner(board)
-  if board == ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
-    return "X"
-  elsif
-    board == ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
-    return "O"
+  winning_array = won?(board)
+  if winning_array
+    return board[winning_array.last]
   else
-    board == ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
     return nil
   end
 end
@@ -113,5 +111,12 @@ end
 def play(board)
   until over?(board)
     turn(board)
+      end
+    if winner(board) == "X"
+      puts "Congratulations X!"
+    elsif winner(board) == "O"
+      puts "Congratulations O!"
+    else draw?(board)
+      puts "Cats Game!"
   end
 end
