@@ -18,12 +18,16 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def input_to_index(user_input)
-  user_input.to_i - 1
+def input_to_index(input)
+  input.to_i - 1
 end
 
 def move(board, index, current_player)
   board[index] = current_player
+end
+
+def position_taken?(board, index)
+  !(board[index].nil? || board[index] == " ")
 end
 
 def valid_move?(board, index)
@@ -32,10 +36,8 @@ end
 
 def turn_count(board)
   counter = 0
-  board.each do [position]
-    if position == "X" || position == "O"
-      counter += 1
-    end
+  if position_taken?(board, index) == true
+    counter += 1
   end
   return counter
 end
@@ -44,6 +46,7 @@ def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
   index = input_to_index(input)
+  player = current_player(board)
   if valid_move?(board, index)
     move(board, index, current_player)
     display_board(board)
@@ -52,16 +55,11 @@ def turn(board)
   end
 end
 
-# Helper Method
-def position_taken?(board, index)
-  !(board[index].nil? || board[index] == " ")
-end
-
 def current_player(board)
-  if turn_count(board).odd
-    return "X"
-  else
+  if turn_count(board) % 2 == 0
     return "O"
+  else
+    return "X"
   end
 end
 
@@ -124,6 +122,7 @@ end
 
 # Define your play method below
 def play(board)
+  index = input_to_index(input)
   turn(board)
   while over?(board) == false
     turn(board)
