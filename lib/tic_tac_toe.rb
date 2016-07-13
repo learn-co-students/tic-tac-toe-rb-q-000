@@ -18,118 +18,127 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def input_to_index(input)
-  input.to_i - 1
+# Convert user's input to an index in board.
+def input_to_index(user_input)
+  user_input.to_i - 1
 end
 
-def move(board, index, current_player)
-  board[index] = current_player
+def move(board, input_to_index, player)
+  board[input_to_index] = player
 end
 
-def position_taken?(board, index)
-  !(board[index].nil? || board[index] == " ")
-end
-
-def valid_move?(board, index)
-  index.between?(0,8) && !position_taken?(board, index)
-end
-
-def turn_count(board)
-  counter = 0
-  if position_taken?(board, index) == true
-    counter += 1
+def position_taken?(board, input_to_index)
+  if board[input_to_index] == " " || board[input_to_index] == ""
+    return false
+  else
+    return true
   end
-  return counter
+end
+
+def valid_move?(board, input_to_index)
+  move = board[input_to_index]
+  if input_to_index >= 0 && input_to_index <= 8
+    if move == "X" || move == "Y"
+      return false
+    else
+      return true
+    end
+  end
 end
 
 def turn(board)
-  puts "Please enter 1-9:"
-  input = gets.strip
-  index = input_to_index(input)
+  puts "Please enter 1-9:"    #asks for user's input_to_index
+  user_input = gets.strip          #gets input and assigns it to a variable
+  index = input_to_index(user_input) #converts the input to an index and assigns it to a variable "index"
   player = current_player(board)
-  if valid_move?(board, index)
-    move(board, index, current_player)
+  if valid_move?(board, index) == true
+    move(board, index, player)
     display_board(board)
   else
     turn(board)
   end
 end
 
+def turn_count(board)
+  counter = 0
+  positions = 0   # Number of positions taken
+  until counter == 9
+    if board[counter] == "X" || board[counter] == "O"
+      positions += 1
+    end
+    counter += 1
+  end
+  return positions
+end
+
 def current_player(board)
-  if turn_count(board) % 2 == 0
-    return "O"
-  else
+  turn_number = turn_count(board)
+  if turn_number.even?
     return "X"
+  else
+    return "O"
   end
 end
 
 def won?(board)
-  pass =
-    WIN_COMBINATIONS.each do |win_combination|
-      index_1 = win_combination[0]
-      index_2 = win_combination[1]
-      index_3 = win_combination[2]
-      if (board[index_1] == "X" && board[index_2] == "X" && board[index_3] == "X") || (board[index_1] == "O" && board[index_2] == "O" && board[index_3] == "O")
-        return win_combination
-      end
+  WIN_COMBINATIONS.each do |win_combination|
+    index_1 = win_combination[0]
+    index_2 = win_combination[1]
+    index_3 = win_combination[2]
+    if (board[index_1] == "X" && board[index_2] == "X" && board[index_3] == "X") || (board[index_1] == "O" && board[index_2] == "O" && board[index_3] == "O")
+      return win_combination
     end
-    return false
+  end
+  return false
 end
 
 def full?(board)
-  counter = 0
-  board.each do |value|
-    if value == "X" || value == "O"
-      counter += 1
-    end
-  end
-  if counter == 9
-    return true
-  else
+  if board.include?(" ")
     return false
+  else
+    return true
   end
 end
 
 def draw?(board)
-  if !won?(board)
+  win = won?(board)
+  full = full?(board)
+  if win == false && full == true
     return true
-  elsif (won?(board) == false && full?(board) == false) || won?(board) ==  true
+  else
     return false
   end
 end
 
 def over?(board)
-  if full?(board) == false
-    return false
-  elsif won?(board) == true || full?(board) == true || draw?(board) == true
+  win = won?(board)
+  full = full?(board)
+  draw = draw?(board)
+  if full == true || draw == true || win != false
     return true
+  else
+    return false
   end
 end
 
 def winner(board)
-  if !won?(board)
-    return nil
+  win_array = won?(board)
+  if win_array != false
+    win_index = win_array[0]
+    return board[win_index]
   else
-    winning_array = won?(board)
-    winning_index = winning_array[0]
-    if board[winning_index] == "X"
-      return "X"
-    else
-      return "O"
-    end
+    return nil
   end
 end
 
-# Define your play method below
 def play(board)
-  index = input_to_index(input)
-  turn(board)
-  while over?(board) == false
+  until over?(board) == true
     turn(board)
   end
-  if won?(board) == true
-    puts "Congratulations player #{winner(board)}"
+  if won?(board) != false
+    winner = winner(board)
+    puts "Congratulations #{winner}!"
   elsif draw?(board) == true
-    puts "The game is a draw."
+    puts "Cats Game!"
   end
 end
