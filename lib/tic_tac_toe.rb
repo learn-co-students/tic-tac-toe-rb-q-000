@@ -113,7 +113,7 @@ def current_player(board)
 end
 
 def turn_count(board)
-  board.count{|token| token == "X" || token == "O"}
+  board.count{|position| position == "X" || position == "O"}
 end
 
 def move(board, index, player)
