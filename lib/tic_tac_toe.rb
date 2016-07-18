@@ -34,13 +34,21 @@ def position_taken?(board, index)
   end
 end
 
-def valid_move?(board, index)
-  if !index.between?(0, board.length)
-    return false
+# def valid_move?(board, index)
+#   if !index.between?(0, board.length)
+#     return false
+#   else
+#     return !position_taken?(board, index)
+#   end
+# end
+
+def valid_move?(board, input)
+  if input.to_i.between?(0, 9) && !position_taken?(board, input) 
+    return true
   else
-    return !position_taken?(board, index)
+    return false
   end
-end
+end  
 
 def turn(board)
   puts("Please enter 1-9:")
