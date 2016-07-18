@@ -29,7 +29,7 @@ def position_taken?(board, index)
   position = board[index]
   if [' ', '', nil].include?(position)
     return false
-  elsif ['X', 'O'].include?(position)
+  else
     return true
   end
 end
@@ -42,13 +42,13 @@ end
 #   end
 # end
 
-def valid_move?(board, input)
-  if input.to_i.between?(0, 9) && !position_taken?(board, input) 
+def valid_move?(board, index)
+  if index.between?(0, board.length) && !position_taken?(board, index)
     return true
   else
     return false
   end
-end  
+end
 
 def turn(board)
   puts("Please enter 1-9:")
