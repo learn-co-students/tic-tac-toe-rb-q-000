@@ -117,6 +117,6 @@ def play(board)
   if won?(board) == false && draw?(board)
     puts "Cats Game!"
   elsif won?(board).class == Array
-    "Congratulations #{winner(board)}!"
+    puts "Congratulations #{winner(board)}!"
   end
 end
