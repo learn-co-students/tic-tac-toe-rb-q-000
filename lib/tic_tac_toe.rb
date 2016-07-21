@@ -68,7 +68,7 @@ def won?(board)
     position_3 = board[win_index_3]
     if position_taken?(board, win_index_1)
       if position_1 == position_2 && position_2 == position_3
-        return [win_index_1,win_index_2,win_index_3]
+        return true
       end
     end
   end
@@ -96,16 +96,25 @@ def draw?(board)
 end
 
 def over?(board)
-  if draw?(board) || won?(board).class == Array || full?(board)
+  if draw?(board) || won?(board) || full?(board)
     return true
   else return false
   end
 end
 
 def winner(board)
-  if won?(board).class == Array
-    won_positions = won?(board)[0]
-    return "#{board[won_positions]}"
+  WIN_COMBINATIONS.each do |index|
+    win_index_1 = index[0]
+    win_index_2 = index[1]
+    win_index_3 = index[2]
+    position_1 = board[win_index_1]
+    position_2 = board[win_index_2]
+    position_3 = board[win_index_3]
+    if position_taken?(board, win_index_1)
+      if position_1 == position_2 && position_2 == position_3
+        return "#{board[win_index_1]}"
+      end
+    end
   end
 end
 
@@ -116,7 +125,7 @@ def play(board)
   end
   if won?(board) == false && draw?(board)
     puts "Cats Game!"
-  elsif won?(board).class == Array
+  elsif won?(board).class
     puts "Congratulations #{winner(board)}!"
   end
 end
