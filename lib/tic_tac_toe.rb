@@ -21,7 +21,7 @@ def input_to_index(input)
   input.to_i-1
 end
 
-def move(board, position, char="X")
+def move(board, position, char)
   board[position] = char
 end
 
@@ -43,7 +43,7 @@ end
 # end
 
 def valid_move?(board, index)
-  if index.between?(0, board.length) && !position_taken?(board, index)
+  if index.between?(0, 8) && !position_taken?(board, index)
     return true
   else
     return false
