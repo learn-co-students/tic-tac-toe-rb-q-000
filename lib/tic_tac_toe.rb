@@ -128,14 +128,14 @@ while !over?(board)
       move(board,index,"X")
       display_board(board)
     elsif(valid_move?(board,index) && current_player(board) == "O")
-      move(board,index,"O")
+      move(board,index,"Y")
       display_board(board)
     else
       play(board)
     end
-      if(won?(board) && current_player(board) == "X")
+      if(won?(board) && winner(board) == "X")
     return "Congratulations X!"
-  elsif(won?(board) && current_player(board) == "O")
+  elsif(won?(board) && winner(board) == "O")
     return "Congratulations O!"
     end
 end # end of while
