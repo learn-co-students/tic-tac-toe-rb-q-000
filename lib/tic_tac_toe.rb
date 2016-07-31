@@ -128,7 +128,7 @@ while !over?(board)
       move(board,index,"X")
       display_board(board)
     elsif(valid_move?(board,index) && current_player(board) == "O")
-      move(board,index,"Y")
+      move(board,index,"O")
       display_board(board)
     else
       play(board)
