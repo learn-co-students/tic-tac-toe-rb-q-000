@@ -120,7 +120,7 @@ else
 end
 end
 def play(board)
-while over?(board)
+while !over?(board)
     user_input = gets.chomp
     index = input_to_index(user_input)
         if(valid_move?(board,index) && current_player(board) == "X")
@@ -132,13 +132,14 @@ while over?(board)
     else
       play(board)
     end
-    if(won?(board) && winner(board) == "X")
-  puts "Congratulations X!"
-  break
-elsif(won?(board) && winner(board) == "O")
-  puts "Congratulations O!"
-  break
-  end
+
 
 end # end of while
+if(won?(board) && winner(board) == "X")
+puts "Congratulations X!"
+
+elsif(won?(board) && winner(board) == "O")
+puts "Congratulations O!"
+
+end
 end #end of play
