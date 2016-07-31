@@ -119,18 +119,18 @@ else
   nil
 end
 end
+
 def play(board)
 while !over?(board)
     turn(board)
 end # end of while
-if(draw?(board))
-  puts "Cats Game!"
-end
 if(won?(board) && winner(board) == "X")
 return " Congratulations X!"
 
 elsif(won?(board) && winner(board) == "O")
 return " Congratulations O!"
+elsif(draw?(board))
+        puts "Cats Game!"
+  end
 
-end
 end #end of play
