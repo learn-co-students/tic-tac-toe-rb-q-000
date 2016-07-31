@@ -124,8 +124,11 @@ while !over?(board)
     user_input = gets.chomp
     index = input_to_index(user_input)
 
-    if(valid_move?(board,index))
+    if(valid_move?(board,index) && current_player(board) == "X")
       move(board,index,"X")
+      display_board(board)
+    elsif(valid_move?(board,index) && current_player(board) == "O")
+      move(board,index,"O")
       display_board(board)
     else
       play(board)
