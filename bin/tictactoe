@@ -1,22 +1,7 @@
-!/usr/bin/env ruby
+#!/usr/bin/env ruby
 
-require_relative '../lib/tic_tac_toe'
+require_relative "../lib/tic_tac_toe"
 puts "Welcome to Tic Tac Toe!"
-board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-def play(board)
-while !over?(board)
-    user_input = gets.chomp
-    index = input_to_index(user_input)
-
-    if(valid_move?(board,index))
-      move(board,index,"X")
-      display_board(board)
-    else
-      play(board)
-    end
-      if(won?(board) && current_player(board) == "X")
-    return "Congratulations X!"
-  elsif(won?(board) && current_player(board) == "O")
-    return "Congratulations O!"
-    end
-end # end of while
+board = [" "," "," "," "," "," "," "," "," "]
+display_board(board)
+play(board)

@@ -123,11 +123,14 @@ def play(board)
 while !over?(board)
     turn(board)
 end # end of while
+if(draw?(board))
+  puts "Cats Game!"
+end
 if(won?(board) && winner(board) == "X")
-puts "Congratulations X!"
+return " Congratulations X!"
 
 elsif(won?(board) && winner(board) == "O")
-puts "Congratulations O!"
+return " Congratulations O!"
 
 end
 end #end of play
