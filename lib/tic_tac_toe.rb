@@ -120,7 +120,7 @@ else
 end
 end
 def play(board)
-while !over?(board)
+while over?(board)
     user_input = gets.chomp
     index = input_to_index(user_input)
         if(valid_move?(board,index) && current_player(board) == "X")
