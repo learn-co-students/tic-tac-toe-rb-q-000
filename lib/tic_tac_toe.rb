@@ -127,13 +127,13 @@ end
 
 #Defines the play method
 def play(board)
-  while over?(board) == false
+  until over?(board)
     turn(board)
-    if won?(board) != nil
+  end
+  if won?(board) != nil
 #      token = winner(board)
-      puts "Congratulations #{winner(board)}!"
-    elsif draw?(board) == true
-      puts "The game was a draw!"
-    end
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board) == true
+    puts "The game was a draw!"
   end
 end
