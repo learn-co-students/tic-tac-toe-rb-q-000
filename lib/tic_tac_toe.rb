@@ -130,10 +130,9 @@ def play(board)
   until over?(board)
     turn(board)
   end
-  if won?(board) != nil
-#      token = winner(board)
+  if won?(board)
     puts "Congratulations #{winner(board)}!"
-  elsif draw?(board) == true
-    puts "The game was a draw!"
+  elsif draw?(board)
+    puts "Cats Game!"
   end
 end
