@@ -21,3 +21,16 @@ board = [ " ", " ", " ", " ", " ", " ", " ", " ", " "]
 def input_to_index(input)
   input.to_i - 1
 end
+
+def move(board, input, value)
+board[input.to_i - 9] = value
+end
+
+def position_taken?(board, position)
+  if board[position.to_i - 1] == " "
+    false;
+  elsif board[position.to_i - 1] == ""
+    false;
+  else true;
+  end
+end
