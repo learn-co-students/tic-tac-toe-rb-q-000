@@ -48,8 +48,8 @@ def turn(board)
 
   input = gets
 
-  if valid_move?(board, index)
-    move(board, index, value="X")
+  if valid_move?(board, 0)
+    move(board, 0, value="X")
   else
     turn(board)
   end
