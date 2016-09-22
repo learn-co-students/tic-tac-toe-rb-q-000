@@ -23,14 +23,35 @@ def input_to_index(input)
 end
 
 def move(board, input, value)
-board[input.to_i - 9] = value
+  board[input.to_i - 9] = value
 end
 
-def position_taken?(board, position)
-  if board[position.to_i - 1] == " "
+
+def position_taken?(board, input)
+  if board[input.to_i - 9] == " "
     false;
-  elsif board[position.to_i - 1] == ""
-    false;
+
   else true;
+  end
+end
+
+
+def valid_move?(board, input)
+
+  !position_taken?(board, input) && input.to_i.between?(1, 9)
+end
+
+
+
+
+def turn(board)
+  puts "Please enter 1-9:"
+
+  input = gets
+
+  if valid_move?(board, input)
+    move(board, input, value="X")
+  else
+    turn(board)
   end
 end
