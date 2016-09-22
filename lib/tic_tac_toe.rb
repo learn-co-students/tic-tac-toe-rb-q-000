@@ -18,17 +18,17 @@ def display_board (board)
 end
 board = [ " ", " ", " ", " ", " ", " ", " ", " ", " "]
 
-def input_to_index(input)
-  input.to_i - 1
+def input_to_index(index)
+  index.to_i - 1
 end
 
-def move(board, input, value)
-  board[input.to_i - 9] = value
+def move(board, index, value)
+  board[index.to_i - 9] = value
 end
 
 
-def position_taken?(board, input)
-  if board[input.to_i - 9] == " "
+def position_taken?(board, index)
+  if board[index.to_i] == " "
     false;
 
   else true;
@@ -36,12 +36,11 @@ def position_taken?(board, input)
 end
 
 
-def valid_move?(board, input)
+def valid_move?(board, index)
 
-  !position_taken?(board, input) && input.to_i.between?(1, 9)
+  !position_taken?(board, index) && index.to_i.between?(0, 8)
+
 end
-
-
 
 
 def turn(board)
@@ -49,8 +48,8 @@ def turn(board)
 
   input = gets
 
-  if valid_move?(board, input)
-    move(board, input, value="X")
+  if valid_move?(board, index)
+    move(board, index, value="X")
   else
     turn(board)
   end
