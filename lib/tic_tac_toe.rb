@@ -55,5 +55,21 @@ end
 
 def turn_count(board)
   board = 3
+end
 
+def current_player(board)
+  if turn_count(board) == 3
+    return "X"
+  else
+    return "O"
+  end
+end
+
+def won?(board)
+  if !WIN_COMBINATIONS
+    return false
+  else
+    true
+    return WIN_COMBINATIONS
+  end
 end
