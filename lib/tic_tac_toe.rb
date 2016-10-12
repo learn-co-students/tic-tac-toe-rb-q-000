@@ -86,3 +86,11 @@ def won?(board)
     end
     false
 end
+
+def full?(board)
+  board.all? {|position| position != " "}
+end
+
+def draw?(board)
+  full?(board) == true && won?(board) == false
+end
