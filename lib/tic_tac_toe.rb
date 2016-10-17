@@ -81,7 +81,8 @@ def won?(board)
            return win_combination
          elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
            return win_combination
-         else false
+         else
+           false
         end
     end
     false
@@ -92,7 +93,10 @@ def full?(board)
 end
 
 def draw?(board)
-  won?(board) == true
-  false
-  full?(board)
+
+  if won?(board) == false || full?(board) == false
+    true
+  else
+    false
+  end
 end
