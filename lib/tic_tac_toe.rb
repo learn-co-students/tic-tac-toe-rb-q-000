@@ -136,4 +136,8 @@ def winner(board)
 
 def play(board)
   input = gets.strip
+  over?(false)
+  over?(false)
+  over?(true)
+  turn(board)
 end
