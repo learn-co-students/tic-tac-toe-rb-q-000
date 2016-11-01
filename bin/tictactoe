@@ -9,3 +9,4 @@ puts "Where would you like to go? Choose an input from 1-9. 1 for the top left c
 input = gets.strip
 move(board, input, value="X")
 print display_board(board)
+play()
