@@ -27,12 +27,9 @@ def move(board, index, value)
 end
 
 
-def position_taken?(board, index)
-  if board[index.to_i] == " "
-    false;
 
-  else true;
-  end
+def position_taken?(board, index)
+  board[index] != " "
 end
 
 
@@ -45,8 +42,10 @@ def turn(board)
   puts "Please enter 1-9:"
     input = gets.strip
     index = input_to_index(input)
+
   if valid_move?(board, index)
-    move(board, index, value="X")
+    move(board, index, current_player(board))
+
     display_board(board)
   else
     turn(board)
@@ -54,11 +53,17 @@ def turn(board)
 end
 
 def turn_count(board)
-  board = 3
+  numturns = 0
+  board.each do |position|
+    if position != " "
+      numturns += 1
+    end
+  end
+  numturns
 end
 
 def current_player(board)
-  if turn_count(board) == 3
+  if turn_count(board) % 2 == 0
     return "X"
   else
     return "O"
@@ -134,10 +139,14 @@ def winner(board)
           else nil
   end
 
-def play(board)
-  input = gets.strip
-  over?(board)
-  over?(board)
-  over?(board)
-  turn(board)
-end
+  def play(board)
+    until over?(board)
+    turn(board)
+  end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cats Game!"
+
+  end
+  end
