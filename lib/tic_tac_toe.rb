@@ -9,6 +9,8 @@ WIN_COMBINATIONS = [
   [2,4,6],
 ]
 
+board = [ " ", " ", " ", " ", " ", " ", " ", " ", " "]
+
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
@@ -17,7 +19,7 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-board = [ " ", " ", " ", " ", " ", " ", " ", " ", " "]
+
 
 
 def input_to_index(input)
