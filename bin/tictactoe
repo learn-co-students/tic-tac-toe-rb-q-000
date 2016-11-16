@@ -4,9 +4,5 @@ require_relative '../lib/tic_tac_toe'
 
 puts "Welcome to Tic Tac Toe!"
 board = [ " ", " ", " ", " ", " ", " ", " ", " ", " "]
-
-puts "Where would you like to go? Choose an input from 1-9. 1 for the top left corner and 9 for the bottom right corner."
-input = gets.strip
-move(board, input, value="X")
 print display_board(board)
-play()
+play(board)
