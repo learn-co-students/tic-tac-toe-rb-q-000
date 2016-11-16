@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-11-16T04:05:26+00:00">2016-11-16T04:05:26+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-11-16T04:32:37+00:00">2016-11-16T04:32:37+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         46.5
+         46.9
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>1</b> files in total.
-    <b>81</b> relevant lines. 
-    <span class="green"><b>81</b> lines covered</span> and
+    <b>80</b> relevant lines. 
+    <span class="green"><b>80</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -54,10 +54,10 @@
         <td class="strong"><a href="#b0e4e533f68ea8559535e32d8527b661844505cc" class="src_link" title="lib/tic_tac_toe.rb">lib/tic_tac_toe.rb</a></td>
         <td class="green strong">100.0 %</td>
         <td>155</td>
-        <td>81</td>
-        <td>81</td>
+        <td>80</td>
+        <td>80</td>
         <td>0</td>
-        <td>46.5</td>
+        <td>46.9</td>
       </tr>
       
     </tbody>
@@ -81,8 +81,8 @@
     <h3>lib/tic_tac_toe.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>81</b> relevant lines. 
-      <span class="green"><b>81</b> lines covered</span> and
+      <b>80</b> relevant lines. 
+      <span class="green"><b>80</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -225,13 +225,13 @@
         <li class="covered" data-hits="1" data-linenumber="23">
           <span class="hits">1</span>
           
-          <code class="ruby">def input_to_index(index)</code>
+          <code class="ruby">def input_to_index(input)</code>
         </li>
       
         <li class="covered" data-hits="24" data-linenumber="24">
           <span class="hits">24</span>
           
-          <code class="ruby">  index.to_i - 1</code>
+          <code class="ruby">  input.to_i - 1</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="25">
@@ -249,13 +249,13 @@
         <li class="covered" data-hits="1" data-linenumber="27">
           <span class="hits">1</span>
           
-          <code class="ruby">def move(board, index, value)</code>
+          <code class="ruby">def move(board, input, value)</code>
         </li>
       
         <li class="covered" data-hits="23" data-linenumber="28">
           <span class="hits">23</span>
           
-          <code class="ruby">  board[index.to_i] = value</code>
+          <code class="ruby">  board[input.to_i] = value</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="29">
@@ -285,13 +285,13 @@
         <li class="covered" data-hits="1" data-linenumber="33">
           <span class="hits">1</span>
           
-          <code class="ruby">def position_taken?(board, index)</code>
+          <code class="ruby">def position_taken?(board, input)</code>
         </li>
       
         <li class="covered" data-hits="28" data-linenumber="34">
           <span class="hits">28</span>
           
-          <code class="ruby">  board[index] != &quot; &quot;</code>
+          <code class="ruby">  board[input] != &quot; &quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="35">
@@ -315,13 +315,13 @@
         <li class="covered" data-hits="1" data-linenumber="38">
           <span class="hits">1</span>
           
-          <code class="ruby">def valid_move?(board, index)</code>
+          <code class="ruby">def valid_move?(board, input)</code>
         </li>
       
         <li class="covered" data-hits="24" data-linenumber="39">
           <span class="hits">24</span>
           
-          <code class="ruby">  !position_taken?(board, index) &amp;&amp; index.to_i.between?(0, 8)</code>
+          <code class="ruby">  !position_taken?(board, input) &amp;&amp; input.to_i.between?(0, 8)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
@@ -954,10 +954,10 @@
           <code class="ruby">  def play(board)</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="145">
-          <span class="hits">12</span>
+        <li class="never" data-hits="" data-linenumber="145">
           
-          <code class="ruby">    p</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="12" data-linenumber="146">

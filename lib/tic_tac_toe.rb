@@ -20,23 +20,23 @@ end
 board = [ " ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 
-def input_to_index(index)
-  index.to_i - 1
+def input_to_index(input)
+  input.to_i - 1
 end
 
-def move(board, index, value)
-  board[index.to_i] = value
-end
-
-
-
-def position_taken?(board, index)
-  board[index] != " "
+def move(board, input, value)
+  board[input.to_i] = value
 end
 
 
-def valid_move?(board, index)
-  !position_taken?(board, index) && index.to_i.between?(0, 8)
+
+def position_taken?(board, input)
+  board[input] != " "
+end
+
+
+def valid_move?(board, input)
+  !position_taken?(board, input) && input.to_i.between?(0, 8)
 end
 
 
@@ -142,7 +142,7 @@ def winner(board)
   end
 
   def play(board)
-    p
+
     until over?(board)
     turn(board)
   end
