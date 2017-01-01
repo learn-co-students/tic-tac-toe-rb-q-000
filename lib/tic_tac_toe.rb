@@ -45,13 +45,7 @@ def turn(board)
 end
 
 def turn_count(board)
-  counter = 0
-  board.each_with_index do |pos,i|
-    if position_taken?(board,i) 
-      counter += 1
-    end
-  end
-  return counter
+  board.count{|token| token == "X" || token == "O"}
 end
 
 def current_player(board)
