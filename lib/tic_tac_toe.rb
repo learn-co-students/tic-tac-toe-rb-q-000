@@ -55,15 +55,12 @@ end
 def won?(board)
   ["X","O"].each do |token|
     WIN_COMBINATIONS.each do |win_combination|
-      @all_same = win_combination.all? do |index|
-        board[index] == token
-      end
-      if @all_same
+      if win_combination.all? { |index| board[index] == token }
         return win_combination 
       end
     end
   end
-  return @all_same
+  false
 end
 
 def full?(board)
