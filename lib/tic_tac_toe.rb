@@ -54,14 +54,12 @@ def turn(board)
   puts "Please enter 1-9:"
   user_input = gets.strip
   index = input_to_index(user_input)
-  over?(board)
-  if valid_move?(board, index) == true
-    over?(board)
+  if valid_move?(board, index) && turn_count(board).even?
     move(board, index, character="X")
-    over?(board)
+  elsif valid_move?(board, index) && turn_count(board).odd?
+    move(board, index, character="O")
   else
     turn(board)
-    over?(board)
   end
   display_board(board)
 end
@@ -141,8 +139,13 @@ end
 def play(board)
   until over?(board) == true
     turn(board)
-  if draw?(board) == true
-    puts "Draw!"
-end
+  end
+
+  if draw?(board)
+    puts "Cats Game!"
+  elsif winner(board) == "X"
+    puts "Congratulations X!"
+  elsif winner(board) == "O"
+    puts "Congratulations O!"
 end
 end

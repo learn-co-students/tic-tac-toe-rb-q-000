@@ -9,3 +9,6 @@ board = [" "," "," "," "," "," "," "," "," "]
 display_board(board)
 
 play(board)
+
+winner(board) == "X"
+puts "Congratulations X!"
