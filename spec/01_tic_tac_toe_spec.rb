@@ -199,7 +199,9 @@ describe './lib/tic_tac_toe.rb' do
     end
 
     it 'returns true for a draw' do
-      board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      board = ["X", "O", "X",
+                "O", "X", "X",
+                "O", "X", "O"]
 
       expect(draw?(board)).to be_truthy
     end
