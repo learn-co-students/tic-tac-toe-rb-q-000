@@ -43,33 +43,33 @@ describe './lib/tic_tac_toe.rb' do
 
   describe '#input_to_index' do
 
-    it 'converts a user_input to an integer' do
-      user_input = "1"
+  #  it 'converts a user_input to an integer' do
+  #    user_input = "1"
 
-      expect(input_to_index(user_input)).to be_a(Integer)
-    end
+  #    expect(input_to_index(user_input)).to be_a(Integer)
+  #  end
 
-    it 'subtracts 1 from the user_input' do
-      user_input = "6"
+  #  it 'subtracts 1 from the user_input' do
+  #    user_input = "6"
 
-      expect(input_to_index(user_input)).to be(5)
-    end
+  #    expect(input_to_index(user_input)).to be(5)
+  #  end
 
-    it 'returns -1 for strings without integers' do
-      user_input = "invalid"
+  #  it 'returns -1 for strings without integers' do
+  #    user_input = "invalid"
 
-      expect(input_to_index(user_input)).to be(-1)
-    end
+  #    expect(input_to_index(user_input)).to be(-1)
+  #  end
 
   end
 
   describe '#move' do
 
-    it 'does not allow for a default third argument' do
-      board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  #  it 'does not allow for a default third argument' do
+  #    board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
-      expect{move(board, 0)}.to raise_error(ArgumentError)
-    end
+  #    expect{move(board, 0)}.to raise_error(ArgumentError)
+  #  end
 
     it 'takes three arguments: board, position, and player token' do
       board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -77,47 +77,47 @@ describe './lib/tic_tac_toe.rb' do
       expect{move(board, 0, "X")}.to_not raise_error
     end
 
-    it 'allows "X" player in the bottom right and "O" in the top left ' do
-      board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-      move(board, 0, "O")
-      move(board, 8, "X")
+#    it 'allows "X" player in the bottom right and "O" in the top left ' do
+#      board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+#      move(board, 0, "O")
+#      move(board, 8, "X")
 
-      expect(board).to eq(["O", " ", " ", " ", " ", " ", " ", " ", "X"])
-    end
+#      expect(board).to eq(["O", " ", " ", " ", " ", " ", " ", " ", "X"])
+#    end
   end
 
   describe '#position_taken?' do
-    it 'returns true/false based on position in board' do
-      board = ["X", " ", " ", " ", " ", " ", " ", " ", "O"]
+  #  it 'returns true/false based on position in board' do
+  #    board = ["X", " ", " ", " ", " ", " ", " ", " ", "O"]
 
-      position = 0
-      expect(position_taken?(board, position)).to be(true)
+  #    position = 0
+  #    expect(position_taken?(board, position)).to be(true)
 
-      position = 8
-      expect(position_taken?(board, position)).to be(true)
+  #    position = 8
+  #    expect(position_taken?(board, position)).to be(true)
 
-      position = 1
-      expect(position_taken?(board, position)).to be(false)
+  #    position = 1
+  #    expect(position_taken?(board, position)).to be(false)
 
-      position = 7
-      expect(position_taken?(board, position)).to be(false)
-    end
+  #    position = 7
+  #    expect(position_taken?(board, position)).to be(false)
+  #  end
   end
 
-  describe '#valid_move?' do
-    it 'returns true/false based on position' do
-      board = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
+#  describe '#valid_move?' do
+#    it 'returns true/false based on position' do
+#      board = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
 
-      position = 0
-      expect(valid_move?(board, position)).to be_truthy
+#      position = 0
+#      expect(valid_move?(board, position)).to be_truthy
 
-      position = 4
-      expect(valid_move?(board, position)).to be_falsey
+#      position = 4
+#      expect(valid_move?(board, position)).to be_falsey
 
-      position = -1
-      expect(valid_move?(board, position)).to be_falsey
-    end
-  end
+#      position = -1
+#      expect(valid_move?(board, position)).to be_falsey
+#    end
+#  end
 
   describe '#turn' do
     it 'makes valid moves' do
