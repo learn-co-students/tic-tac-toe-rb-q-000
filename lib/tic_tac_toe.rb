@@ -19,7 +19,7 @@ def display_board(board)
 end
 
 def input_to_index(input)
-	input.to_i - 1
+  input.to_i - 1
 end
 
 def move(board, index, current_player)
@@ -48,7 +48,7 @@ def turn(board)
 end
 
 def current_player(board)
-	turn_count(board).even? ? "X" : "O"
+  turn_count(board).even? ? "X" : "O"
 end
 
 def turn_count(board)
@@ -79,24 +79,24 @@ def won?(board)
 end
 
 def full?(board)
-	board.all? {|e| e == "X" || e == "O"}
+  board.all? {|e| e == "X" || e == "O"}
 end
 
 def draw?(board)
-	full?(board) && !won?(board)
+  full?(board) && !won?(board)
 end
 
 def over?(board)
-	won?(board) || draw?(board) || full?(board)
+  won?(board) || draw?(board) || full?(board)
 end
 
 def winner(board)
-	won?(board) ? board[won?(board)[0]] : nil
+  won?(board) ? board[won?(board)[0]] : nil
 end
 
 def play(board)
-	until over?(board)
-		turn(board)
+  until over?(board)
+    turn(board)
   end
     if won?(board)
       puts "Congratulations #{winner(board)}!"
