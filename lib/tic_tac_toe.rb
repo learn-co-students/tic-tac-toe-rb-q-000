@@ -7,150 +7,103 @@ WIN_COMBINATIONS = [
   [2,5,8],
   [0,4,8],
   [2,4,6]
-  ]
+]
 
-def display_board(board = " ")
-  puts " #{board[0]} | #{board[1]} | #{board[2]} "
-  puts "-----------"
-  puts " #{board[3]} | #{board[4]} | #{board[5]} "
-  puts "-----------"
-  puts " #{board[6]} | #{board[7]} | #{board[8]} "
+def display_board(board)
+    puts " #{board[0]} | #{board[1]} | #{board[2]} "
+    puts "------------"
+    puts " #{board[3]} | #{board[4]} | #{board[5]} "
+    puts "------------"
+    puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-# code your move method here!
-def move(board,move,current_player= "X")
-  board[move.to_i - 1] = current_player
+def input_to_index(input)
+  input.to_i - 1
 end
 
-def position_taken?(board, position)
-  !(board[position].nil? || board[position] == " ")
+def position_taken?(board,index)
+  !(board[index] == " " || board[index] == "")
 end
 
-def valid_move?(board,position)
-  position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
-  #move_integer = position.to_i
-  #move= move_integer - 1
-  #if position is within board and not taken = valid move
-  #if move.between?(0,8) && position_taken?(board,position) == false
-   # true
-  # if position is within board and taken = invalid move
-  #elsif move.between?(0,8) && position_taken?(board,position)
-   # false
-  # if position is outside the board, its an invalid move
-  #elsif move < 0 || move > 8
-   # false
-  #end
+def valid_move?(board, index)
+  if index.between?(0,8)
+    !position_taken?(board, index)
+  end
 end
 
-def turn(board)
-  puts "Please enter 1-9:"
-  position= gets.strip
-    if valid_move?(board,position)
-      move(board,position,current_player(board))
-    else
-    until valid_move?(board,position) == true #|| turn_count(board) == 9
-      puts "Please select an empty cell in range 1-9"
-      position= gets.strip
-
-      end
-    end
-  display_board(board)
+def move(board, index, char)
+    board[index] = char
 end
-#else
-      #turn(board)
-    #end
-  #display_board(board)
-#end
 
 def turn_count(board)
   counter = 0
-    board.each do |spot|
-        if spot != " "
-         counter += 1
-        end
+  board.each_with_index do |e,i|
+    if position_taken?(board, i)
+      counter += 1
     end
-  return counter
+  end
+  counter
 end
 
 def current_player(board)
   if turn_count(board) % 2 == 0
-    return "X"
-  elsif turn_count(board) % 2 != 0
-    return "O"
+      return "X"
+  else
+      return "O"
   end
 end
 
-def won?(board)
-  WIN_COMBINATIONS.each do |win_combination|
-    win_index_1 = win_combination[0]
-    win_index_2 = win_combination[1]
-    win_index_3 = win_combination[2]
-
-    position_1 = board[win_index_1] # load the value of the board at win_index_1
-    position_2 = board[win_index_2] # load the value of the board at win_index_2
-    position_3 = board[win_index_3] # load the value of the board at win_index_3
-
-    if (position_1 == "X" && position_2 == "X" && position_3 == "X") #|| (position_1 == "O" && position_2 == "O" && position_3 == "O")
-      return win_combination     # return the win_combination indexes that won.
-    elsif (position_1 == "O" && position_2 == "O" && position_3 == "O")
-      return win_combination
-    end
+def turn(board)
+  puts "Please enter 1-9:"
+  input = gets.strip
+  index = input_to_index(input)
+  if valid_move?(board, index)
+      move(board, index, current_player(board))
+      display_board(board)
+  else
+      turn(board)
   end
-  return false
+end
+  
+def won?(board)
+    WIN_COMBINATIONS.each do |wc|
+        i1 = wc[0]
+        i2 = wc[1]
+        i3 = wc[2]
+        if board[i1] == "X" && board[i2] == "X" && board[i3] == "X" 
+        return wc
+        elsif board[i1] == "O" && board[i2] == "O" && board[i3] == "O" 
+        return wc
+        end
+    end
+    return false
 end
 
 def full?(board)
-  board.all? {|x| x == "X" || x == "O"}
+    board.all?{|e| e == "X" || e == "O"}
 end
 
 def draw?(board)
-  full?(board) && !won?(board)
+    full?(board) && !won?(board)
 end
 
 def over?(board)
-  won?(board) || draw?(board)
+    draw?(board) || won?(board)
 end
 
 def winner(board)
-  if won?(board)
-  x =  won?(board) #[0,4,8]
-  y = x[2].to_i
-  board[y]
-  else
-    nil
-  end
+    if arr = won?(board)
+        return board[arr[0]]
+    end
 end
 
 def play(board)
-  until over?(board)
-    turn(board)
-  end
-  if won?(board)
-    puts "Congratulations #{winner(board)}!"
-  else
-    puts "Cats Game!"
-  end
+    until over?(board)
+        turn(board)
+    end
+    if won?(board)
+        puts "Congratulations #{winner(board)}!"
+    elsif 
+        puts "Cat's Game!"
+    end
 end
-
-  #while counter < 10 do
-   # turn(board)
-    #counter += 1
-    #if won?(board)
-     # puts "Congratulations #{winner(board)}, you won!"
-      #break
-   # end
-#end
-  #puts "Cats Game!"
-#end
-
-  #counter = 0
-  #while counter < 10
-   # turn(board)
-    #turns += 1
-    #if won?(board)
-     # puts "Congratulations #{winner(board)} !!!"
-    #elsif draw?(board)
-    #puts "Cats Game!"
-    #end
-  #end
-
