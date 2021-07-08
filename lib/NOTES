@@ -1,0 +1,149 @@
+NOTES
+
+
+rspec spec/01_tic_tac_toe_spec.rb
+
+
+no implicit conversion of Array into Integer
+
+TypeError: no implicit conversion of String into Integer
+
+TypeError:
+       no implicit conversion of String into Integer
+
+
+
+
+
+
+#********  #position_taken? Example 1
+
+# def position_taken?(board, position)
+#   if    board[(position.to_i)-1] == (" ") || board[(position.to_i)-1] == ("")
+#     return false
+#   elsif board[(position.to_i)-1] == ("X") || board[(position.to_i)-1] == ("O")
+#     return true
+#   else
+#   end
+# end 
+
+#********  #position_taken? Example 2
+
+
+
+
+#********    using [(position.to_i)-1]
+#********    this FAILS the test for #position_taken? in spec/01_tic_tac_spec.rb  ******** 
+
+# def position_taken?(board, position)
+#   if board[(position.to_i)-1] == (" ") || board[(position.to_i)-1] == ("")
+#     return false
+#   elsif board[(position.to_i)-1] == "X" || board[(position.to_i)-1] == "O"
+#     return true
+#   else
+#     false
+#   end
+# end 
+
+
+
+#******************************************************
+#***** Example 1:   ORIGINAL order, with #position_taken? first in the comparison *************
+#***** throws TypeError
+#
+# def valid_move?(board,position)
+#   if position_taken?(board,position) == false && position.between?(1,9) == true
+#     true
+#   else 
+#     false
+#   end
+# end
+
+# Failures:
+
+#   1) ./lib/tic_tac_toe.rb #valid_move? returns true/false based on position
+#      Failure/Error: expect(valid_move?(board, position)).to be_truthy
+#      TypeError:
+#        no implicit conversion of String into Integer
+#******************************************************
+#***** Example 2:  change order of the statements, notice different error message *************
+#***** throws ArgumentError
+#
+# def valid_move?(board,position)
+#   if position.between?(1,9) == true && position_taken?(board,position) == false
+#     true
+#   else 
+#     false
+#   end
+# end
+
+# Failures:
+
+#   1) ./lib/tic_tac_toe.rb #valid_move? returns true/false based on position
+#      Failure/Error: expect(valid_move?(board, position)).to be_truthy
+#      ArgumentError:
+#        comparison of String with 1 failed
+
+#******************************************************
+
+
+#******************************************************
+#***** Example 3:  attempt to fix Example 1 Argument Error *************
+#***** 
+#
+# def valid_move?(board,position)
+#   if position.between?(1,9) == true && position_taken?(board,position) == false
+#     true
+#   else 
+#     false
+#   end
+# end
+
+# Failures:
+
+#   1) ./lib/tic_tac_toe.rb #valid_move? returns true/false based on position
+#      Failure/Error: expect(valid_move?(board, position)).to be_truthy
+#      ArgumentError:
+#        comparison of String with 1 failed
+#------------------------------------------------------------
+# ([position.to_i]-1).between?(1,9)
+        # 1) ./lib/tic_tac_toe.rb #valid_move? returns true/false based on position
+        #     Failure/Error: expect(valid_move?(board, position)).to be_truthy
+        #     TypeError:
+        #       no implicit conversion of Fixnum into Array
+#------------------------------------------------------------
+# position.to_i.between?(1,9)
+        # 1) ./lib/tic_tac_toe.rb #valid_move? returns true/false based on position
+        #      Failure/Error: expect(valid_move?(board, position)).to be_truthy
+        #      TypeError:
+        #        no implicit conversion of String into Integer
+#------------------------------------------------------------
+# int = position.to_i
+#   if int.between?(1,9) 
+        # 1) ./lib/tic_tac_toe.rb #valid_move? returns true/false based on position
+        #      Failure/Error: expect(valid_move?(board, position)).to be_truthy
+        #      TypeError:
+        #        no implicit conversion of String into Integer
+#------------------------------------------------------------
+
+
+
+#******************************************************
+
+#******************************************************
+#***** Example 4:  try declaring variable, while converting to integer *************
+#***** 
+#
+# def valid_move?(board,position)
+#   if position_taken?(board, board[(position.to_i)]) == false && [(position.to_i)].between?(1,9) == true
+#     return true
+#   else 
+#     false
+#   end
+# end
+
+
+
+
+
+    
